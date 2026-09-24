@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GCG — Portfolio & Services</title>
+  <meta name="description" content="GCG — présentation de la société, de ses services et de ses réalisations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!--
+    Les textes entre [crochets] sont à remplacer par le contenu réel
+    du document « Portfolio GCG_CI.pdf ».
+  -->
+
+  <header class="site-header" id="top">
+    <div class="container nav">
+      <a href="#top" class="logo" aria-label="GCG — accueil">
+        <span class="logo-mark">GCG</span>
+        <span class="logo-sub">[Nom complet de la société]</span>
+      </a>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#apropos">À propos</a>
+        <a href="#services">Services</a>
+        <a href="#realisations">Réalisations</a>
+        <a href="#valeurs">Nos valeurs</a>
+        <a href="#contact" class="btn btn-small">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">[Secteur d'activité] · [Ville, Pays]</p>
+        <h1>Des solutions fiables,<br>des projets <em>maîtrisés</em>.</h1>
+        <p class="lead">[Phrase d'accroche : ce que fait GCG, pour qui, et ce qui la distingue.]</p>
+        <div class="hero-actions">
+          <a href="#realisations" class="btn">Voir nos réalisations</a>
+          <a href="#contact" class="btn btn-ghost">Demander un devis</a>
+        </div>
+      </div>
+      <div class="container stats">
+        <div class="stat"><strong data-count="">[X]</strong><span>Années d'expérience</span></div>
+        <div class="stat"><strong data-count="">[X]</strong><span>Projets réalisés</span></div>
+        <div class="stat"><strong data-count="">[X]</strong><span>Clients satisfaits</span></div>
+        <div class="stat"><strong data-count="">[X]</strong><span>Collaborateurs</span></div>
+      </div>
+    </section>
+
+    <!-- À propos -->
+    <section class="section" id="apropos">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">À propos</p>
+          <h2>Qui sommes-nous&nbsp;?</h2>
+          <p>[Présentation de la société : date de création, historique, domaine d'expertise, zone d'intervention.]</p>
+          <p>[Mission et vision de GCG.]</p>
+          <ul class="checklist">
+            <li>[Point fort n°1]</li>
+            <li>[Point fort n°2]</li>
+            <li>[Point fort n°3]</li>
+          </ul>
+        </div>
+        <div class="about-card">
+          <div class="about-row"><span>Raison sociale</span><strong>[GCG …]</strong></div>
+          <div class="about-row"><span>Création</span><strong>[Année]</strong></div>
+          <div class="about-row"><span>Siège</span><strong>[Adresse]</strong></div>
+          <div class="about-row"><span>Dirigeant</span><strong>[Nom]</strong></div>
+          <div class="about-row"><span>Certifications</span><strong>[ISO, agréments…]</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Nos services</p>
+          <h2>Un accompagnement de bout en bout</h2>
+          <p>[Courte introduction aux services proposés.]</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+            </div>
+            <h3>[Service 1]</h3>
+            <p>[Description du service.]</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>
+            </div>
+            <h3>[Service 2]</h3>
+            <p>[Description du service.]</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16v12H4zM8 20h8M12 16v4"/></svg>
+            </div>
+            <h3>[Service 3]</h3>
+            <p>[Description du service.]</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
+            </div>
+            <h3>[Service 4]</h3>
+            <p>[Description du service.]</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>
+            </div>
+            <h3>[Service 5]</h3>
+            <p>[Description du service.]</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            </div>
+            <h3>[Service 6]</h3>
+            <p>[Description du service.]</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Réalisations -->
+    <section class="section" id="realisations">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Portfolio</p>
+          <h2>Nos réalisations</h2>
+          <p>Une sélection de projets menés pour nos clients.</p>
+        </div>
+        <div class="filters" role="tablist" aria-label="Filtrer les projets">
+          <button class="filter active" data-filter="all">Tous</button>
+          <button class="filter" data-filter="cat-a">[Catégorie A]</button>
+          <button class="filter" data-filter="cat-b">[Catégorie B]</button>
+          <button class="filter" data-filter="cat-c">[Catégorie C]</button>
+        </div>
+        <div class="grid grid-3 projects">
+          <article class="project" data-cat="cat-a">
+            <div class="project-img" style="--h: 210"><span>Photo du projet</span></div>
+            <div class="project-body">
+              <span class="tag">[Catégorie A]</span>
+              <h3>[Nom du projet 1]</h3>
+              <p>[Client · Lieu · Année]</p>
+            </div>
+          </article>
+          <article class="project" data-cat="cat-b">
+            <div class="project-img" style="--h: 190"><span>Photo du projet</span></div>
+            <div class="project-body">
+              <span class="tag">[Catégorie B]</span>
+              <h3>[Nom du projet 2]</h3>
+              <p>[Client · Lieu · Année]</p>
+            </div>
+          </article>
+          <article class="project" data-cat="cat-c">
+            <div class="project-img" style="--h: 225"><span>Photo du projet</span></div>
+            <div class="project-body">
+              <span class="tag">[Catégorie C]</span>
+              <h3>[Nom du projet 3]</h3>
+              <p>[Client · Lieu · Année]</p>
+            </div>
+          </article>
+          <article class="project" data-cat="cat-a">
+            <div class="project-img" style="--h: 200"><span>Photo du projet</span></div>
+            <div class="project-body">
+              <span class="tag">[Catégorie A]</span>
+              <h3>[Nom du projet 4]</h3>
+              <p>[Client · Lieu · Année]</p>
+            </div>
+          </article>
+          <article class="project" data-cat="cat-b">
+            <div class="project-img" style="--h: 180"><span>Photo du projet</span></div>
+            <div class="project-body">
+              <span class="tag">[Catégorie B]</span>
+              <h3>[Nom du projet 5]</h3>
+              <p>[Client · Lieu · Année]</p>
+            </div>
+          </article>
+          <article class="project" data-cat="cat-c">
+            <div class="project-img" style="--h: 215"><span>Photo du projet</span></div>
+            <div class="project-body">
+              <span class="tag">[Catégorie C]</span>
+              <h3>[Nom du projet 6]</h3>
+              <p>[Client · Lieu · Année]</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Valeurs -->
+    <section class="section section-dark" id="valeurs">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Nos engagements</p>
+          <h2>Ce qui guide notre travail</h2>
+        </div>
+        <div class="grid grid-4">
+          <div class="value"><span class="num">01</span><h3>Qualité</h3><p>Un haut niveau d'exigence à chaque étape du projet.</p></div>
+          <div class="value"><span class="num">02</span><h3>Délais</h3><p>Des plannings réalistes et respectés.</p></div>
+          <div class="value"><span class="num">03</span><h3>Sécurité</h3><p>Le respect des normes et la protection des équipes.</p></div>
+          <div class="value"><span class="num">04</span><h3>Transparence</h3><p>Un suivi clair et une communication régulière avec nos clients.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Références clients -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Références</p>
+          <h2>Ils nous font confiance</h2>
+        </div>
+        <div class="clients">
+          <div class="client">[Client 1]</div>
+          <div class="client">[Client 2]</div>
+          <div class="client">[Client 3]</div>
+          <div class="client">[Client 4]</div>
+          <div class="client">[Client 5]</div>
+          <div class="client">[Client 6]</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Parlons de votre projet</h2>
+          <p>Décrivez-nous votre besoin&nbsp;: nous revenons vers vous rapidement avec une proposition adaptée.</p>
+          <ul class="contact-list">
+            <li><strong>Adresse</strong><span>[Adresse complète]</span></li>
+            <li><strong>Téléphone</strong><span>[+000 00 00 00 00]</span></li>
+            <li><strong>E-mail</strong><span>[contact@gcg.com]</span></li>
+            <li><strong>Horaires</strong><span>[Lun – Ven, 8h – 17h]</span></li>
+          </ul>
+        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="field-row">
+            <label>Nom<input type="text" name="nom" required></label>
+            <label>Société<input type="text" name="societe"></label>
+          </div>
+          <div class="field-row">
+            <label>E-mail<input type="email" name="email" required></label>
+            <label>Téléphone<input type="tel" name="tel"></label>
+          </div>
+          <label>Objet
+            <select name="objet">
+              <option>Demande de devis</option>
+              <option>Information sur nos services</option>
+              <option>Partenariat</option>
+              <option>Autre</option>
+            </select>
+          </label>
+          <label>Message<textarea name="message" rows="5" required></textarea></label>
+          <button type="submit" class="btn">Envoyer le message</button>
+          <p class="form-note" id="form-note" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="logo-mark">GCG</span>
+        <p>[Slogan de la société]</p>
+      </div>
+      <nav aria-label="Liens du pied de page">
+        <a href="#apropos">À propos</a>
+        <a href="#services">Services</a>
+        <a href="#realisations">Réalisations</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="container copyright">© <span id="year"></span> GCG. Tous droits réservés.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
