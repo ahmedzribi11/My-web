@@ -37,6 +37,8 @@ export function ProjectRouter({ children }: { children: ReactNode }) {
   const [openId, setOpenId] = useState<string | null>(() => (typeof window === 'undefined' ? null : idFromPath()))
 
   useEffect(() => {
+    // URL /projets/<id> inconnue : revenir à l’accueil plutôt que garder une URL invalide
+    if (window.location.pathname.startsWith(PREFIX) && !idFromPath()) safeHistory(() => window.history.replaceState(null, '', '/'))
     const onPop = () => setOpenId(idFromPath())
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
