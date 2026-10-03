@@ -49,7 +49,11 @@ export default function App() {
       if (!target) return
       e.preventDefault()
       scrollToTarget(hash === '#top' ? 0 : (target as HTMLElement))
-      history.replaceState(history.state, '', hash === '#top' ? window.location.pathname : hash)
+      try {
+        history.replaceState(history.state, '', hash === '#top' ? window.location.pathname : hash)
+      } catch {
+        /* API History indisponible (iframe sandbox) */
+      }
     }
     document.addEventListener('click', onClick)
 

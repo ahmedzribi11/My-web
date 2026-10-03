@@ -17,6 +17,15 @@ interface Ctx {
 const ProjectRouterContext = createContext<Ctx>({ openId: null, open: () => {}, close: () => {} })
 export const useProjectRouter = () => useContext(ProjectRouterContext)
 
+/** L’API History peut être refusée (iframe sandbox, aperçu local) : la fiche s’ouvre quand même. */
+function safeHistory(fn: () => void) {
+  try {
+    fn()
+  } catch {
+    /* navigation sans URL dédiée */
+  }
+}
+
 function idFromPath(): string | null {
   const path = window.location.pathname
   if (!path.startsWith(PREFIX)) return null
@@ -40,8 +49,10 @@ export function ProjectRouter({ children }: { children: ReactNode }) {
 
   const open = useCallback((id: string, replace = false) => {
     if (window.location.pathname !== PREFIX + id) {
-      if (replace) window.history.replaceState({ ...window.history.state, project: id }, '', PREFIX + id)
-      else window.history.pushState({ project: id }, '', PREFIX + id)
+      safeHistory(() => {
+        if (replace) window.history.replaceState({ ...window.history.state, project: id }, '', PREFIX + id)
+        else window.history.pushState({ project: id }, '', PREFIX + id)
+      })
     }
     setOpenId(id)
   }, [])
@@ -49,7 +60,7 @@ export function ProjectRouter({ children }: { children: ReactNode }) {
   const close = useCallback(() => {
     if (window.location.pathname.startsWith(PREFIX)) {
       if (window.history.state?.project) window.history.back()
-      else window.history.replaceState(null, '', '/#projets')
+      else safeHistory(() => window.history.replaceState(null, '', '/#projets'))
     }
     setOpenId(null)
   }, [])
