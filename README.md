@@ -4,11 +4,16 @@ Site vitrine cinématique de General Constructor Group (construction & ingénier
 
 React · TypeScript · Vite · Three.js / React Three Fiber · GSAP + ScrollTrigger · Lenis · Tailwind CSS v4
 
+Prérequis : **Node.js 20.19+ ou 22.12+** (voir `.nvmrc`) et npm.
+
 ```bash
+git clone https://github.com/ahmedzribi11/My-web.git
+cd My-web
+git checkout gcg-website   # inutile une fois fusionné dans main
 npm install
-npm run dev       # développement
+npm run dev       # développement → http://localhost:5173
 npm run build     # typecheck + build de production (dist/)
-npm run preview   # prévisualiser le build
+npm run preview   # prévisualiser le build → http://localhost:4173
 ```
 
 ## Structure
@@ -49,9 +54,13 @@ un champ non renseigné n’est simplement pas affiché.
 - Three.js est chargé à la demande (chunk séparé) ; les scènes sont mises en pause hors écran.
 - Polices auto-hébergées (Geist / Geist Mono).
 
-## Déploiement
+## Déploiement (Vercel)
 
-Les fiches projet ont des URL propres (`/projets/<id>`) : l’hébergeur doit renvoyer `index.html`
-pour ces routes (fourni : `public/_redirects` pour Netlify, `vercel.json` pour Vercel).
+1. vercel.com → *Add New… → Project* → importer le dépôt GitHub `My-web`.
+2. Branche de production : `main` (ou `gcg-website` tant que la PR n’est pas fusionnée).
+3. Les réglages sont lus depuis `vercel.json` (Vite, `npm run build`, dossier `dist`) → *Deploy*.
+
+Chaque push redéploie automatiquement. Les fiches projet ont des URL propres (`/projets/<id>`) :
+`vercel.json` (Vercel) et `public/_redirects` (Netlify) renvoient ces routes vers `index.html`.
 Une fois le domaine connu, ajouter `<link rel="canonical">`, une URL absolue pour `og:image`
 et un `sitemap.xml`.
