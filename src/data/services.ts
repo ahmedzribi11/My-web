@@ -69,8 +69,20 @@ export const services: Service[] = [
       en: 'GCG’s engineering studies and quality control division sizes each structure, from reinforced concrete to steel frames, and coordinates plumbing and electrical engineering. Quality control follows the site all the way to handover.',
     },
     includes: {
-      fr: ['Études de structure (béton et structure métallique)', 'Études fluides et électricité', 'Études techniques', 'Modélisation BIM', 'Contrôle qualité (QA/QC)'],
-      en: ['Structural engineering (concrete and steel)', 'Plumbing and electrical engineering', 'Technical studies', 'BIM modelling', 'Quality control (QA/QC)'],
+      fr: [
+        'Études de structure (béton et structure métallique)',
+        'Études fluides et électricité',
+        'Études techniques',
+        'Modélisation BIM',
+        'Contrôle qualité (QA/QC)',
+      ],
+      en: [
+        'Structural engineering (concrete and steel)',
+        'Plumbing and electrical engineering',
+        'Technical studies',
+        'BIM modelling',
+        'Quality control (QA/QC)',
+      ],
     },
   },
   {

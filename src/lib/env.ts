@@ -21,4 +21,8 @@ export const launchMode = process.env.GCG_LAUNCH === '1'
 export const contactFormEnabled = Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_TO && process.env.CONTACT_FROM)
 
 /** Chemin public d’une page (sans « .html » ni « /index », sans barre finale). */
-export const pagePath = (pathname: string) => pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/'
+export const pagePath = (pathname: string) =>
+  pathname
+    .replace(/\.html$/, '')
+    .replace(/\/index$/, '')
+    .replace(/\/$/, '') || '/'

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import Icon from '../components/Icon.astro'
-import { route, SECTOR_LABELS, STATUS_LABELS, useT, type Lang } from '../i18n'
+import { colon, route, SECTOR_LABELS, STATUS_LABELS, useT, type Lang } from '../i18n'
 import { getProjects, pad } from '../lib/projects'
 import { contact } from '../lib/settings'
 import { SECTORS } from '../content.config'
@@ -26,7 +26,7 @@ const studies = projects.filter((p) => p.status === 'etudes').length
   </div>
 
   <div class="refs-stage px-3 py-8 md:px-8 md:py-12">
-    <article class="refs-doc mx-auto max-w-[1180px] bg-white p-6 text-[#1b2a20] shadow-2xl md:p-12">
+    <article class="refs-doc mx-auto max-w-[1180px] bg-white p-6 text-doc-ink shadow-2xl md:p-12">
       <header class="flex flex-wrap items-end justify-between gap-6 border-b-2 border-brand pb-6">
         <div>
           <img src="/brand/gcg-logo-green.png" alt="GCG — General Constructor Group CI" width="720" height="219" class="h-14 w-auto" />
@@ -34,7 +34,7 @@ const studies = projects.filter((p) => p.status === 'etudes').length
         </div>
         <div class="text-right">
           <h1 class="text-title font-normal tracking-[-0.02em] text-brand">{t('refs.title')}</h1>
-          <p class="mt-1 text-label uppercase tracking-[0.16em] text-brand/70">{t('refs.edition')} : {edition}</p>
+          <p class="mt-1 text-label uppercase tracking-[0.16em] text-brand/70">{t('refs.edition')}{colon(lang)}{edition}</p>
         </div>
       </header>
 
@@ -44,7 +44,7 @@ const studies = projects.filter((p) => p.status === 'etudes').length
         <p><span class="block text-title font-light text-brand">{studies}</span>{STATUS_LABELS.etudes[lang]}</p>
         <p><span class="block text-title font-light text-brand">20+</span>{fr ? 'collaborateurs, 4 pôles' : 'staff, 4 divisions'}</p>
       </div>
-      <p class="mt-4 max-w-3xl text-small text-[#3a4a40]">{t('about.lead')}</p>
+      <p class="mt-4 max-w-3xl text-small text-doc-muted">{t('about.lead')}</p>
 
       {
         groups.map((g) => (
@@ -68,14 +68,14 @@ const studies = projects.filter((p) => p.status === 'etudes').length
               </thead>
               <tbody>
                 {g.list.map((p) => (
-                  <tr class="border-t border-[#dfe5df] align-top">
+                  <tr class="border-t border-doc-rule align-top">
                     <td class="py-2.5 pr-2 text-brand/75">{pad(p.number)}</td>
                     <td class="py-2.5 pr-3 font-medium text-brand">{p.name}</td>
                     <td class="py-2.5 pr-3">{p.location}</td>
                     <td class="whitespace-nowrap py-2.5 pr-3">{p.period}</td>
                     <td class="whitespace-nowrap py-2.5 pr-3">{[p.surface, p.coveredSurface && `(${p.coveredSurface} ${fr ? 'couverts' : 'built'})`].filter(Boolean).join(' ')}</td>
                     <td class="py-2.5 pr-3">{p.composition}</td>
-                    <td class="py-2.5 pr-3">{p.missions.join(' ; ')}</td>
+                    <td class="py-2.5 pr-3">{p.missions.join(lang === 'fr' ? ' ; ' : '; ')}</td>
                     <td class="py-2.5">{p.status ? STATUS_LABELS[p.status][lang] : ''}</td>
                   </tr>
                 ))}

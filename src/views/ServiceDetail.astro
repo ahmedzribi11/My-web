@@ -36,7 +36,7 @@ const area = [...new Set((related.length ? related : projects).map((p) => p.city
 <Base lang={lang} alt={servicePath(s.slug[other], other)} title={s.title[lang]} docTitle={`${s.title[lang]} · ${lang === 'fr' ? 'expertise GCG, Côte d’Ivoire' : 'GCG service, Côte d’Ivoire'}`} description={s.intro[lang]} image={og.src} header="overlay" jsonLd={[breadcrumbLd(crumbs, Astro.site)]}>
   <header class="relative flex min-h-[78svh] items-end overflow-hidden bg-ink-3">
     <ProjectImage image={cover} sizes="100vw" priority class="absolute inset-0 block h-full w-full" />
-    <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/30"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/55"></div>
     <div class="wrap relative pb-12 pt-32 md:pb-16">
       <Breadcrumb items={crumbs} />
       <h1 class="display mt-6 text-display" data-split>

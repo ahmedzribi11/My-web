@@ -66,7 +66,11 @@ export interface DocumentFile {
 }
 
 const ascii = (s: string) =>
-  s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  s
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^A-Za-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
 
 /** Documents téléchargeables (PDF dans public/documents) ; taille lue au build. */
 export const documents: DocumentFile[] = ((settings as { documents?: unknown[] }).documents ?? [])

@@ -65,11 +65,13 @@ Le site place lui-même les espaces insécables avant `: ; ! ?`.
 4. **La première photo est la couverture.** Glisser les photos par la poignée `═` pour changer l’ordre.
 5. Facultatif : **point focal** (« 50% 30% ») si le recadrage coupe une partie importante.
 
-Formats acceptés : JPG, PNG ou WebP, de préférence la photo d’origine (2 400 px de large ou plus). Le site
-crée lui-même les versions légères et retire les données de localisation (GPS) des photos.
+Formats acceptés : JPG, PNG, WebP ou HEIC (iPhone), 20 Mo au plus, de préférence la photo d’origine
+(2 400 px de large ou plus). Le site convertit les photos HEIC en JPG, crée lui-même les versions légères et
+retire les données de localisation (GPS). Un autre format (vidéo, PDF, capture renommée) est refusé avec un
+message.
 
-- **iPhone** : les photos HEIC sont refusées. Réglages → Appareil photo → Formats → **« Le plus compatible »**,
-  ou partager la photo par e-mail/WhatsApp en « Taille réelle » avant de la téléverser.
+- **Photos reçues par WhatsApp** : elles sont fortement compressées ; demander l’original (envoi en
+  « Document » ou par e-mail en taille réelle).
 - Pas de photos de personnes reconnaissables (ouvriers, clients) sans leur accord écrit, ni de plaques
   d’immatriculation lisibles.
 - Ne publier que des photos dont GCG détient les droits (photographe payé, drone de GCG…) : les noter dans

@@ -9,17 +9,17 @@ import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const NBSP = ' '
-const NNBSP = ' '
+const NBSP = '\u00a0'
+const NNBSP = '\u202f'
 
 function fr(text) {
   return text
     .replace(/(\p{L})'(?=\p{L})/gu, '$1’')
-    .replace(/[   ]+:(?=\s|$|<)/g, `${NBSP}:`)
-    .replace(/[   ]+([;!?])/g, `${NNBSP}$1`)
-    .replace(/«[   ]*/g, `«${NBSP}`)
-    .replace(/[   ]*»/g, `${NBSP}»`)
-    .replace(/(\d)[  ](?=\d{3}(?!\d))/g, `$1${NNBSP}`)
+    .replace(/[ \u00a0\u202f]+:(?=\s|$|<)/g, `${NBSP}:`)
+    .replace(/[ \u00a0\u202f]+([;!?])/g, `${NNBSP}$1`)
+    .replace(/«[ \u00a0\u202f]*/g, `«${NBSP}`)
+    .replace(/[ \u00a0\u202f]*»/g, `${NBSP}»`)
+    .replace(/(\d)[ \u00a0](?=\d{3}(?!\d))/g, `$1${NNBSP}`)
     .replace(/(\d)[ ](?=(m²|ha|km|m|FCFA|%)(?![\p{L}\d]))/gu, `$1${NBSP}`)
     .replace(/N° /g, `N°${NBSP}`)
 }

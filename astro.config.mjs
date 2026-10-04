@@ -9,9 +9,7 @@ import typography from './integrations/typography.mjs'
  * Ordre : SITE_URL (domaine définitif, ex. https://www.gcg-ci.com) → domaine
  * de production Vercel (fourni automatiquement au build) → aucune.
  */
-const site =
-  process.env.SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined)
+const site = process.env.SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined)
 
 /** Mesure d’audience sans cookie (facultative) : origines à autoriser dans la CSP. */
 const umami = process.env.PUBLIC_UMAMI_WEBSITE_ID ? new URL(process.env.PUBLIC_UMAMI_SRC || 'https://cloud.umami.is/script.js').origin : ''
@@ -30,7 +28,8 @@ export default defineConfig({
     ...(site
       ? [
           sitemap({
-            filter: (page) => !/\/(admin|partager\/affiche|en\/share\/poster|contact\/merci|contact\/erreur|en\/contact\/thanks|en\/contact\/error|qr)(\/|$)/.test(page),
+            filter: (page) =>
+              !/\/(admin|partager\/affiche|en\/share\/poster|contact\/merci|contact\/erreur|en\/contact\/thanks|en\/contact\/error|qr)(\/|$)/.test(page),
             i18n: { defaultLocale: 'fr', locales: { fr: 'fr-CI', en: 'en' } },
           }),
         ]

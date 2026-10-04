@@ -14,13 +14,36 @@ const require = createRequire(import.meta.url)
 const axe = readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8')
 const BASE = process.env.BASE_URL || 'http://127.0.0.1:4321'
 const PAGES = [
-  '/', '/en', '/realisations', '/en/projects', '/realisations/green-city', '/en/projects/villa-palmeras', '/expertises', '/en/services',
-  '/expertises/architecture-et-conception', '/a-propos', '/en/about', '/investir', '/en/invest', '/contact', '/en/contact', '/partager',
-  '/en/share', '/references', '/mentions-legales', '/confidentialite', '/en/privacy', '/contact/merci', '/page-inexistante',
+  '/',
+  '/en',
+  '/realisations',
+  '/en/projects',
+  '/realisations/green-city',
+  '/en/projects/villa-palmeras',
+  '/expertises',
+  '/en/services',
+  '/expertises/architecture-et-conception',
+  '/a-propos',
+  '/en/about',
+  '/investir',
+  '/en/invest',
+  '/contact',
+  '/en/contact',
+  '/partager',
+  '/en/share',
+  '/references',
+  '/mentions-legales',
+  '/confidentialite',
+  '/en/privacy',
+  '/contact/merci',
+  '/page-inexistante',
 ]
 const problems = []
 const browser = await chromium.launch()
-for (const [mode, viewport] of [['mobile', { width: 320, height: 720 }], ['desktop', { width: 1440, height: 900 }]]) {
+for (const [mode, viewport] of [
+  ['mobile', { width: 320, height: 720 }],
+  ['desktop', { width: 1440, height: 900 }],
+]) {
   const ctx = await browser.newContext({ viewport, bypassCSP: true, isMobile: mode === 'mobile', hasTouch: mode === 'mobile' })
   const page = await ctx.newPage()
   for (const path of PAGES) {
@@ -39,7 +62,9 @@ for (const [mode, viewport] of [['mobile', { width: 320, height: 720 }], ['deskt
     await page.addScriptTag({ content: axe })
     const violations = await page.evaluate(async () => {
       const r = await window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } })
-      return r.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => `${v.id} (${v.nodes.length}) ${v.nodes[0]?.target.join(' ')}`)
+      return r.violations
+        .filter((v) => v.impact === 'serious' || v.impact === 'critical')
+        .map((v) => `${v.id} (${v.nodes.length}) ${v.nodes[0]?.target.join(' ')}`)
     })
     errs.push(...violations.map((v) => `axe : ${v}`))
     for (const e of errs) problems.push(`${mode} ${path} : ${e}`)

@@ -115,7 +115,7 @@ const general = await getImage({ src: requireProject(projects, 'villa-palmeras')
   }
   @media print {
     @page { size: A4 portrait; margin: 0; }
-    html, body { background: #052e14 !important; }
+    html, body { background: var(--color-brand) !important; }
     .poster-stage { padding: 0 !important; display: block; }
     .poster { box-shadow: none; zoom: 1; }
     .poster * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }

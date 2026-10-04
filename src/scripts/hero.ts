@@ -32,14 +32,49 @@ function start(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
     const z0 = b.z - b.d / 2
     const z1 = b.z + b.d / 2
     for (let y = 0; y <= b.h + 1e-6; y += 0.5) {
-      segs.push([[x0, y, z0], [x1, y, z0]], [[x1, y, z0], [x1, y, z1]], [[x1, y, z1], [x0, y, z1]], [[x0, y, z1], [x0, y, z0]])
+      segs.push(
+        [
+          [x0, y, z0],
+          [x1, y, z0],
+        ],
+        [
+          [x1, y, z0],
+          [x1, y, z1],
+        ],
+        [
+          [x1, y, z1],
+          [x0, y, z1],
+        ],
+        [
+          [x0, y, z1],
+          [x0, y, z0],
+        ],
+      )
     }
     const cols = Math.max(2, Math.round(b.w / 0.8))
     for (let i = 0; i <= cols; i++) {
       const x = x0 + (b.w * i) / cols
-      segs.push([[x, 0, z0], [x, b.h, z0]], [[x, 0, z1], [x, b.h, z1]])
+      segs.push(
+        [
+          [x, 0, z0],
+          [x, b.h, z0],
+        ],
+        [
+          [x, 0, z1],
+          [x, b.h, z1],
+        ],
+      )
     }
-    segs.push([[x0, 0, (z0 + z1) / 2], [x0, b.h, (z0 + z1) / 2]], [[x1, 0, (z0 + z1) / 2], [x1, b.h, (z0 + z1) / 2]])
+    segs.push(
+      [
+        [x0, 0, (z0 + z1) / 2],
+        [x0, b.h, (z0 + z1) / 2],
+      ],
+      [
+        [x1, 0, (z0 + z1) / 2],
+        [x1, b.h, (z0 + z1) / 2],
+      ],
+    )
   }
 
   /* Particules réparties le long des arêtes, départ dispersé dans la brume */

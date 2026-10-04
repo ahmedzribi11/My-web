@@ -36,7 +36,7 @@ Elle est générée à partir du nom, en minuscules sans accents, et **ne change
 
 | Champ | Règle |
 | --- | --- |
-| `src` | JPG, PNG, WebP ou AVIF ; ≥ 500 px de large (2 400 px recommandés pour la couverture) ; HEIC refusé avec message |
+| `src` | JPG, PNG, WebP, AVIF ou HEIC (converti en JPG au build) ; ≤ 20 Mo ; ≥ 500 px de large (2 400 px recommandés pour la couverture) ; autre format refusé avec message |
 | `alt`, `alt_en` | description de ce que montre l’image (5 à 140 caractères), obligatoire dans les deux langues |
 | `kind` | `photo`, `render` (perspective 3D, signalée sur le site) ou `plan` |
 | `focus` | facultatif, point à garder visible au recadrage (« 50% 30% ») |

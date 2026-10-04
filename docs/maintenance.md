@@ -44,6 +44,15 @@
 | --- | --- | --- | --- | --- |
 | 4 octobre 2026 | toutes les dépendances à jour ; `npm audit` : 0 vulnérabilité | non | équipe | oui |
 
+## Contrôle hebdomadaire du formulaire (HOST-09)
+
+Chaque semaine : envoyer une demande de test depuis `/contact` (nom « Test hebdomadaire ») et vérifier qu’elle
+arrive dans la boîte de GCG, hors courrier indésirable, en moins de 2 minutes.
+
+| Semaine | Date | Reçu (oui/non, délai) | Par |
+| --- | --- | --- | --- |
+| | | | |
+
 ## Revue annuelle (HAND-09)
 
 Chaque année, à la date anniversaire du lancement :

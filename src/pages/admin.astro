@@ -29,15 +29,15 @@ Astro.csp?.insertDirective('img-src https://avatars.githubusercontent.com https:
       window.CMS_MANUAL_INIT = true
       // Déconnexion après 8 heures d’inactivité (SEC-08)
       ;(function () {
-        var USER = 'decap-cms-user'
-        var LAST = 'gcg-admin-last-activity'
-        var MAX = 8 * 3600 * 1000
-        var expired = function () {
+        const USER = 'decap-cms-user'
+        const LAST = 'gcg-admin-last-activity'
+        const MAX = 8 * 3600 * 1000
+        const expired = function () {
           return Date.now() - (Number(localStorage.getItem(LAST)) || Date.now()) > MAX
         }
         try {
           if (expired()) localStorage.removeItem(USER)
-          var touch = function () {
+          const touch = function () {
             localStorage.setItem(LAST, String(Date.now()))
           }
           touch()
@@ -49,7 +49,9 @@ Astro.csp?.insertDirective('img-src https://avatars.githubusercontent.com https:
               location.reload()
             }
           }, 60000)
-        } catch (e) {}
+        } catch {
+          // stockage local indisponible (navigation privée) : pas de déconnexion automatique
+        }
       })()
     </script>
   </head>

@@ -31,7 +31,9 @@ export function renderQrs(root: ParentNode = document) {
     el.querySelectorAll<HTMLElement>('[data-qr-label]').forEach((l) => (l.textContent = url))
   })
   root.querySelectorAll<HTMLElement>('[data-qr-text]').forEach((el) => {
-    el.textContent = qrUrl(el.dataset.qrText!).replace(/^https?:\/\//, '').replace(/\/$/, '')
+    el.textContent = qrUrl(el.dataset.qrText!)
+      .replace(/^https?:\/\//, '')
+      .replace(/\/$/, '')
   })
 }
 

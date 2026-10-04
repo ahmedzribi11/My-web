@@ -34,12 +34,16 @@ Conséquence : **pas de bandeau cookies** sur le site public (LEGAL-08), à conf
   l’objectif du site est la visibilité de GCG. À revoir si GCG le demande.
 - Aucune balise `nosnippet` sur les pages commerciales.
 
-## Demandes d’exercice des droits (LEGAL-09)
+## Demandes d’exercice des droits et demandes de retrait (LEGAL-09, MEDIA-10)
 
 1. La demande arrive par l’adresse de contact (ou le formulaire) : accusé de réception sous 2 jours ouvrés.
 2. Vérifier l’identité du demandeur (réponse depuis l’adresse ou le numéro utilisé initialement).
 3. Accès / rectification / suppression dans la boîte de réception de GCG et chez Resend (journaux).
 4. Réponse écrite sous 30 jours ; noter la demande dans le journal ci-dessous.
+
+**Demande de retrait d’un contenu** (image, texte ; procédure annoncée dans les mentions légales) : accusé de
+réception sous 2 jours ouvrés, contenu retiré sous 72 heures pendant l’examen (passer le projet en
+« Autorisation : en attente » ou retirer la photo dans `/admin`), décision notée dans le même journal.
 
 | Date | Demande | Traitée par | Réponse le |
 | --- | --- | --- | --- |

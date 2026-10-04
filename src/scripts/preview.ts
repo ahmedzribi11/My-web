@@ -22,10 +22,11 @@ document.querySelectorAll<HTMLElement>('[data-preview-root]').forEach((root) => 
     const r = root.getBoundingClientRect()
     x = e.clientX - r.left
     y = e.clientY - r.top
-    if (!raf) raf = requestAnimationFrame(() => {
-      stage.style.transform = `translate3d(${x}px, ${y}px, 0)`
-      raf = 0
-    })
+    if (!raf)
+      raf = requestAnimationFrame(() => {
+        stage.style.transform = `translate3d(${x}px, ${y}px, 0)`
+        raf = 0
+      })
     show((e.target as Element).closest<HTMLElement>('[data-preview]')?.dataset.preview ?? null)
   })
   root.addEventListener('pointerleave', () => show(null))

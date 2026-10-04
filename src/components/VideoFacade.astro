@@ -6,6 +6,7 @@
 import ProjectImage from './ProjectImage.astro'
 import Icon from './Icon.astro'
 import type { ProjectImageData } from '../lib/projects'
+import { colon, type Lang } from '../i18n'
 
 interface Props {
   kind: 'iframe' | 'file'
@@ -13,8 +14,9 @@ interface Props {
   title: string
   poster: ProjectImageData
   playLabel: string
+  lang?: Lang
 }
-const { kind, src, title, poster, playLabel } = Astro.props
+const { kind, src, title, poster, playLabel, lang = 'fr' } = Astro.props
 const embed = kind === 'iframe' ? `${src}${src.includes('?') ? '&' : '?'}autoplay=1` : src
 ---
 
@@ -22,7 +24,7 @@ const embed = kind === 'iframe' ? `${src}${src.includes('?') ? '&' : '?'}autopla
   <ProjectImage image={poster} alt="" sizes="(min-width: 1024px) 80vw, 100vw" class="absolute inset-0 block h-full w-full" imgClass="h-full w-full object-cover opacity-70" />
   <button type="button" class="absolute inset-0 flex items-center justify-center gap-4 text-bone" data-video-play>
     <span class="flex h-20 w-20 items-center justify-center rounded-full bg-gold text-brand"><Icon name="arrow" size={26} /></span>
-    <span class="text-lead">{playLabel}<span class="sr-only"> : {title}</span></span>
+    <span class="text-lead">{playLabel}<span class="sr-only">{colon(lang)}{title}</span></span>
   </button>
 </div>
 

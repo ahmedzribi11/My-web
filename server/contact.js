@@ -19,8 +19,18 @@ const WINDOW = 10 * 60 * 1000
 const MIN_FILL_MS = 3000
 const hits = new Map()
 
-const oneLine = (v, max) => String(v ?? '').replace(/[\r\n\t\u2028\u2029]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max)
-const multiLine = (v, max) => String(v ?? '').replace(/\r\n?/g, '\n').replace(/\n{3,}/g, '\n\n').trim().slice(0, max)
+const oneLine = (v, max) =>
+  String(v ?? '')
+    .replace(/[\r\n\t\u2028\u2029]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, max)
+const multiLine = (v, max) =>
+  String(v ?? '')
+    .replace(/\r\n?/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+    .slice(0, max)
 
 function rateLimited(ip) {
   const now = Date.now()
@@ -84,7 +94,10 @@ async function send(d, env, origin) {
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json; charset=utf-8' },
     body: JSON.stringify({
       from: env.CONTACT_FROM,
-      to: String(env.CONTACT_TO).split(',').map((s) => s.trim()).filter(Boolean),
+      to: String(env.CONTACT_TO)
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean),
       ...(d.email ? { reply_to: d.email } : {}),
       subject: oneLine(`Demande de projet — ${d.name}${d.type ? ` (${d.type})` : ''}`, 150),
       text: emailBody(d, origin),
@@ -106,12 +119,13 @@ export async function handleContact(request, env, ip) {
 
   const reply = (status, code, extra = {}) => {
     if (wantsJson) return Response.json({ ok: status < 300, code, ...extra }, { status, headers: { 'Cache-Control': 'no-store' } })
-    const to = status < 300 ? (lang === 'en' ? '/en/contact/thanks' : '/contact/merci') : `${lang === 'en' ? '/en/contact/error' : '/contact/erreur'}?code=${code}`
+    const to =
+      status < 300 ? (lang === 'en' ? '/en/contact/thanks' : '/contact/merci') : `${lang === 'en' ? '/en/contact/error' : '/contact/erreur'}?code=${code}`
     return new Response(null, { status: 303, headers: { Location: to, 'Cache-Control': 'no-store' } })
   }
 
   if (ctype.includes('multipart/form-data')) return reply(415, 'unsupported')
-  let raw = {}
+  let raw
   try {
     raw = ctype.includes('application/json') ? await request.json() : Object.fromEntries(new URLSearchParams(await request.text()))
   } catch {

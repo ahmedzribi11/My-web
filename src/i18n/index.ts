@@ -3,7 +3,8 @@ export const LANGS: Lang[] = ['fr', 'en']
 
 /* ─── Routes ──────────────────────────────────────────────────────────── */
 
-export type RouteKey = 'home' | 'services' | 'projects' | 'about' | 'invest' | 'contact' | 'thanks' | 'formError' | 'share' | 'poster' | 'references' | 'legal' | 'privacy'
+export type RouteKey =
+  'home' | 'services' | 'projects' | 'about' | 'invest' | 'contact' | 'thanks' | 'formError' | 'share' | 'poster' | 'references' | 'legal' | 'privacy'
 
 const ROUTES: Record<RouteKey, Record<Lang, string>> = {
   home: { fr: '/', en: '/en' },
@@ -120,7 +121,8 @@ const UI = {
 
     'services.label': 'Expertises',
     'services.title': 'Tout ce qu’un projet exige, sous un même toit.',
-    'services.lead': 'Un client peut venir pour une étude, un plan d’architecte ou un chantier complet : GCG intervient à chaque étape, ou sur l’ensemble du projet.',
+    'services.lead':
+      'Un client peut venir pour une étude, un plan d’architecte ou un chantier complet : GCG intervient à chaque étape, ou sur l’ensemble du projet.',
     'services.projects': 'projets',
     'services.project': 'projet',
     'services.includes': 'Ce que nous faisons',
@@ -130,7 +132,8 @@ const UI = {
 
     'types.label': 'Tout type de projet',
     'types.title': 'Vous voulez un hôtel ? Nous construisons un hôtel.',
-    'types.lead': 'Villas, résidences, immeubles, hôtels, bars de plage, spas, usines, écoles, voiries : le portfolio de GCG couvre presque tout ce qui se construit.',
+    'types.lead':
+      'Villas, résidences, immeubles, hôtels, bars de plage, spas, usines, écoles, voiries : le portfolio de GCG couvre presque tout ce qui se construit.',
 
     'featured.label': 'Réalisations phares',
     'featured.title': 'Des projets qui parlent pour nous.',
@@ -276,8 +279,7 @@ const UI = {
 
     'share.label': 'Partager',
     'share.title': 'GCG en un scan.',
-    'share.lead':
-      'Un QR code pour chaque support : panneaux de chantier, cartes de visite, brochures, réseaux sociaux. Scannez, imprimez, partagez.',
+    'share.lead': 'Un QR code pour chaque support : panneaux de chantier, cartes de visite, brochures, réseaux sociaux. Scannez, imprimez, partagez.',
     'share.site': 'Site GCG',
     'share.siteHelp': 'Mène à la page d’accueil.',
     'share.download': 'Télécharger (SVG)',
@@ -291,7 +293,8 @@ const UI = {
     'share.socialPending': 'Les QR codes Instagram et Facebook apparaîtront ici dès que les adresses des pages seront renseignées.',
     'share.copy': 'Copier le lien',
     'share.native': 'Partager…',
-    'share.tempWarning': 'Ne pas imprimer pour l’instant : le site est encore sur une adresse provisoire. Les QR codes seront définitifs une fois le site publié sur le domaine de GCG.',
+    'share.tempWarning':
+      'Ne pas imprimer pour l’instant : le site est encore sur une adresse provisoire. Les QR codes seront définitifs une fois le site publié sur le domaine de GCG.',
     'share.pdf': 'Portfolio (PDF)',
     'share.pdfHelp': 'Le portfolio complet de GCG, à télécharger ou à joindre à un dossier.',
 
@@ -405,7 +408,8 @@ const UI = {
 
     'types.label': 'Every kind of project',
     'types.title': 'You want a hotel? We build a hotel.',
-    'types.lead': 'Villas, residences, buildings, hotels, beach bars, spas, factories, schools, roads: GCG’s portfolio covers almost everything that gets built.',
+    'types.lead':
+      'Villas, residences, buildings, hotels, beach bars, spas, factories, schools, roads: GCG’s portfolio covers almost everything that gets built.',
 
     'featured.label': 'Flagship projects',
     'featured.title': 'Projects that speak for us.',
@@ -631,6 +635,8 @@ const UNIT = /(\d)[ \u00a0\u202f]?(m²|m2|ha|km|m|FCFA|%)(?![\p{L}\d])/gu
 export const frNumber = (s: string) =>
   s.replace(/(\d)[\s\u00a0\u202f](?=\d{3}(?!\d))/g, '$1\u202f').replace(UNIT, (_, d, u) => `${d}\u00a0${u === 'm2' ? 'm²' : u}`)
 
+/** Deux-points selon la langue : « Édition : » en français, “Edition: ” en anglais (EDIT-04, I18N-07). */
+export const colon = (lang: Lang) => (lang === 'fr' ? ' : ' : ': ')
+
 /** Format des nombres anglais : « 2 500 m² » → « 2,500 m² ». */
-export const enNumber = (s: string) =>
-  s.replace(/(\d)[\s\u00a0\u202f](?=\d{3}(?!\d))/g, '$1,').replace(UNIT, (_, d, u) => `${d}\u00a0${u === 'm2' ? 'm²' : u}`)
+export const enNumber = (s: string) => s.replace(/(\d)[\s\u00a0\u202f](?=\d{3}(?!\d))/g, '$1,').replace(UNIT, (_, d, u) => `${d}\u00a0${u === 'm2' ? 'm²' : u}`)

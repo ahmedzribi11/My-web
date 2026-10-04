@@ -39,6 +39,33 @@ définis dans le même fichier (`@theme`).
 | Pastille de statut | `.pill[data-status]` | point coloré + statut (or : exécution ; vert pâle : études ; blanc : réceptionné) | — | — | — | absente si le statut n’est pas confirmé |
 | Vidéo | `components/VideoFacade.astro` | image + bouton lecture ; rien n’est chargé chez YouTube/Vimeo | bouton plus visible | contour or | clic : charge la vidéo (youtube-nocookie) | absente sans lien vidéo |
 
+## Jetons de couleur et contrastes (UX-01, UX-04, A11Y-04)
+
+Palette tirée du logo GCG (vert profond et or). Tous les couples texte/fond utilisés dépassent 4,5:1 ;
+les indicateurs de focus et les contours de composants dépassent 3:1.
+
+| Jeton | Valeur | Couple utilisé | Contraste |
+| --- | --- | --- | --- |
+| `bone` sur `ink` | `#f2efe6` / `#070c09` | texte courant sur fond sombre | 17,1:1 |
+| `bone` 75 % sur `ink` | | texte secondaire | 9,7:1 |
+| `mist` sur `ink` / `ink-3` | `#a3a9a0` | libellés, métadonnées | 8,2:1 / 7,2:1 |
+| `gold` sur `ink` | `#e8de9f` | accents, focus | 14,4:1 |
+| `sage` sur `ink` | `#b9d4c2` | statut « en cours d’études » | 12,4:1 |
+| `error` sur `ink` | `#ffb8ab` | messages d’erreur, contour des champs en erreur | 11,9:1 |
+| `brand` sur `gold` / `gold-light` | `#052e14` | bouton principal (repos / survol) | 10,9:1 / 12,5:1 |
+| `bone` / `gold` sur `brand` | | sections vertes | 13,0:1 / 10,9:1 |
+| `brand` sur `paper` | `#f6f3eb` | sections claires | 13,5:1 |
+| `brand` 75 % sur `paper` | | texte secondaire sur fond clair | 6,4:1 |
+| `gold-deep` sur `paper` | `#6f6224` | accents sur fond clair | 5,5:1 |
+| `doc-ink` / `doc-muted` sur blanc | `#1b2a20` / `#3a4a40` | liste de références imprimable | 15,0:1 / 9,4:1 |
+
+**Texte sur photo** : toujours sur un dégradé `ink` (au moins 70 % d’opacité sous le texte), vérifié à 360,
+768 et 1 440 px.
+
+**Exceptions documentées** (valeurs brutes hors jetons) : la balise `theme-color` (`#052e14`, valeur littérale
+exigée par les navigateurs) et les couleurs des QR codes exportés (`src/scripts/qr.ts` : `#052e14` sur blanc,
+pour des fichiers SVG/PNG autonomes).
+
 ## Vérification
 
 - Contrôle automatique à chaque modification : `scripts/browser-checks.mjs` (axe, débordements, console).

@@ -2,7 +2,8 @@
  * Contrôles statiques du site construit (dist/) — exécutés en CI après le build (ENG-04).
  * SEO-01 titres et descriptions uniques, A11Y-03 un seul h1, SEO-04/05 canonique et hreflang réciproques,
  * I18N-03 bouton de langue vers une page existante, I18N-05 pas de français sur les pages anglaises,
- * EDIT-01 aucun texte de remplissage, A11Y-02 attribut alt sur toutes les images, liens internes valides.
+ * EDIT-01 aucun texte de remplissage, A11Y-02 attribut alt sur toutes les images, liens internes valides,
+ * SEO-02 sitemap identique aux pages indexables (ni brouillon, ni redirection, ni 404).
  *
  *   node scripts/audit-dist.mjs        (après npm run build ; avec SITE_URL pour tester hreflang/canonique)
  */
@@ -18,7 +19,11 @@ const pages = []
 const walk = (d) => readdirSync(d).forEach((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : f.endsWith('.html') && pages.push(join(d, f))))
 walk(DIST)
 
-const urlOf = (file) => '/' + relative(DIST, file).replace(/\.html$/, '').replace(/(^|\/)index$/, '')
+const urlOf = (file) =>
+  '/' +
+  relative(DIST, file)
+    .replace(/\.html$/, '')
+    .replace(/(^|\/)index$/, '')
 const exists = (path) => {
   const p = decodeURIComponent(path.split(/[?#]/)[0]).replace(/\/$/, '') || '/'
   if (p === '/') return existsSync(join(DIST, 'index.html'))
@@ -71,7 +76,8 @@ for (const file of pages) {
   if (target && !exists(target)) errors.push(`${url} : le bouton de langue mène à ${target}, introuvable`)
 
   const canonical = /<link rel="canonical" href="([^"]+)"/.exec(html)?.[1]
-  if (canonical && new URL(canonical).pathname.replace(/\/$/, '') !== (url === '/' ? '' : url)) errors.push(`${url} : canonique ${canonical} différente de la page`)
+  if (canonical && new URL(canonical).pathname.replace(/\/$/, '') !== (url === '/' ? '' : url))
+    errors.push(`${url} : canonique ${canonical} différente de la page`)
   for (const [, hl, href] of html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)) {
     if (hl === 'x-default') continue
     const path = new URL(href).pathname
@@ -84,6 +90,29 @@ for (const file of pages) {
   }
 
   for (const [, href] of html.matchAll(/\shref="(\/[^"]*)"/g)) if (!href.startsWith('//') && !exists(href)) errors.push(`${url} : lien interne cassé ${href}`)
+}
+
+/* SEO-02 : le sitemap liste exactement les pages indexables */
+const indexable = new Set()
+let canonicalSeen = false
+for (const file of pages) {
+  const html = readFileSync(file, 'utf8')
+  const canonical = /<link rel="canonical" href="([^"]+)"/.exec(html)?.[1]
+  if (canonical) canonicalSeen = true
+  if (canonical && !/<meta name="robots" content="[^"]*noindex/.test(html)) indexable.add(new URL(canonical).pathname.replace(/\/$/, '') || '/')
+}
+const maps = existsSync(DIST) ? readdirSync(DIST).filter((f) => /^sitemap-\d+\.xml$/.test(f)) : []
+if (!maps.length) {
+  if (canonicalSeen) errors.push('sitemap absent alors que le site a des adresses canoniques (SITE_URL)')
+} else {
+  const listed = new Set(
+    maps.flatMap((f) =>
+      [...readFileSync(join(DIST, f), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, u]) => new URL(u).pathname.replace(/\/$/, '') || '/'),
+    ),
+  )
+  for (const u of listed) if (!indexable.has(u)) errors.push(`sitemap : ${u} n’est pas une page indexable (absente, redirigée ou noindex)`)
+  for (const u of indexable) if (!listed.has(u)) errors.push(`sitemap : page indexable absente du sitemap ${u}`)
+  if (!readFileSync(join(DIST, 'robots.txt'), 'utf8').includes('sitemap-index.xml')) errors.push('robots.txt ne mentionne pas le sitemap')
 }
 
 for (const w of warnings) console.warn(`  avertissement : ${w}`)

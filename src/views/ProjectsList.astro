@@ -38,7 +38,7 @@ const studies = n((p) => p.status === 'etudes')
   </PageHeader>
 
   <div id="filters" class="sticky top-0 z-30 border-y border-line bg-ink/85 backdrop-blur-xl transition-[top] duration-300" data-filters>
-    <div class="wrap flex items-center gap-3 py-3">
+    <div class="wrap flex flex-wrap items-center gap-3 py-3">
       <details class="filters-panel group relative flex-1 md:hidden">
         <summary class="chip w-full justify-between list-none">
           <span class="flex items-center gap-2"><Icon name="plus" size={14} class="transition-transform group-open:rotate-45" /> {lang === 'fr' ? 'Filtrer' : 'Filter'}</span>

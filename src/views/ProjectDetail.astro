@@ -6,7 +6,7 @@ import ProjectCard from '../components/ProjectCard.astro'
 import Breadcrumb from '../components/Breadcrumb.astro'
 import Icon from '../components/Icon.astro'
 import { getService } from '../data/services'
-import { projectPath, qrPath, route, SECTOR_LABELS, servicePath, STATUS_LABELS, useT, type Lang } from '../i18n'
+import { colon, projectPath, qrPath, route, SECTOR_LABELS, servicePath, STATUS_LABELS, useT, type Lang } from '../i18n'
 import { pad, type Project } from '../lib/projects'
 import { pageWhatsApp } from '../lib/settings'
 import { breadcrumbLd } from '../lib/seo'
@@ -26,14 +26,16 @@ const related = all
   .sort((a, b) => Number(b.sector === p.sector) - Number(a.sector === p.sector) || Math.abs(a.number - p.number) - Math.abs(b.number - p.number))
   .slice(0, 3)
 const og = await getImage({ src: p.images[0].src, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 72 })
-const sheet: [string, string | undefined][] = [
+// Fiche du projet ; secteur et statut mènent à la liste filtrée (maillage interne, SEO-13)
+const filtered = (key: string, value: string) => `${route('projects', lang)}?${key}=${value}`
+const sheet: [string, string | undefined, string?][] = [
   [t('project.location'), p.location],
   [t('project.period'), p.period],
   [t('project.surface'), p.surface],
   [t('project.terrain'), p.terrain],
   [t('project.covered'), p.coveredSurface],
-  [t('project.sector'), SECTOR_LABELS[p.sector][lang]],
-  [t('project.status'), p.status ? STATUS_LABELS[p.status][lang] : undefined],
+  [t('project.sector'), SECTOR_LABELS[p.sector][lang], filtered('secteur', p.sector)],
+  [t('project.status'), p.status ? STATUS_LABELS[p.status][lang] : undefined, p.status ? filtered('statut', p.status) : undefined],
 ]
 const path = projectPath(p.slug, lang)
 // Version dans l’autre langue : page projet si la version anglaise est relue, sinon liste des projets
@@ -66,7 +68,7 @@ const crumbs = [
   <article>
     <header class="relative flex min-h-[560px] items-end overflow-hidden bg-ink-3 md:h-[86svh]">
       <ProjectImage image={p.images[0]} sizes="100vw" priority class="absolute inset-0 block h-full w-full" vt={`p-${p.slug}`} />
-      <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/50"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/55"></div>
       <div class="wrap relative pb-10 pt-28 md:pb-16">
         <Breadcrumb items={crumbs} />
         <h1 class="display mt-6 max-w-[16ch] text-display">{p.name}</h1>
@@ -152,10 +154,10 @@ const crumbs = [
             {
               sheet
                 .filter(([, v]) => v)
-                .map(([k, v]) => (
+                .map(([k, v, href]) => (
                   <>
                     <dt class="meta border-b border-r border-line px-5 py-3.5 text-mist">{k}</dt>
-                    <dd class="border-b border-line px-5 py-3.5 text-body">{v}</dd>
+                    <dd class="border-b border-line px-5 py-3.5 text-body">{href ? <a href={href} class="link-line hover:text-gold">{v}</a> : v}</dd>
                   </>
                 ))
             }
@@ -170,14 +172,14 @@ const crumbs = [
           <h2 class="meta text-gold">{t('project.share')}</h2>
           <div class="mt-4 flex gap-4">
             <span id="project-qr" class="block w-24 shrink-0 self-start rounded bg-white p-1" data-qr={qrPath(lang, 'panneau', p.slug)}></span>
-            <div class="flex flex-col gap-2">
-              <button type="button" class="chip" data-share={path} data-title={`${p.name} · GCG`} data-copied={t('project.copied')}>
+            <div class="flex min-w-0 flex-col gap-2">
+              <button type="button" class="chip max-w-full whitespace-normal" data-share={path} data-title={`${p.name} · GCG`} data-copied={t('project.copied')}>
                 <Icon name="share" size={14} /> <span data-copy-label>{t('cta.share')}</span>
               </button>
-              <button type="button" class="chip" data-copy={path} data-copied={t('project.copied')}>
+              <button type="button" class="chip max-w-full whitespace-normal" data-copy={path} data-copied={t('project.copied')}>
                 <Icon name="link" size={14} /> <span data-copy-label>{t('project.copy')}</span>
               </button>
-              <a href={`${route('poster', lang)}?p=${p.slug}`} class="chip"><Icon name="print" size={14} /> {t('project.poster')}</a>
+              <a href={`${route('poster', lang)}?p=${p.slug}`} class="chip max-w-full whitespace-normal"><Icon name="print" size={14} /> {t('project.poster')}</a>
             </div>
           </div>
           <p class="mt-4 text-small text-bone/75">{t('project.qrHelp')}</p>
@@ -194,7 +196,7 @@ const crumbs = [
               <button type="button" class="group relative block h-full overflow-hidden bg-ink-3 text-left" data-lightbox={i} aria-haspopup="dialog">
                 <ProjectImage image={img} alt="" sizes={i === 0 && p.images.length > 2 ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 768px) 50vw, 100vw'} class="block aspect-[4/3] h-full w-full" imgClass="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
                 {img.kind !== 'photo' && <span class="pill absolute left-3 top-3" data-kind={img.kind}>{kindLabel(img.kind)}</span>}
-                <span class="sr-only">{`${t('project.enlarge')} : ${img.alt}`}</span>
+                <span class="sr-only">{`${t('project.enlarge')}${colon(lang)}${img.alt}`}</span>
               </button>
               <p class="mt-2 text-small text-bone/75">{img.alt}</p>
             </li>

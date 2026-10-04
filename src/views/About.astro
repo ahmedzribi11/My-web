@@ -49,7 +49,7 @@ const video = videoEmbed(media.videoUrl)
       <section class="wrap py-24 md:py-32" aria-label={t('about.video')}>
         <p class="label text-gold" data-reveal>{t('about.video')}</p>
         <div class="mt-8" data-reveal>
-          <VideoFacade kind={video.kind} src={video.src} title={t('about.video')} poster={by('villa-palmeras').images[0]} playLabel={fr ? 'Lire la vidéo' : 'Play the video'} />
+          <VideoFacade kind={video.kind} src={video.src} title={t('about.video')} poster={by('villa-palmeras').images[0]} playLabel={fr ? 'Lire la vidéo' : 'Play the video'} lang={lang} />
         </div>
       </section>
     )

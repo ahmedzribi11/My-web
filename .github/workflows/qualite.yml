@@ -25,32 +25,35 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: "Dépendances sans vulnérabilité haute ou critique (SEC-09)"
+      - name: 'Dépendances sans vulnérabilité haute ou critique (SEC-09)'
         run: npm audit --omit=dev --audit-level=high
 
-      - name: "Types et schéma de contenu (ENG-03, MODEL-13)"
+      - name: 'Analyse statique et mise en forme (ENG-02)'
+        run: npm run lint && npm run format:check
+
+      - name: 'Types et schéma de contenu (ENG-03, MODEL-13)'
         run: npm run check
 
-      - name: "Build (inclut le contrôle du contenu)"
+      - name: 'Build (inclut le contrôle du contenu)'
         run: npm run build
 
-      - name: "SEO, liens, langues, h1, textes de remplissage (SEO-01/05, I18N-03/05, EDIT-01)"
+      - name: 'SEO, liens, langues, h1, textes de remplissage (SEO-01/05, I18N-03/05, EDIT-01)'
         run: node scripts/audit-dist.mjs
 
-      - name: "Validation HTML (Nu Html Checker)"
+      - name: 'Validation HTML (Nu Html Checker)'
         run: |
           npm i --no-save vnu-jar@24
           java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only --filterpattern '.*view-transition-name.*' \
             $(find dist -name '*.html' -not -path 'dist/qr/*' -not -name 'qr.html')
 
-      - name: "Navigateur : console, accessibilité axe, débordements (ENG-09, A11Y-01, UX-05)"
+      - name: 'Navigateur : console, accessibilité axe, débordements (ENG-09, A11Y-01, UX-05)'
         run: |
           npm i --no-save playwright@1 axe-core@4
           npx playwright install --with-deps chromium
           (npx astro preview --host 127.0.0.1 --port 4321 &) && sleep 4
           node scripts/browser-checks.mjs
 
-      - name: "Lighthouse : budgets de performance et d’accessibilité (PERF-01/02/03/05/06/09)"
+      - name: 'Lighthouse : budgets de performance et d’accessibilité (PERF-01/02/03/05/06/09)'
         run: npx --yes @lhci/cli@0.14 autorun
 
   secrets:
@@ -59,7 +62,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: "Aucun secret dans l’historique (SEC-10)"
+      - name: 'Aucun secret dans l’historique (SEC-10)'
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

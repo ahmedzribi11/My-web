@@ -55,6 +55,7 @@ collections:
       - { label: Secteur, field: sector }
       - { label: Statut, field: status }
       - { label: Autorisation, field: permission }
+      - { label: 'Version anglaise', field: en_status }
     # Images enregistrées dans le dossier du projet, optimisées automatiquement au déploiement
     media_folder: /src/assets/projects/{{slug}}
     public_folder: ../../assets/projects/{{slug}}
@@ -164,7 +165,7 @@ collections:
         widget: list
         min: 1
         summary: '{{fields.alt}}'
-        hint: 'La première image sert de couverture ; glisser pour réordonner. JPG ou PNG, 2 400 px de large idéalement. Sur iPhone : Réglages > Appareil photo > Formats > « Le plus compatible ».'
+        hint: 'La première image sert de couverture ; glisser pour réordonner. Photo d’origine (JPG, PNG ou HEIC d’iPhone, 20 Mo maximum), 2 400 px de large idéalement : le site la convertit et l’optimise automatiquement.'
         fields:
           - { label: Image, name: src, widget: image, choose_url: false }
           - { label: 'Description (français)', name: alt, widget: string, hint: 'Ce que montre l’image, pour les malvoyants et Google. Ex. : Villa Palmeras, façade principale et piscine' }
