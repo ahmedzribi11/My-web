@@ -3,7 +3,7 @@ import { gsap, EASE } from '../animations/gsap'
 import { useGsap } from '../hooks/useGsap'
 import { useEnv } from '../lib/env'
 import { useProjectRouter } from '../lib/projectRouter'
-import { CATEGORY_LABELS, STATUS_LABELS, featuredProjects, type Project } from '../data/projects'
+import { CATEGORY_LABELS, featuredProjects, projectTiming, type Project } from '../data/projects'
 import ProjectVisual from '../components/ProjectVisual'
 import SectionLabel from '../components/SectionLabel'
 import SplitText from '../components/SplitText'
@@ -52,7 +52,7 @@ function Slide({ project, index, onOpen }: { project: Project; index: number; on
         >
           {project.location && <Info label="Lieu" value={project.location} />}
           {project.surface && <Info label="Surface" value={project.surface} />}
-          {project.status && <Info label="Statut" value={`${project.year ? `${project.year} — ` : ''}${STATUS_LABELS[project.status]}`} />}
+          {projectTiming(project) && <Info label="Période" value={projectTiming(project)} />}
           {project.category && <Info label="Catégorie" value={CATEGORY_LABELS[project.category]} />}
           {project.missions?.[0] && <Info label="Missions" value={project.missions[0]} />}
         </dl>

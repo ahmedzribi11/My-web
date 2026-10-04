@@ -33,8 +33,10 @@ export default function ProjectModal({ project, onClose, onNavigate }: Props) {
 
   const facts: [string, string][] = []
   if (project.location) facts.push(['Lieu', project.location])
-  if (project.year) facts.push(['Année', project.year])
+  if (project.period) facts.push(['Période', project.period])
   if (project.surface) facts.push(['Surface', project.surface])
+  if (project.terrain) facts.push(['Terrain', project.terrain])
+  if (project.coveredSurface) facts.push(['Surface couverte', project.coveredSurface])
   if (project.status) facts.push(['Statut', STATUS_LABELS[project.status]])
   if (project.category) facts.push(['Catégorie', CATEGORY_LABELS[project.category]])
 
@@ -101,7 +103,7 @@ export default function ProjectModal({ project, onClose, onNavigate }: Props) {
       <div ref={scroller} data-lenis-prevent className="h-full overflow-y-auto overscroll-contain">
         <div className="fixed inset-x-0 top-0 z-10 flex h-16 items-center justify-between bg-gradient-to-b from-ink via-ink/70 to-transparent px-5 md:h-24 md:px-10">
           <span className="meta">
-            Projet {String(idx + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+            Projet {String(project.number).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
           </span>
           <button ref={closeBtn} type="button" onClick={requestClose} className="btn btn-outline !h-11 bg-ink/40 backdrop-blur-md">
             Fermer
@@ -149,6 +151,13 @@ export default function ProjectModal({ project, onClose, onNavigate }: Props) {
                     </li>
                   ))}
                 </ul>
+              </div>
+            )}
+
+            {project.typology && (
+              <div data-md="fade">
+                <h3 className="meta">Typologie</h3>
+                <p className="mt-6 border-t border-line pt-5 text-xl font-light md:text-2xl">{project.typology}</p>
               </div>
             )}
 
