@@ -1,0 +1,29 @@
+{
+  "number": 30,
+  "name": "Hôtel du Golf Abidjan",
+  "name_en": "Hôtel du Golf, Abidjan",
+  "sector": "hotellerie",
+  "city": "abidjan",
+  "location": "Riviera Golf",
+  "period": "2020",
+  "composition": "Complexe touristique.",
+  "composition_en": "Tourist resort complex.",
+  "missions": [
+    "Étude de faisabilité"
+  ],
+  "missions_en": [
+    "Feasibility study"
+  ],
+  "services": [
+    "etudes"
+  ],
+  "types": [
+    "hotels"
+  ],
+  "images": [
+    "../../assets/projects/hotel-du-golf/01.jpg",
+    "../../assets/projects/hotel-du-golf/02.jpg",
+    "../../assets/projects/hotel-du-golf/03.jpg",
+    "../../assets/projects/hotel-du-golf/04.jpg"
+  ]
+}

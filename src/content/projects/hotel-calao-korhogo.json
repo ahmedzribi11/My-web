@@ -1,0 +1,37 @@
+{
+  "number": 3,
+  "featured": true,
+  "featuredOrder": 3,
+  "name": "Hôtel Calao Korhogo",
+  "name_en": "Hôtel Calao, Korhogo",
+  "sector": "hotellerie",
+  "city": "korhogo",
+  "location": "Korhogo",
+  "period": "2020 – 2024",
+  "status": "receptionne",
+  "surface": "4 000 m²",
+  "composition": "Projet clé en main d’un hôtel R+3 — 42 chambres haut standing.",
+  "composition_en": "Turnkey four-storey (R+3) hotel with 42 high-end rooms.",
+  "missions": [
+    "Études",
+    "Réalisation et aménagement"
+  ],
+  "missions_en": [
+    "Studies",
+    "Construction and fit-out"
+  ],
+  "services": [
+    "etudes",
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "hotels"
+  ],
+  "images": [
+    "../../assets/projects/hotel-calao-korhogo/01.jpg",
+    "../../assets/projects/hotel-calao-korhogo/02.jpg",
+    "../../assets/projects/hotel-calao-korhogo/03.jpg"
+  ]
+}

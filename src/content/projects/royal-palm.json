@@ -1,0 +1,39 @@
+{
+  "number": 9,
+  "name": "Royal Palm",
+  "sector": "hotellerie",
+  "city": "assinie",
+  "location": "Assinie",
+  "period": "2018",
+  "surface": "2 200 m²",
+  "composition": "Huit villas touristiques haut standing.",
+  "composition_en": "Eight high-end holiday villas.",
+  "missions": [
+    "Conception architecturale",
+    "Étude de structure",
+    "Travaux de gros œuvre",
+    "Travaux de second œuvre",
+    "Aménagements extérieurs"
+  ],
+  "missions_en": [
+    "Architectural design",
+    "Structural engineering",
+    "Structural works",
+    "Finishing works",
+    "Landscaping"
+  ],
+  "services": [
+    "architecture",
+    "ingenierie",
+    "construction",
+    "amenagement"
+  ],
+  "types": [
+    "villas",
+    "hotels"
+  ],
+  "images": [
+    "../../assets/projects/royal-palm/01.jpg",
+    "../../assets/projects/royal-palm/02.jpg"
+  ]
+}

@@ -1,0 +1,219 @@
+---
+import Base from '../layouts/Base.astro'
+import PageHeader from '../components/PageHeader.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import PresenceMap from '../components/PresenceMap.astro'
+import FinalCta from '../components/FinalCta.astro'
+import Icon from '../components/Icon.astro'
+import { cities } from '../data/geo'
+import { route, SECTOR_LABELS, STATUS_LABELS, TYPE_LABELS, useT, type Lang } from '../i18n'
+import { getProjects } from '../lib/projects'
+import { CITIES, SECTORS, STATUSES, TYPES } from '../content.config'
+
+interface Props {
+  lang: Lang
+}
+const { lang } = Astro.props
+const t = useT(lang)
+const projects = await getProjects(lang)
+const n = (pred: (p: (typeof projects)[number]) => boolean) => projects.filter(pred).length
+const groups = [
+  { key: 'secteur', label: t('projects.filter.sector'), items: SECTORS.map((v) => ({ v, label: SECTOR_LABELS[v][lang], n: n((p) => p.sector === v) })) },
+  { key: 'statut', label: t('projects.filter.status'), items: STATUSES.map((v) => ({ v, label: STATUS_LABELS[v][lang], n: n((p) => p.status === v) })) },
+  { key: 'ville', label: t('projects.filter.city'), items: CITIES.map((v) => ({ v, label: cities[v].name, n: n((p) => p.city === v) })).sort((a, b) => b.n - a.n) },
+  { key: 'type', label: lang === 'fr' ? 'Typologie' : 'Building type', items: TYPES.map((v) => ({ v, label: TYPE_LABELS[v][lang], n: n((p) => p.types.includes(v)) })) },
+].map((g) => ({ ...g, items: g.items.filter((i) => i.n > 0) }))
+const ongoing = n((p) => p.status === 'execution')
+const studies = n((p) => p.status === 'etudes')
+---
+
+<Base lang={lang} alt={route('projects', lang === 'fr' ? 'en' : 'fr')} title={t('projects.label')} description={t('projects.lead')}>
+  <PageHeader label={t('projects.label')} title={t('projects.title')} accent={lang === 'fr' ? 'GCG.' : 'track record.'} lead={t('projects.lead')}>
+    <div class="flex flex-wrap items-center gap-x-8 gap-y-3 md:col-span-12" data-reveal style="--d:.3s">
+      <p class="meta text-bone/70"><span class="text-gold">{projects.length}</span> {t('projects.count.many')}</p>
+      <p class="meta text-bone/70"><span class="text-gold">{String(ongoing).padStart(2, '0')}</span> {STATUS_LABELS.execution[lang]}</p>
+      <p class="meta text-bone/70"><span class="text-gold">{String(studies).padStart(2, '0')}</span> {STATUS_LABELS.etudes[lang]}</p>
+      <a href={route('references', lang)} class="meta ml-auto inline-flex items-center gap-2 text-bone hover:text-gold"><Icon name="download" /> {t('projects.references')}</a>
+    </div>
+  </PageHeader>
+
+  <div id="filters" class="sticky top-0 z-30 border-y border-line bg-ink/85 backdrop-blur-xl transition-[top] duration-700" data-filters>
+    <div class="wrap flex items-center gap-3 py-3">
+      <details class="filters-panel group relative flex-1 md:hidden">
+        <summary class="chip w-full justify-between list-none">
+          <span class="flex items-center gap-2"><Icon name="plus" size={14} class="transition-transform group-open:rotate-45" /> {lang === 'fr' ? 'Filtrer' : 'Filter'}</span>
+          <span class="meta text-gold" data-active-count></span>
+        </summary>
+      </details>
+      <div class="hidden flex-1 flex-wrap items-center gap-2 md:flex" data-groups-desktop></div>
+      <button type="button" class="meta hidden text-mist hover:text-gold md:inline" data-reset>{t('projects.filter.reset')}</button>
+      <p class="meta shrink-0 text-bone/70" aria-live="polite"><span data-results class="text-gold">{projects.length}</span> <span data-count-label>{t('projects.count.many')}</span></p>
+      <div class="flex shrink-0 rounded-full border border-line p-1" role="group" aria-label={lang === 'fr' ? 'Affichage' : 'View'}>
+        <button type="button" class="flex h-8 items-center gap-1.5 rounded-full px-3 text-[12px] aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="true" data-view="grid"><Icon name="grid" size={14} /><span class="hidden sm:inline">{t('projects.view.grid')}</span></button>
+        <button type="button" class="flex h-8 items-center gap-1.5 rounded-full px-3 text-[12px] aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="false" data-view="map"><Icon name="map" size={14} /><span class="hidden sm:inline">{t('projects.view.map')}</span></button>
+      </div>
+    </div>
+    <div class="wrap hidden pb-4" data-groups-mobile></div>
+  </div>
+
+  <template id="filter-groups">
+    {
+      groups.map((g) => (
+        <div class="flex min-w-0 items-center gap-2" data-group={g.key}>
+          <span class="meta shrink-0 text-mist">{g.label}</span>
+          <div class="no-scrollbar flex gap-1.5 overflow-x-auto">
+            {g.items
+              .filter((it) => it.n > 0)
+              .map((it) => (
+                <button type="button" class="chip !h-8 !px-3 !text-[12px]" aria-pressed="false" data-filter={g.key} data-value={it.v}>
+                  {it.label} <small>{it.n}</small>
+                </button>
+              ))}
+          </div>
+        </div>
+      ))
+    }
+  </template>
+  <template id="filter-dropdowns">
+    {
+      groups.map((g) => (
+        <details class="dd relative" data-dd={g.key}>
+          <summary class="chip list-none !h-9 !pr-3">
+            <span class="text-mist">{g.label}</span>
+            <span class="text-bone" data-dd-value></span>
+            <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" class="transition-transform"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+          </summary>
+          <div class="absolute left-0 top-full z-20 mt-2 flex min-w-60 flex-col gap-1 rounded-2xl border border-line bg-ink-2/95 p-2 shadow-2xl backdrop-blur-xl">
+            {g.items
+              .filter((it) => it.n > 0)
+              .map((it) => (
+                <button type="button" class="dd-item flex items-center justify-between gap-6 rounded-xl px-3 py-2.5 text-left text-[13px] text-bone/80 hover:bg-ink-3 hover:text-bone aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="false" data-filter={g.key} data-value={it.v} data-label={it.label}>
+                  {it.label} <small class="meta opacity-60">{it.n}</small>
+                </button>
+              ))}
+          </div>
+        </details>
+      ))
+    }
+  </template>
+
+  <section class="wrap py-12 md:py-16" aria-label={t('projects.label')}>
+    <div data-panel="grid" class="grid gap-x-6 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
+      {projects.map((p, i) => <ProjectCard project={p} lang={lang} index={i} />)}
+    </div>
+    <div data-empty hidden class="flex flex-col items-center gap-6 py-24 text-center">
+      <p class="text-2xl font-light text-bone/70">{t('projects.empty')}</p>
+      <button type="button" class="btn btn-line" data-reset>{t('projects.filter.reset')}</button>
+    </div>
+    <div data-panel="map" hidden class="mx-auto max-w-4xl py-8">
+      <PresenceMap lang={lang} projects={projects} />
+    </div>
+  </section>
+
+  <FinalCta lang={lang} />
+</Base>
+
+<script>
+  const KEYS = ['secteur', 'statut', 'ville', 'type'] as const
+  type Key = (typeof KEYS)[number]
+  const state: Record<Key, string> = { secteur: '', statut: '', ville: '', type: '' }
+
+  const tpl = document.getElementById('filter-groups') as HTMLTemplateElement
+  const desktop = document.querySelector<HTMLElement>('[data-groups-desktop]')!
+  const mobile = document.querySelector<HTMLElement>('[data-groups-mobile]')!
+  desktop.append((document.getElementById('filter-dropdowns') as HTMLTemplateElement).content.cloneNode(true))
+  const mob = tpl.content.cloneNode(true) as DocumentFragment
+  const dropdowns = Array.from(desktop.querySelectorAll<HTMLDetailsElement>('details.dd'))
+  dropdowns.forEach((d) =>
+    d.addEventListener('toggle', () => {
+      if (d.open) dropdowns.forEach((o) => o !== d && (o.open = false))
+    }),
+  )
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element).closest('details.dd')) dropdowns.forEach((d) => (d.open = false))
+  })
+  mob.querySelectorAll<HTMLElement>('[data-group]').forEach((g) => g.classList.add('py-1.5'))
+  mobile.append(mob)
+
+  const panel = document.querySelector<HTMLDetailsElement>('.filters-panel')!
+  panel.addEventListener('toggle', () => mobile.classList.toggle('hidden', !panel.open))
+
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project]'))
+  const count = document.querySelector<HTMLElement>('[data-results]')!
+  const countLabel = document.querySelector<HTMLElement>('[data-count-label]')!
+  const empty = document.querySelector<HTMLElement>('[data-empty]')!
+  const activeCount = document.querySelector<HTMLElement>('[data-active-count]')!
+  const lang = document.body.dataset.lang
+  const one = lang === 'en' ? 'project' : 'projet'
+  const many = lang === 'en' ? 'projects' : 'projets'
+
+  const params = new URLSearchParams(location.search)
+  KEYS.forEach((k) => (state[k] = params.get(k) ?? ''))
+
+  function apply(push = true) {
+    let visible = 0
+    for (const c of cards) {
+      const ok =
+        (!state.secteur || c.dataset.sector === state.secteur) &&
+        (!state.statut || c.dataset.status === state.statut) &&
+        (!state.ville || c.dataset.city === state.ville) &&
+        (!state.type || (c.dataset.types ?? '').split(' ').includes(state.type))
+      c.hidden = !ok
+      if (ok) {
+        visible++
+        c.classList.add('is-in')
+      }
+    }
+    count.textContent = String(visible)
+    countLabel.textContent = visible > 1 ? many : one
+    empty.hidden = visible > 0
+    document.querySelectorAll<HTMLElement>('[data-filter]').forEach((b) => {
+      b.setAttribute('aria-pressed', String(state[b.dataset.filter as Key] === b.dataset.value))
+    })
+    dropdowns.forEach((d) => {
+      const k = d.dataset.dd as Key
+      const btn = d.querySelector<HTMLElement>(`[data-value="${state[k]}"]`)
+      d.querySelector<HTMLElement>('[data-dd-value]')!.textContent = state[k] && btn ? `· ${btn.dataset.label}` : ''
+      d.classList.toggle('is-active', Boolean(state[k]))
+      if (state[k]) d.open = false
+    })
+    const active = KEYS.filter((k) => state[k]).length
+    activeCount.textContent = active ? `${active}` : ''
+    if (push) {
+      const q = new URLSearchParams()
+      KEYS.forEach((k) => state[k] && q.set(k, state[k]))
+      history.replaceState(null, '', q.toString() ? `?${q}` : location.pathname)
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    const b = (e.target as Element).closest<HTMLElement>('[data-filter]')
+    if (b) {
+      const k = b.dataset.filter as Key
+      state[k] = state[k] === b.dataset.value ? '' : b.dataset.value!
+      apply()
+      return
+    }
+    if ((e.target as Element).closest('[data-reset]')) {
+      KEYS.forEach((k) => (state[k] = ''))
+      apply()
+      return
+    }
+    const v = (e.target as Element).closest<HTMLElement>('[data-view]')
+    if (v) {
+      const view = v.dataset.view!
+      document.querySelectorAll<HTMLElement>('[data-view]').forEach((x) => x.setAttribute('aria-pressed', String(x === v)))
+      document.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => (p.hidden = p.dataset.panel !== view))
+      document.querySelector('[data-panel="map"] [data-reveal]')?.classList.add('is-in')
+      empty.hidden = view === 'map' || Number(count.textContent) > 0
+    }
+  })
+
+  apply(false)
+</script>
+
+<style>
+  .dd[open] summary svg { transform: rotate(180deg); }
+  .dd.is-active > summary { border-color: var(--color-gold); }
+  .dd > summary::-webkit-details-marker { display: none; }
+</style>

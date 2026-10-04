@@ -1,0 +1,37 @@
+{
+  "number": 31,
+  "name": "Villa Palmerais",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Riviera Palmeraie",
+  "period": "2019 – 2020",
+  "surface": "1 100 m²",
+  "composition": "Projet clé en main de 3 villas R+1 haut standing.",
+  "composition_en": "Turnkey project of 3 two-storey (R+1) high-end villas.",
+  "missions": [
+    "Études technique et architecturale, réalisation",
+    "Gros œuvre et second œuvre",
+    "Aménagements intérieurs et extérieurs"
+  ],
+  "missions_en": [
+    "Architectural and engineering design, construction",
+    "Structural and finishing works",
+    "Interior and exterior fit-out"
+  ],
+  "services": [
+    "architecture",
+    "ingenierie",
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "villas"
+  ],
+  "images": [
+    "../../assets/projects/villa-palmerais/01.jpg",
+    "../../assets/projects/villa-palmerais/02.jpg",
+    "../../assets/projects/villa-palmerais/03.jpg",
+    "../../assets/projects/villa-palmerais/04.jpg"
+  ]
+}

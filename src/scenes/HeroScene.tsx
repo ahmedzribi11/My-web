@@ -7,8 +7,8 @@ import FogVolume from './FogVolume'
 import Ground from './Ground'
 import AdaptiveQuality from './AdaptiveQuality'
 import { buildArchitecture, sampleEdges } from './architecture'
-import { heroState } from '../animations/heroState'
-import { TIER_CONFIG, type Tier } from '../lib/device'
+import { heroState } from './state'
+import { TIER_CONFIG, type Tier } from './device'
 
 const damp = THREE.MathUtils.damp
 
@@ -88,10 +88,10 @@ export default function HeroScene({ tier, active, onFallback }: Props) {
       gl={{ antialias: tier !== 'low', powerPreference: 'high-performance', alpha: false, stencil: false }}
       camera={{ fov: 35, near: 0.1, far: 120, position: [-2.4, 2.6, 31] }}
       onCreated={({ gl, scene }) => {
-        gl.setClearColor('#050505')
+        gl.setClearColor('#070c09')
         gl.toneMapping = THREE.ACESFilmicToneMapping
         gl.toneMappingExposure = 1.05
-        scene.fog = new THREE.Fog('#050505', 14, 46)
+        scene.fog = new THREE.Fog('#070c09', 14, 46)
       }}
       aria-hidden
     >

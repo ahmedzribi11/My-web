@@ -1,0 +1,28 @@
+{
+  "number": 28,
+  "name": "Complexe familial de vacances",
+  "name_en": "Family holiday resort",
+  "sector": "hotellerie",
+  "city": "assinie",
+  "location": "Assinie",
+  "period": "2026",
+  "status": "etudes",
+  "composition": "Projet de revalorisation et de développement d’un site balnéaire, dans une situation exceptionnelle entre lagune et océan.",
+  "composition_en": "Redevelopment of a seaside site in an exceptional setting between lagoon and ocean.",
+  "missions": [
+    "Étude architecturale"
+  ],
+  "missions_en": [
+    "Architectural design"
+  ],
+  "services": [
+    "architecture"
+  ],
+  "types": [
+    "hotels"
+  ],
+  "images": [
+    "../../assets/projects/complexe-familial-vacances/01.jpg",
+    "../../assets/projects/complexe-familial-vacances/02.jpg"
+  ]
+}

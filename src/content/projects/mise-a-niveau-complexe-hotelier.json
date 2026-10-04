@@ -1,0 +1,32 @@
+{
+  "number": 20,
+  "name": "Mise à niveau d’un complexe hôtelier",
+  "name_en": "Hotel complex upgrade",
+  "sector": "hotellerie",
+  "city": "assouinde",
+  "location": "Assouindé",
+  "period": "Août – oct. 2024",
+  "period_en": "Aug. – Oct. 2024",
+  "composition": "Détection et lutte contre l’incendie.",
+  "composition_en": "Fire detection and fire-fighting systems.",
+  "missions": [
+    "Mise à niveau des installations électriques et de plomberie",
+    "Mise en conformité technique du site"
+  ],
+  "missions_en": [
+    "Upgrade of electrical and plumbing installations",
+    "Technical compliance of the site"
+  ],
+  "services": [
+    "rehabilitation",
+    "ingenierie"
+  ],
+  "types": [
+    "hotels"
+  ],
+  "images": [
+    "../../assets/projects/mise-a-niveau-complexe-hotelier/01.jpg",
+    "../../assets/projects/mise-a-niveau-complexe-hotelier/02.jpg",
+    "../../assets/projects/mise-a-niveau-complexe-hotelier/03.jpg"
+  ]
+}

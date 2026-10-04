@@ -1,0 +1,39 @@
+{
+  "number": 26,
+  "name": "Résidence Abatta",
+  "name_en": "Abatta residence",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Abidjan",
+  "period": "2026",
+  "status": "etudes",
+  "surface": "8 000 m²",
+  "coveredSurface": "8 700 m²",
+  "composition": "Ensemble de villas résidentielles haut standing : deux prototypes de villas urbaines et un immeuble R+3.",
+  "composition_en": "High-end residential villas: two urban villa prototypes and a four-storey (R+3) building.",
+  "typology": "Villas haut standing avec piscine, immeuble résidentiel avec parking en sous-sol.",
+  "typology_en": "High-end villas with pools; residential building with underground parking.",
+  "missions": [
+    "Études technique et architecturale",
+    "Aménagements intérieurs et extérieurs"
+  ],
+  "missions_en": [
+    "Architectural and engineering design",
+    "Interior and exterior fit-out"
+  ],
+  "services": [
+    "architecture",
+    "ingenierie",
+    "amenagement"
+  ],
+  "types": [
+    "villas",
+    "residences",
+    "immeubles"
+  ],
+  "images": [
+    "../../assets/projects/residence-abatta/01.jpg",
+    "../../assets/projects/residence-abatta/02.jpg",
+    "../../assets/projects/residence-abatta/03.jpg"
+  ]
+}

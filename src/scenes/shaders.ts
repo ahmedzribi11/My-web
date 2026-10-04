@@ -94,7 +94,7 @@ varying float vAlpha;
 void main() {
   float d = length(gl_PointCoord - 0.5);
   float a = smoothstep(0.5, 0.0, d);
-  gl_FragColor = vec4(vec3(1.0, 0.975, 0.94), a * a * vAlpha);
+  gl_FragColor = vec4(vec3(1.0, 0.95, 0.78), a * a * vAlpha);
 }
 `
 
@@ -115,7 +115,7 @@ uniform float uOpacity;
 varying float vReveal;
 varying float vY;
 void main() {
-  gl_FragColor = vec4(vec3(0.93, 0.91, 0.87), uOpacity * vReveal);
+  gl_FragColor = vec4(vec3(0.95, 0.92, 0.78), uOpacity * vReveal);
 }
 `
 

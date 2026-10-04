@@ -1,0 +1,38 @@
+{
+  "number": 27,
+  "name": "Résidence Assinie Mafia",
+  "name_en": "Assinie Mafia residence",
+  "sector": "residentiel",
+  "city": "assinie",
+  "location": "Assinie",
+  "period": "2025",
+  "status": "etudes",
+  "surface": "1 200 m²",
+  "composition": "Ensemble de villas résidentielles de standing : trois prototypes de villas urbaines et une villa lagunaire.",
+  "composition_en": "Upscale residential villas: three urban villa prototypes and a lagoon villa.",
+  "typology": "R+1 avec rooftop et terrasse panoramique.",
+  "typology_en": "Two storeys (R+1) with rooftop and panoramic terrace.",
+  "missions": [
+    "Études technique et architecturale",
+    "Aménagements intérieurs et extérieurs"
+  ],
+  "missions_en": [
+    "Architectural and engineering design",
+    "Interior and exterior fit-out"
+  ],
+  "services": [
+    "architecture",
+    "ingenierie",
+    "amenagement"
+  ],
+  "types": [
+    "villas",
+    "residences"
+  ],
+  "images": [
+    "../../assets/projects/residence-assinie-mafia/01.jpg",
+    "../../assets/projects/residence-assinie-mafia/02.jpg",
+    "../../assets/projects/residence-assinie-mafia/03.jpg",
+    "../../assets/projects/residence-assinie-mafia/04.jpg"
+  ]
+}

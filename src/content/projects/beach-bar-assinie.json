@@ -1,0 +1,39 @@
+{
+  "number": 10,
+  "name": "Beach Bar Assinie",
+  "sector": "hotellerie",
+  "city": "assinie",
+  "location": "Assinie",
+  "period": "2022",
+  "surface": "800 m²",
+  "composition": "Restaurant-bar touristique avec piscine à débordement.",
+  "composition_en": "Beach restaurant and bar with an infinity pool.",
+  "missions": [
+    "Conception architecturale",
+    "Étude de structure",
+    "Travaux de gros œuvre",
+    "Travaux de second œuvre",
+    "Aménagements extérieurs"
+  ],
+  "missions_en": [
+    "Architectural design",
+    "Structural engineering",
+    "Structural works",
+    "Finishing works",
+    "Landscaping"
+  ],
+  "services": [
+    "architecture",
+    "ingenierie",
+    "construction",
+    "amenagement"
+  ],
+  "types": [
+    "loisirs"
+  ],
+  "images": [
+    "../../assets/projects/beach-bar-assinie/01.jpg",
+    "../../assets/projects/beach-bar-assinie/02.jpg",
+    "../../assets/projects/beach-bar-assinie/03.jpg"
+  ]
+}

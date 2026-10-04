@@ -1,0 +1,22 @@
+{
+  "contact": {
+    "phone": "",
+    "whatsapp": "",
+    "email": "",
+    "address": "",
+    "mapsUrl": "",
+    "hours": "",
+    "hours_en": ""
+  },
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "linkedin": "",
+    "tiktok": "",
+    "youtube": ""
+  },
+  "media": {
+    "videoUrl": "",
+    "portfolioPdf": ""
+  }
+}

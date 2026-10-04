@@ -1,0 +1,33 @@
+{
+  "number": 7,
+  "featured": true,
+  "featuredOrder": 8,
+  "name": "Usine pharmaceutique SAIF Ivoire",
+  "name_en": "SAIF Ivoire pharmaceutical plant",
+  "sector": "industrie",
+  "city": "grand-bassam",
+  "location": "Zone franche VITIB",
+  "location_en": "VITIB free zone",
+  "period": "2020 – 2021",
+  "surface": "3 500 m²",
+  "composition": "Construction d’une usine pharmaceutique en structure métallique.",
+  "composition_en": "Construction of a steel-frame pharmaceutical plant.",
+  "missions": [
+    "Études techniques et réalisation"
+  ],
+  "missions_en": [
+    "Engineering studies and construction"
+  ],
+  "services": [
+    "ingenierie",
+    "construction"
+  ],
+  "types": [
+    "industrie"
+  ],
+  "images": [
+    "../../assets/projects/saif-ivoire/01.jpg",
+    "../../assets/projects/saif-ivoire/02.jpg",
+    "../../assets/projects/saif-ivoire/03.jpg"
+  ]
+}

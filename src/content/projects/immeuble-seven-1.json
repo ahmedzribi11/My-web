@@ -1,0 +1,28 @@
+{
+  "number": 32,
+  "name": "Immeuble Seven 1",
+  "name_en": "Seven 1 building",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Angré 7e tranche",
+  "location_en": "Angré, 7th phase",
+  "period": "2018 – 2020",
+  "surface": "3 000 m²",
+  "composition": "Achèvement des travaux de finition d’un immeuble R+4.",
+  "composition_en": "Completion of finishing works on a five-storey (R+4) building.",
+  "missions": [
+    "Travaux de second œuvre et de finition"
+  ],
+  "missions_en": [
+    "Finishing works"
+  ],
+  "services": [
+    "construction"
+  ],
+  "types": [
+    "immeubles"
+  ],
+  "images": [
+    "../../assets/projects/immeuble-seven-1/01.jpg"
+  ]
+}

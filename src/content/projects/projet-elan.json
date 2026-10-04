@@ -1,0 +1,37 @@
+{
+  "number": 4,
+  "featured": true,
+  "featuredOrder": 5,
+  "name": "Projet Élan",
+  "name_en": "Projet Élan",
+  "sector": "residentiel",
+  "city": "grand-bassam",
+  "location": "Bassam Modeste",
+  "period": "2026",
+  "status": "etudes",
+  "surface": "14 hectares",
+  "coveredSurface": "600 000 m²",
+  "composition": "Complexe résidentiel de 28 tours R+16.",
+  "composition_en": "Residential complex of 28 seventeen-storey (R+16) towers.",
+  "missions": [
+    "Étude architecturale",
+    "Études techniques"
+  ],
+  "missions_en": [
+    "Architectural design",
+    "Engineering studies"
+  ],
+  "services": [
+    "architecture",
+    "ingenierie"
+  ],
+  "types": [
+    "residences",
+    "immeubles"
+  ],
+  "images": [
+    "../../assets/projects/projet-elan/01.jpg",
+    "../../assets/projects/projet-elan/02.jpg",
+    "../../assets/projects/projet-elan/03.jpg"
+  ]
+}

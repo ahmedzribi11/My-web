@@ -1,0 +1,31 @@
+{
+  "number": 17,
+  "name": "Salle de sport Progym",
+  "name_en": "Progym fitness centre",
+  "sector": "equipements",
+  "city": "abidjan",
+  "location": "Cocody",
+  "period": "Mars – déc. 2017",
+  "period_en": "Mar. – Dec. 2017",
+  "surface": "800 m²",
+  "composition": "Réaménagement d’une salle de sport.",
+  "composition_en": "Refurbishment of a fitness centre.",
+  "missions": [
+    "Travaux de second œuvre"
+  ],
+  "missions_en": [
+    "Finishing works"
+  ],
+  "services": [
+    "construction",
+    "rehabilitation"
+  ],
+  "types": [
+    "loisirs"
+  ],
+  "images": [
+    "../../assets/projects/salle-de-sport-progym/01.jpg",
+    "../../assets/projects/salle-de-sport-progym/02.jpg",
+    "../../assets/projects/salle-de-sport-progym/03.jpg"
+  ]
+}

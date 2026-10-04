@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import type { Architecture, SolidKind } from './architecture'
 import { lineFragment, lineVertex } from './shaders'
-import { heroState } from '../animations/heroState'
+import { heroState } from './state'
 
 /** Injecte une coupe horizontale (construction du bas vers le haut) dans un matériau standard. */
 function withBuildCut(material: THREE.MeshStandardMaterial, uniforms: { uCut: { value: number }; uOpacity: { value: number } }) {

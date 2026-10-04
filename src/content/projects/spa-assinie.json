@@ -1,0 +1,35 @@
+{
+  "number": 5,
+  "featured": true,
+  "featuredOrder": 7,
+  "name": "Spa Assinie",
+  "sector": "hotellerie",
+  "city": "assinie",
+  "location": "Assinie",
+  "period": "2020 – 2023",
+  "surface": "1 200 m²",
+  "composition": "Aménagement d’un centre de loisirs et de détente SPA.",
+  "composition_en": "Leisure and wellness centre with spa.",
+  "missions": [
+    "Conception",
+    "Réalisation clé en main"
+  ],
+  "missions_en": [
+    "Design",
+    "Turnkey construction"
+  ],
+  "services": [
+    "architecture",
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "loisirs"
+  ],
+  "images": [
+    "../../assets/projects/spa-assinie/01.jpg",
+    "../../assets/projects/spa-assinie/02.jpg",
+    "../../assets/projects/spa-assinie/03.jpg"
+  ]
+}

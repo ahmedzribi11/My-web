@@ -1,0 +1,67 @@
+---
+export type IconName =
+  | 'arrow'
+  | 'arrow-left'
+  | 'arrow-up-right'
+  | 'whatsapp'
+  | 'phone'
+  | 'mail'
+  | 'pin'
+  | 'instagram'
+  | 'facebook'
+  | 'linkedin'
+  | 'tiktok'
+  | 'youtube'
+  | 'close'
+  | 'download'
+  | 'share'
+  | 'link'
+  | 'print'
+  | 'qr'
+  | 'grid'
+  | 'map'
+  | 'plus'
+  | 'play'
+  | 'clock'
+
+interface Props {
+  name: IconName
+  size?: number
+  class?: string
+}
+const { name, size = 16, class: cls } = Astro.props
+const stroke = { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' } as const
+---
+
+<svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" class={cls}>
+  {name === 'arrow' && <path {...stroke} d="M4 12h15M14 6l6 6-6 6" />}
+  {name === 'arrow-left' && <path {...stroke} d="M20 12H5M10 6l-6 6 6 6" />}
+  {name === 'arrow-up-right' && <path {...stroke} d="M7 17 17 7M8 7h9v9" />}
+  {
+    name === 'whatsapp' && (
+      <path
+        fill="currentColor"
+        d="M12.04 2a9.9 9.9 0 0 0-8.5 14.98L2 22l5.17-1.5A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.07.89.9-2.98-.2-.31a8.2 8.2 0 1 1 6.85 3.73Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.17.25-.64.8-.78.97-.14.16-.29.18-.53.06a6.7 6.7 0 0 1-3.34-2.92c-.25-.43.25-.4.72-1.34.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.74 2.74 0 0 0-.85 2.03 4.76 4.76 0 0 0 1 2.53 10.9 10.9 0 0 0 4.17 3.68c1.55.67 2.16.73 2.94.61.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.15-1.17-.06-.11-.22-.17-.47-.29Z"
+      />
+    )
+  }
+  {name === 'phone' && <path {...stroke} d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" />}
+  {name === 'mail' && <g {...stroke}><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></g>}
+  {name === 'pin' && <g {...stroke}><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></g>}
+  {name === 'instagram' && <g {...stroke}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" /></g>}
+  {name === 'facebook' && <path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.25-1.46 1.5-1.46h1.6V4.46A21 21 0 0 0 14.27 4C11.97 4 10.4 5.4 10.4 7.97v2.53H7.8v3h2.6V21h3.1Z" />}
+  {name === 'linkedin' && <path fill="currentColor" d="M5.3 8.7h3.1V19H5.3V8.7ZM6.85 4a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6ZM10.4 8.7h3v1.4h.04c.41-.79 1.44-1.62 2.96-1.62 3.17 0 3.75 2.08 3.75 4.79V19h-3.1v-5.1c0-1.22-.02-2.78-1.7-2.78-1.69 0-1.95 1.33-1.95 2.7V19H10.4V8.7Z" />}
+  {name === 'tiktok' && <path fill="currentColor" d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v2.6a7 7 0 0 1-3.8-1.2v6.1A5.7 5.7 0 1 1 11 8.6v2.8a2.9 2.9 0 1 0 2 2.8V3h3.6Z" />}
+  {name === 'youtube' && <path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15V9l5.2 3L10 15Z" />}
+  {name === 'close' && <path {...stroke} d="M6 6l12 12M18 6 6 18" />}
+  {name === 'download' && <path {...stroke} d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14" />}
+  {name === 'share' && <g {...stroke}><circle cx="6" cy="12" r="2.5" /><circle cx="18" cy="6" r="2.5" /><circle cx="18" cy="18" r="2.5" /><path d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6" /></g>}
+  {name === 'link' && <path {...stroke} d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3A4 4 0 0 0 11 18.7l1-1" />}
+  {name === 'print' && <g {...stroke}><path d="M7 9V3h10v6M7 17H4v-7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v7h-3" /><path d="M7 14h10v7H7z" /></g>}
+  {name === 'qr' && <g {...stroke}><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3" /></g>}
+  {name === 'grid' && <g {...stroke}><rect x="4" y="4" width="7" height="7" /><rect x="13" y="4" width="7" height="7" /><rect x="4" y="13" width="7" height="7" /><rect x="13" y="13" width="7" height="7" /></g>}
+  {name === 'map' && <path {...stroke} d="M9 4 3 6.5v13.5L9 17.5l6 2.5 6-2.5V4l-6 2.5L9 4Zm0 0v13.5m6-11v13.5" />}
+  {name === 'plus' && <path {...stroke} d="M12 5v14M5 12h14" />}
+  {name === 'play' && <path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5Z" />}
+  {name === 'clock' && <g {...stroke}><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></g>}
+</svg>

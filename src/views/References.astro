@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro'
+import Icon from '../components/Icon.astro'
+import { route, SECTOR_LABELS, STATUS_LABELS, useT, type Lang } from '../i18n'
+import { getProjects, pad } from '../lib/projects'
+import { contact } from '../lib/settings'
+import { SECTORS } from '../content.config'
+
+interface Props {
+  lang: Lang
+}
+const { lang } = Astro.props
+const t = useT(lang)
+const fr = lang === 'fr'
+const projects = await getProjects(lang)
+const edition = new Intl.DateTimeFormat(fr ? 'fr-FR' : 'en-GB', { month: 'long', year: 'numeric' }).format(new Date())
+const groups = SECTORS.map((s) => ({ s, list: projects.filter((p) => p.sector === s) })).filter((g) => g.list.length)
+const ongoing = projects.filter((p) => p.status === 'execution').length
+const studies = projects.filter((p) => p.status === 'etudes').length
+---
+
+<Base lang={lang} alt={route('references', fr ? 'en' : 'fr')} title={t('refs.title')} description={t('refs.lead')} bare>
+  <div class="no-print sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-line bg-ink/90 px-4 py-3 backdrop-blur">
+    <a href={route('projects', lang)} class="meta inline-flex items-center gap-2 text-bone/70 hover:text-gold"><Icon name="arrow-left" /> {t('projects.label')}</a>
+    <button type="button" class="btn btn-gold !min-h-10" onclick="window.print()"><Icon name="print" /> {t('refs.print')}</button>
+  </div>
+
+  <div class="refs-stage px-3 py-8 md:px-8 md:py-12">
+    <article class="refs-doc mx-auto max-w-[1180px] bg-white p-6 text-[#1b2a20] shadow-2xl md:p-12">
+      <header class="flex flex-wrap items-end justify-between gap-6 border-b-2 border-brand pb-6">
+        <div>
+          <img src="/brand/gcg-logo-green.png" alt="GCG — General Constructor Group CI" width="720" height="219" class="h-14 w-auto" />
+          <p class="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-brand/70">{fr ? 'Construction & ingénierie — depuis 2016 — Côte d’Ivoire' : 'Construction & engineering — since 2016 — Côte d’Ivoire'}</p>
+        </div>
+        <div class="text-right">
+          <h1 class="text-3xl font-normal tracking-[-0.02em] text-brand md:text-4xl">{t('refs.title')}</h1>
+          <p class="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-brand/70">{t('refs.edition')} : {edition}</p>
+        </div>
+      </header>
+
+      <div class="mt-6 grid gap-4 text-[13px] sm:grid-cols-4">
+        <p><span class="block text-2xl font-light text-brand">{projects.length}</span>{fr ? 'projets au portfolio' : 'projects in the portfolio'}</p>
+        <p><span class="block text-2xl font-light text-brand">{ongoing}</span>{STATUS_LABELS.execution[lang]}</p>
+        <p><span class="block text-2xl font-light text-brand">{studies}</span>{STATUS_LABELS.etudes[lang]}</p>
+        <p><span class="block text-2xl font-light text-brand">20+</span>{fr ? 'collaborateurs, 4 pôles' : 'staff, 4 divisions'}</p>
+      </div>
+      <p class="mt-4 max-w-3xl text-[13px] leading-relaxed text-[#3a4a40]">{t('about.lead')}</p>
+
+      {
+        groups.map((g) => (
+          <section class="mt-10">
+            <h2 class="flex items-baseline justify-between border-b border-brand/30 pb-2 text-lg font-medium text-brand">
+              {SECTOR_LABELS[g.s][lang]}
+              <span class="font-mono text-[11px] font-normal text-brand/60">{g.list.length}</span>
+            </h2>
+            <table class="mt-2 w-full border-collapse text-left text-[12px] leading-snug">
+              <thead>
+                <tr class="font-mono text-[10px] uppercase tracking-[0.1em] text-brand/60">
+                  <th class="w-10 py-2 pr-2 font-normal">{t('refs.col.n')}</th>
+                  <th class="py-2 pr-3 font-normal">{t('refs.col.project')}</th>
+                  <th class="py-2 pr-3 font-normal">{t('refs.col.location')}</th>
+                  <th class="py-2 pr-3 font-normal">{t('refs.col.period')}</th>
+                  <th class="py-2 pr-3 font-normal">{t('refs.col.surface')}</th>
+                  <th class="py-2 pr-3 font-normal">{t('refs.col.program')}</th>
+                  <th class="py-2 pr-3 font-normal">{t('refs.col.missions')}</th>
+                  <th class="py-2 font-normal">{t('refs.col.status')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {g.list.map((p) => (
+                  <tr class="border-t border-[#dfe5df] align-top">
+                    <td class="py-2.5 pr-2 font-mono text-brand/60">{pad(p.number)}</td>
+                    <td class="py-2.5 pr-3 font-medium text-brand">{p.name}</td>
+                    <td class="py-2.5 pr-3">{p.location}</td>
+                    <td class="whitespace-nowrap py-2.5 pr-3">{p.period}</td>
+                    <td class="whitespace-nowrap py-2.5 pr-3">{[p.surface, p.coveredSurface && `(${p.coveredSurface} ${fr ? 'couverts' : 'built'})`].filter(Boolean).join(' ')}</td>
+                    <td class="py-2.5 pr-3">{p.composition}</td>
+                    <td class="py-2.5 pr-3">{p.missions.join(' ; ')}</td>
+                    <td class="py-2.5">{p.status ? STATUS_LABELS[p.status][lang] : ''}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        ))
+      }
+
+      <footer class="mt-10 flex flex-wrap justify-between gap-4 border-t-2 border-brand pt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-brand/70">
+        <span>General Constructor Group CI</span>
+        <span>{[contact.phone, contact.email].filter(Boolean).join(' · ')}</span>
+        <span data-qr-text={route('home', lang)}></span>
+      </footer>
+    </article>
+  </div>
+</Base>
+
+<script>
+  import '../scripts/qr'
+</script>
+
+<style is:global>
+  .refs-doc table { font-variant-numeric: tabular-nums; }
+  @media print {
+    @page { size: A4 landscape; margin: 10mm; }
+    .refs-stage { padding: 0 !important; }
+    .refs-doc { box-shadow: none !important; max-width: none !important; padding: 0 !important; }
+    .refs-doc section { break-inside: auto; }
+    .refs-doc tr { break-inside: avoid; }
+    .refs-doc h2 { break-after: avoid; }
+  }
+</style>

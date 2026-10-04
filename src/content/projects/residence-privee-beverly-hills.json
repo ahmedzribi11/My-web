@@ -1,0 +1,40 @@
+{
+  "number": 24,
+  "featured": true,
+  "featuredOrder": 4,
+  "name": "Résidence privée de luxe Beverly Hills",
+  "name_en": "Beverly Hills private luxury residence",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Riviera Golf",
+  "period": "2025",
+  "status": "execution",
+  "surface": "1 200 m²",
+  "composition": "Projet clé en main de 3 villas très haut standing.",
+  "composition_en": "Turnkey project of 3 luxury villas.",
+  "missions": [
+    "Études, conception et réalisation",
+    "Gros œuvre et second œuvre",
+    "Aménagements intérieurs et extérieurs"
+  ],
+  "missions_en": [
+    "Studies, design and construction",
+    "Structural and finishing works",
+    "Interior and exterior fit-out"
+  ],
+  "services": [
+    "etudes",
+    "architecture",
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "villas",
+    "residences"
+  ],
+  "images": [
+    "../../assets/projects/residence-privee-beverly-hills/01.jpg",
+    "../../assets/projects/residence-privee-beverly-hills/02.jpg"
+  ]
+}

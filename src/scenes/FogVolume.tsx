@@ -28,7 +28,7 @@ export default function FogVolume({ layers, center = [0, 4, 0], spread = 12, rea
             uSeed: { value: i * 3.17 },
             uScroll: { value: 0 },
             uPointer: { value: new THREE.Vector2(0.5, 0.5) },
-            uColor: { value: new THREE.Color(i % 2 ? '#d9d5cd' : '#bdb8b0') },
+            uColor: { value: new THREE.Color(i % 2 ? '#d6d6c2' : '#aeb7a2') },
           },
         }),
       ),
