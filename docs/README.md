@@ -16,6 +16,7 @@ Tout ce qu’il faut pour exploiter le site sans dépendre des deux développeur
 | [maintenance.md](maintenance.md) | GCG + équipe | périmètre de maintenance (à recopier de la grille tarifaire), journal des mises à jour, revue annuelle |
 | [fiche-de-faits.csv](fiche-de-faits.csv) | GCG | tous les chiffres et faits publiés, projet par projet, **à valider ligne par ligne** |
 | [registre-des-droits.csv](registre-des-droits.csv) | GCG | chaque image : source, auteur, licence, autorisation du client final |
+| [audit-qualite-2026-10-04.csv](audit-qualite-2026-10-04.csv) | équipe | audit des 245 critères qualité : statut et preuve de chacun (en anglais) |
 | [signature-email.html](signature-email.html) | personnel de GCG | signature e-mail FR/EN à compléter et copier dans Gmail ou Outlook |
 | [../CHANGELOG.md](../CHANGELOG.md) | GCG | modifications par mise en production |
 
