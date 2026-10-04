@@ -39,8 +39,7 @@ export default function Nav() {
     >
       <nav aria-label="Navigation principale" className="mx-auto flex h-16 max-w-[1800px] items-center justify-between px-5 md:h-20 md:px-10">
         <a href="#top" onClick={() => setOpen(false)} className="group relative z-10 flex items-baseline gap-3" aria-label="GCG — retour en haut de page">
-          <span className="text-[15px] font-medium tracking-[0.28em]">GCG</span>
-          <span className="meta hidden !text-[10px] lg:inline">General Constructor Group</span>
+          <img src="/brand/gcg-logo-white.png" alt="GCG — General Constructor Group CI" width={720} height={220} className="h-7 w-auto md:h-8" />
         </a>
 
         <ul className="hidden items-center gap-10 md:flex">

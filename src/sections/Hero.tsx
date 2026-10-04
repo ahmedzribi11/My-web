@@ -134,7 +134,7 @@ export default function Hero() {
 
         <div data-hero="overlay" className="absolute inset-0 flex flex-col justify-end px-5 pb-10 pt-24 md:px-10 md:pb-14">
           <p data-hero="label" className="meta absolute left-5 top-24 flex items-center gap-4 md:left-10 md:top-32">
-            <span className="text-bone">GCG</span>
+            <span className="text-gold">GCG</span>
             <span className="h-px w-10 bg-bone/30" />
             Construction & Ingénierie
           </p>

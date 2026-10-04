@@ -30,7 +30,7 @@ export default function Process() {
         })
         tl.fromTo('[data-pr="rail"]', desktop ? { scaleX: 0 } : { scaleY: 0 }, { scaleX: 1, scaleY: 1, ease: 'none', duration: 5 }, 0)
         gsap.utils.toArray<HTMLElement>('[data-step]').forEach((el, i) => {
-          tl.fromTo(el.querySelector('[data-node]'), { scale: 0.4, backgroundColor: 'rgba(5,5,5,1)' }, { scale: 1, backgroundColor: '#f2efe9', ease: 'none', duration: 0.4 }, i * 1.05)
+          tl.fromTo(el.querySelector('[data-node]'), { scale: 0.4, backgroundColor: 'rgba(5,5,5,1)' }, { scale: 1, backgroundColor: '#e8de9f', ease: 'none', duration: 0.4 }, i * 1.05)
           tl.fromTo(el.querySelectorAll('[data-step-text] > *'), { opacity: 0.12, y: 18 }, { opacity: 1, y: 0, stagger: 0.1, ease: 'none', duration: 0.6 }, i * 1.05)
         })
       })
@@ -57,7 +57,7 @@ export default function Process() {
               <span
                 data-node
                 aria-hidden
-                className="absolute -left-10 top-1.5 block h-[11px] w-[11px] rounded-full border border-bone bg-bone md:-top-[3.85rem] md:left-0"
+                className="absolute -left-10 top-1.5 block h-[11px] w-[11px] rounded-full border border-gold bg-gold md:-top-[3.85rem] md:left-0"
               />
               <div data-step-text>
                 <p className="meta">{s.index}</p>

@@ -40,7 +40,7 @@ export default function FinalCTA() {
       const tl = gsap.timeline({ scrollTrigger: { trigger: root.current, start: 'top 45%' } })
       tl.from('[data-cta="kicker"]', { autoAlpha: 0, y: 14, duration: 1.4, ease: EASE.out })
         .from('[data-cta="title"] .split-inner', { yPercent: 115, duration: 2, stagger: 0.1, ease: EASE.out }, 0.2)
-        .from('[data-cta="mark"]', { autoAlpha: 0, letterSpacing: '0.8em', duration: 2.4, ease: EASE.cinematic }, 0.3)
+        .from('[data-cta="mark"]', { autoAlpha: 0, y: 12, duration: 2.4, ease: EASE.cinematic }, 0.3)
         .from('[data-cta="actions"] > *', { autoAlpha: 0, y: 16, duration: 1.4, stagger: 0.12, ease: EASE.out }, 0.9)
     },
     [reducedMotion],
@@ -67,9 +67,15 @@ export default function FinalCTA() {
         <h2 id="cta-title" data-cta="title" className="display mt-8 text-[clamp(3.6rem,15vw,16rem)]">
           <SplitText text="Parlons-en." />
         </h2>
-        <p data-cta="mark" className="mt-6 text-[13px] font-medium tracking-[0.5em] text-bone/70">
-          GCG
-        </p>
+        <img
+          data-cta="mark"
+          src="/brand/gcg-logo-gold.png"
+          alt="GCG — General Constructor Group CI"
+          width={720}
+          height={218}
+          loading="lazy"
+          className="mt-8 h-10 w-auto opacity-90 md:h-12"
+        />
 
         <div data-cta="actions" className="mt-14 flex flex-col items-center gap-8">
           <Magnetic href={contactHref} className="btn btn-primary !h-16 !px-10">

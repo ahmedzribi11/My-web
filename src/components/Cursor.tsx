@@ -77,7 +77,7 @@ export default function Cursor({ enabled }: { enabled: boolean }) {
           style={{
             width: ringSize,
             height: ringSize,
-            background: mode === 'view' ? 'rgba(242,239,233,0.95)' : 'transparent',
+            background: mode === 'view' ? 'rgba(232,222,159,0.95)' : 'transparent',
             borderColor: mode === 'view' ? 'transparent' : undefined,
           }}
         >

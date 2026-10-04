@@ -13,6 +13,7 @@ import SavoirFaire from './sections/SavoirFaire'
 import Expertise from './sections/Expertise'
 import Projects from './sections/Projects'
 import Process from './sections/Process'
+import Organisation from './sections/Organisation'
 import About from './sections/About'
 import FinalCTA from './sections/FinalCTA'
 
@@ -80,6 +81,7 @@ export default function App() {
           <Expertise />
           <Projects />
           <Process />
+          <Organisation />
           <About />
           <FinalCTA />
         </main>
