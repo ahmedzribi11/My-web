@@ -19,6 +19,7 @@ export const contactHref = site.contact.email ? `mailto:${site.contact.email}` :
 export const NAV = [
   { label: 'Projets', href: '#projets' },
   { label: 'Expertise', href: '#expertise' },
+  { label: 'Organisation', href: '#organisation' },
   { label: 'À propos', href: '#a-propos' },
   { label: 'Contact', href: '#contact' },
 ] as const

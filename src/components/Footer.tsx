@@ -5,8 +5,8 @@ export default function Footer() {
     <footer className="border-t border-line px-5 pb-10 pt-16 md:px-10">
       <div className="mx-auto grid max-w-[1800px] gap-12 md:grid-cols-12">
         <div className="md:col-span-6">
-          <p className="text-[15px] font-medium tracking-[0.28em]">{site.short}</p>
-          <p className="meta mt-3">{site.name}</p>
+          <img src="/brand/gcg-logo-gold.png" alt={`${site.short} — ${site.name} CI`} width={720} height={218} loading="lazy" className="h-12 w-auto md:h-14" />
+          <p className="meta mt-5">Construction & Ingénierie — depuis {site.since}</p>
         </div>
         <nav aria-label="Navigation de pied de page" className="md:col-span-3 md:col-start-10">
           <ul className="grid grid-cols-2 gap-3">
@@ -24,7 +24,7 @@ export default function Footer() {
         <p className="meta">
           © {new Date().getFullYear()} {site.name}
         </p>
-        <p className="meta">Construction & Ingénierie — depuis {site.since}</p>
+        <p className="meta">Côte d’Ivoire</p>
       </div>
     </footer>
   )

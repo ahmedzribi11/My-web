@@ -9,6 +9,9 @@
   --color-mist: #9a968f;
   --color-steel: #b9bcc0;
   --color-bone: #f2efe9;
+  /* Identité GCG (portfolio) */
+  --color-brand: #052e14;
+  --color-gold: #e8de9f;
 
   --font-sans: "Geist Variable", "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -36,7 +39,7 @@
     font-weight: 300;
     overflow-x: hidden;
   }
-  ::selection { background: var(--color-bone); color: var(--color-ink); }
+  ::selection { background: var(--color-gold); color: var(--color-ink); }
 
   :focus-visible {
     outline: 1px solid var(--color-bone);
@@ -85,8 +88,8 @@
     transition: background-color 0.6s var(--ease-out-expo), color 0.6s var(--ease-out-expo), border-color 0.6s var(--ease-out-expo);
     white-space: nowrap;
   }
-  .btn-primary { background: var(--color-bone); color: var(--color-ink); }
-  .btn-primary:hover { background: #ffffff; }
+  .btn-primary { background: var(--color-gold); color: var(--color-brand); }
+  .btn-primary:hover { background: #f2ecc4; }
   .btn-outline { border: 1px solid rgba(242, 239, 233, 0.32); color: var(--color-bone); }
   .btn-outline:hover { border-color: var(--color-bone); background: rgba(242, 239, 233, 0.06); }
   .btn .arrow { transition: transform 0.6s var(--ease-out-expo); }

@@ -35,11 +35,9 @@ src/
 Le portfolio **« Portfolio GCG_CI.pdf » est la seule source de vérité**. Aucune donnée n’est inventée :
 un champ non renseigné n’est simplement pas affiché.
 
-- **Projets** : `src/data/projects.ts`. Seul *Green City* est entièrement documenté à ce jour ; les autres
-  projets n’ont que leur nom (et une catégorie lorsqu’elle découle sans ambiguïté du nom). Compléter
-  lieu, année, surface, composition, missions et statut depuis le PDF.
-- **Images** : déposer les visuels dans `public/projects/<id>/` et les référencer dans `images`
-  (voir `public/projects/README.md`). Sans image, un rendu « élévation schématique » génératif est affiché.
+- **Projets** : `src/data/projects.ts` — les 34 projets du portfolio, avec lieu, période, surface,
+  composition, missions et statut tels qu’indiqués dans le PDF (un champ absent du PDF n’est pas affiché).
+- **Images** : extraites du portfolio dans `public/projects/<id>/` (voir `public/projects/README.md`).
 - **Coordonnées** : `src/data/site.ts` → `contact.email`, `contact.phone`, `contact.address`.
   Le bouton « Contactez GCG » devient un lien `mailto:` dès qu’un email est renseigné.
 

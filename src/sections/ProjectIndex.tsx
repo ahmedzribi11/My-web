@@ -3,7 +3,7 @@ import { gsap, EASE, ScrollTrigger } from '../animations/gsap'
 import { useGsap } from '../hooks/useGsap'
 import { useEnv } from '../lib/env'
 import { useProjectRouter } from '../lib/projectRouter'
-import { CATEGORY_LABELS, STATUS_LABELS, projects, type ProjectCategory, type ProjectStatus } from '../data/projects'
+import { CATEGORY_LABELS, STATUS_LABELS, projects, projectTiming, type ProjectCategory, type ProjectStatus } from '../data/projects'
 import ProjectVisual from '../components/ProjectVisual'
 
 type Filter = { kind: 'all' } | { kind: 'category'; value: ProjectCategory } | { kind: 'status'; value: ProjectStatus }
@@ -77,7 +77,7 @@ export default function ProjectIndex() {
   return (
     <div ref={root} className="mx-auto max-w-[1800px] px-5 pb-28 pt-28 md:px-10 md:pb-44 md:pt-40">
       <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-        <h3 className="display text-[clamp(2rem,4vw,3.6rem)]">Index des projets</h3>
+        <h3 className="display shrink-0 text-[clamp(2rem,4vw,3.6rem)]">Index des projets</h3>
         <div role="group" aria-label="Filtrer les projets" className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-2 md:mx-0 md:flex-wrap md:justify-end md:px-0 md:pb-0">
           {filters.map((f) => (
             <button
@@ -100,11 +100,11 @@ export default function ProjectIndex() {
         <span className="col-span-5">Projet</span>
         <span className="col-span-2">Catégorie</span>
         <span className="col-span-2">Lieu</span>
-        <span className="col-span-2 text-right">Statut</span>
+        <span className="col-span-2 text-right">Période</span>
       </div>
 
       <ul className="mt-6 md:mt-0" onMouseLeave={() => setHovered(null)}>
-        {list.map((p, i) => (
+        {list.map((p) => (
           <li key={p.id} data-row className="border-b border-line">
             <button
               type="button"
@@ -115,7 +115,7 @@ export default function ProjectIndex() {
               onBlur={() => setHovered(null)}
               className="group grid w-full grid-cols-12 items-baseline gap-x-6 gap-y-1 py-5 text-left md:py-7"
             >
-              <span className="meta col-span-2 md:col-span-1">{pad(i + 1)}</span>
+              <span className="meta col-span-2 md:col-span-1">{pad(p.number)}</span>
               <span className="col-span-10 text-2xl font-light tracking-[-0.02em] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:translate-x-3 md:col-span-5 md:text-4xl">
                 {p.name}
               </span>
@@ -124,7 +124,7 @@ export default function ProjectIndex() {
               </span>
               <span className="col-span-10 col-start-3 text-[13px] text-bone/55 md:col-span-2 md:col-start-auto">{p.location ?? ''}</span>
               <span className="col-span-10 col-start-3 text-[13px] text-bone/55 md:col-span-2 md:col-start-auto md:text-right">
-                {p.status ? `${p.year ? `${p.year} — ` : ''}${STATUS_LABELS[p.status]}` : ''}
+                {projectTiming(p)}
               </span>
             </button>
           </li>
