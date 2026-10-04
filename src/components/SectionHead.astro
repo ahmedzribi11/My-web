@@ -13,13 +13,13 @@ interface Props {
 }
 const { label, title, accent, lead, as: Tag = 'h2', size = 'lg', align = 'split', tone = 'dark', id } = Astro.props
 const sizeClass = {
-  xl: 'text-[clamp(2.8rem,8.5vw,9rem)]',
-  lg: 'text-[clamp(2.4rem,6vw,6.4rem)]',
-  md: 'text-[clamp(2rem,4.2vw,4.2rem)]',
+  xl: 'text-display',
+  lg: 'text-display',
+  md: 'text-display',
 }[size]
 const html = accent ? title.replace(accent, `<em class="serif">${accent}</em>`) : title
 const leadColor = tone === 'paper' ? 'text-brand/70' : 'text-bone/65'
-const labelColor = tone === 'paper' ? 'text-brand/60' : tone === 'brand' ? 'text-gold' : 'text-gold'
+const labelColor = tone === 'paper' ? 'text-brand/75' : tone === 'brand' ? 'text-gold' : 'text-gold'
 ---
 
 <div class:list={['grid gap-8', align === 'split' && lead ? 'md:grid-cols-12 md:items-end' : '']}>
@@ -29,7 +29,7 @@ const labelColor = tone === 'paper' ? 'text-brand/60' : tone === 'brand' ? 'text
   </div>
   {
     lead && (
-      <p class:list={['max-w-md text-[15px] leading-relaxed md:text-base', leadColor, align === 'split' ? 'md:col-span-4 md:pb-3' : '']} data-reveal style="--d:.15s">
+      <p class:list={['max-w-md text-body', leadColor, align === 'split' ? 'md:col-span-4 md:pb-3' : '']} data-reveal>
         {lead}
       </p>
     )

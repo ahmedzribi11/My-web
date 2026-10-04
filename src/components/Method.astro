@@ -33,26 +33,20 @@ const paper = tone === 'paper'
   <div class="wrap">
     <SectionHead id="method-title" label={t('method.label')} title={t('method.title')} accent={lang === 'fr' ? 'remise des clés.' : 'the keys.'} size="md" tone={paper ? 'paper' : 'dark'} />
 
-    <ol class="method relative mt-16 grid gap-10 pl-8 md:mt-28 md:grid-cols-6 md:gap-6 md:pl-0 md:pt-12" data-reveal="fade">
-      <span class:list={['method-rail absolute bottom-2 left-[5px] top-2 w-px md:bottom-auto md:left-0 md:right-0 md:top-[5px] md:h-px md:w-auto', paper ? 'bg-brand/40' : 'bg-gold/50']} aria-hidden="true"></span>
+    <div class="relative mt-16 md:mt-28" data-reveal="fade">
+    <span class:list={['absolute bottom-2 left-[5px] top-2 w-px md:bottom-auto md:left-0 md:right-0 md:top-[5px] md:h-px md:w-auto', paper ? 'bg-brand/40' : 'bg-gold/50']} aria-hidden="true"></span>
+    <ol class="relative grid gap-10 pl-8 md:grid-cols-6 md:gap-6 md:pl-0 md:pt-12">
       {
         steps.map(([title, text], i) => (
-          <li class="method-step relative" style={`--i:${i}`}>
+          <li class="relative">
             <span class:list={['absolute -left-8 top-1.5 block h-[11px] w-[11px] rounded-full md:-top-[3.05rem] md:left-0', paper ? 'bg-brand' : 'bg-gold']} aria-hidden="true" />
-            <p class:list={['meta', paper ? 'text-brand/55' : 'text-mist']}>{String(i + 1).padStart(2, '0')}</p>
-            <h3 class="mt-3 text-2xl font-light tracking-[-0.03em] md:text-[clamp(1.3rem,1.8vw,2rem)]">{title}</h3>
-            <p class:list={['mt-2 max-w-[24ch] text-[14px] leading-relaxed', paper ? 'text-brand/65' : 'text-bone/55']}>{text}</p>
+            <p class:list={['meta', paper ? 'text-brand/75' : 'text-mist']}>{String(i + 1).padStart(2, '0')}</p>
+            <h3 class="mt-3 text-title font-light tracking-[-0.03em]">{title}</h3>
+            <p class:list={['mt-2 max-w-[24ch] text-small', paper ? 'text-brand/75' : 'text-bone/80']}>{text}</p>
           </li>
         ))
       }
     </ol>
+    </div>
   </div>
 </section>
-
-<style>
-  .js .method .method-rail { transform: scaleY(0); transform-origin: top; transition: transform 2.4s var(--ease-cinema); }
-  @media (min-width: 768px) { .js .method .method-rail { transform: scaleX(0); transform-origin: left; } }
-  .js .method.is-in .method-rail { transform: none; }
-  .js .method .method-step { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo); transition-delay: calc(0.3s + var(--i) * 0.28s); }
-  .js .method.is-in .method-step { opacity: 1; transform: none; }
-</style>

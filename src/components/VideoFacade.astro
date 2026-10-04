@@ -1,0 +1,51 @@
+---
+/**
+ * Vidéo sans chargement anticipé (PERF-10, LEGAL-08) : une image et un bouton « Lire » ;
+ * le lecteur YouTube/Vimeo (ou le fichier) n’est chargé qu’au clic.
+ */
+import ProjectImage from './ProjectImage.astro'
+import Icon from './Icon.astro'
+import type { ProjectImageData } from '../lib/projects'
+
+interface Props {
+  kind: 'iframe' | 'file'
+  src: string
+  title: string
+  poster: ProjectImageData
+  playLabel: string
+}
+const { kind, src, title, poster, playLabel } = Astro.props
+const embed = kind === 'iframe' ? `${src}${src.includes('?') ? '&' : '?'}autoplay=1` : src
+---
+
+<div class="video-facade relative aspect-video overflow-hidden bg-ink-3" data-video-kind={kind} data-video-src={embed} data-video-title={title}>
+  <ProjectImage image={poster} alt="" sizes="(min-width: 1024px) 80vw, 100vw" class="absolute inset-0 block h-full w-full" imgClass="h-full w-full object-cover opacity-70" />
+  <button type="button" class="absolute inset-0 flex items-center justify-center gap-4 text-bone" data-video-play>
+    <span class="flex h-20 w-20 items-center justify-center rounded-full bg-gold text-brand"><Icon name="arrow" size={26} /></span>
+    <span class="text-lead">{playLabel}<span class="sr-only"> : {title}</span></span>
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.video-facade').forEach((box) =>
+    box.querySelector('[data-video-play]')?.addEventListener('click', () => {
+      const { videoKind, videoSrc, videoTitle } = box.dataset
+      const el = document.createElement(videoKind === 'iframe' ? 'iframe' : 'video')
+      el.className = 'absolute inset-0 h-full w-full'
+      if (el instanceof HTMLIFrameElement) {
+        el.src = videoSrc!
+        el.title = videoTitle!
+        el.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'
+        el.allowFullscreen = true
+      } else {
+        const v = el as HTMLVideoElement
+        v.src = videoSrc!
+        v.controls = true
+        v.autoplay = true
+        v.playsInline = true
+      }
+      box.replaceChildren(el)
+      el.focus()
+    }),
+  )
+</script>

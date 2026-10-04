@@ -1,16 +1,20 @@
 ---
 import Icon from './Icon.astro'
+import Logo from './Logo.astro'
 import { route, useT, type Lang } from '../i18n'
-import { contact, whatsappLink } from '../lib/settings'
+import { contact, pageWhatsApp } from '../lib/settings'
+import { pagePath } from '../lib/env'
 
 interface Props {
   lang: Lang
   alt: string
+  altExact?: boolean
   variant: 'overlay' | 'solid'
+  pageTitle?: string
 }
-const { lang, alt, variant } = Astro.props
+const { lang, alt, altExact = true, variant, pageTitle } = Astro.props
 const t = useT(lang)
-const path = Astro.url.pathname.replace(/\/$/, '') || '/'
+const path = pagePath(Astro.url.pathname)
 const nav = [
   { href: route('services', lang), label: t('nav.services') },
   { href: route('projects', lang), label: t('nav.projects') },
@@ -19,17 +23,19 @@ const nav = [
   { href: route('contact', lang), label: t('nav.contact') },
 ]
 const isActive = (href: string) => path === href || path.startsWith(href + '/')
-const wa = whatsappLink(t('contact.form.intro'))
+const wa = pageWhatsApp(lang, pageTitle)
+const other = lang === 'fr' ? 'en' : 'fr'
+const switchHref = altExact ? alt : `${alt}?notice=lang`
 ---
 
 <header
   id="site-header"
   data-variant={variant}
-  class="no-print group fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color,backdrop-filter,transform] duration-700 data-[scrolled]:border-line data-[scrolled]:bg-ink/70 data-[scrolled]:backdrop-blur-xl data-[variant=solid]:border-line data-[variant=solid]:bg-ink/80 data-[variant=solid]:backdrop-blur-xl data-[hidden]:-translate-y-full"
+  class="no-print group fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color,transform] duration-300 data-[scrolled]:border-line data-[scrolled]:bg-ink/70 data-[scrolled]:backdrop-blur-xl data-[variant=solid]:border-line data-[variant=solid]:bg-ink/80 data-[variant=solid]:backdrop-blur-xl data-[hidden]:-translate-y-full"
 >
   <nav aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'} class="wrap flex h-16 items-center justify-between gap-6 md:h-20">
     <a href={route('home', lang)} class="relative z-10 shrink-0" aria-label="GCG — General Constructor Group CI">
-      <img src="/brand/gcg-logo-white.png" alt="GCG — General Constructor Group CI" width="720" height="220" class="h-7 w-auto md:h-8" />
+      <Logo tone="white" class="h-7 w-auto md:h-8" />
     </a>
 
     <ul class="hidden items-center gap-8 lg:flex">
@@ -38,7 +44,7 @@ const wa = whatsappLink(t('contact.form.intro'))
           <li>
             <a
               href={item.href}
-              class:list={['link-line pb-1 text-[13px] tracking-[0.05em] transition-colors duration-500 hover:text-bone', isActive(item.href) ? 'text-gold' : 'text-bone/70']}
+              class:list={['link-line pb-1 text-small tracking-[0.04em] transition-colors duration-200 hover:text-bone', isActive(item.href) ? 'text-gold' : 'text-bone/80']}
               aria-current={isActive(item.href) ? 'page' : undefined}
             >
               {item.label}
@@ -49,31 +55,31 @@ const wa = whatsappLink(t('contact.form.intro'))
     </ul>
 
     <div class="relative z-10 flex items-center gap-2 md:gap-3">
-      <a href={alt} hreflang={lang === 'fr' ? 'en' : 'fr'} lang={lang === 'fr' ? 'en' : 'fr'} class="meta flex h-10 min-w-10 items-center justify-center rounded-full border border-line px-3 text-bone/80 transition-colors hover:border-bone/50 hover:text-bone" aria-label={t('nav.lang')}>
-        {t('nav.langShort')}
+      <a href={switchHref} hreflang={other} lang={other} data-lang-switch class="meta flex h-11 min-w-11 items-center justify-center rounded-full border border-line px-3 text-bone/85 transition-colors duration-200 hover:border-bone/50 hover:text-bone" aria-label={other === 'en' ? 'English' : 'Français'}>
+        {other.toUpperCase()}
       </a>
-      <a href={wa || route('contact', lang)} target={wa ? '_blank' : undefined} rel={wa ? 'noopener' : undefined} class="btn btn-gold hidden !min-h-10 !px-5 !text-[12px] md:inline-flex" data-magnetic>
+      <a href={wa || route('contact', lang)} target={wa ? '_blank' : undefined} rel={wa ? 'noopener' : undefined} class="btn btn-gold hidden !min-h-11 !px-5 md:inline-flex">
         {wa && <Icon name="whatsapp" size={15} />}
         {t('nav.cta')}
       </a>
-      <button type="button" id="menu-toggle" class="meta flex h-10 items-center gap-3 rounded-full border border-line px-4 text-bone lg:hidden" aria-expanded="false" aria-controls="mobile-menu">
+      <button type="button" id="menu-toggle" class="meta flex h-11 items-center gap-3 rounded-full border border-line px-4 text-bone lg:hidden" aria-expanded="false" aria-controls="mobile-menu">
         <span data-label-open>{t('nav.menu')}</span><span data-label-close hidden>{t('nav.close')}</span>
         <span class="relative block h-2.5 w-4" aria-hidden="true">
-          <span class="menu-bar absolute left-0 top-0 h-px w-full bg-bone transition-transform duration-500"></span>
-          <span class="menu-bar absolute left-0 top-2 h-px w-full bg-bone transition-transform duration-500"></span>
+          <span class="menu-bar absolute left-0 top-0 h-px w-full bg-bone transition-transform duration-200"></span>
+          <span class="menu-bar absolute left-0 top-2 h-px w-full bg-bone transition-transform duration-200"></span>
         </span>
       </button>
     </div>
   </nav>
 
-  <div id="mobile-menu" class="invisible fixed inset-0 -z-0 bg-ink opacity-0 transition-[opacity,visibility] duration-700 lg:hidden" aria-hidden="true">
+  <div id="mobile-menu" class="invisible fixed inset-0 -z-0 bg-ink opacity-0 transition-[opacity,visibility] duration-200 lg:hidden" aria-hidden="true">
     <div class="wrap flex h-full flex-col justify-between pb-8 pt-24">
       <ul class="flex flex-col">
         {
           nav.map((item, i) => (
             <li class="overflow-hidden border-b border-line">
-              <a href={item.href} tabindex="-1" class="menu-link flex items-baseline justify-between py-4" style={`--i:${i}`}>
-                <span class:list={['display text-[2.6rem]', isActive(item.href) && 'text-gold']}>{item.label}</span>
+              <a href={item.href} class="menu-link flex items-baseline justify-between py-4">
+                <span class:list={['display text-display', isActive(item.href) && 'text-gold']}>{item.label}</span>
                 <span class="meta text-mist">0{i + 1}</span>
               </a>
             </li>
@@ -83,21 +89,21 @@ const wa = whatsappLink(t('contact.form.intro'))
       <div class="flex flex-col gap-3">
         {
           wa && (
-            <a href={wa} target="_blank" rel="noopener" tabindex="-1" class="btn btn-gold w-full">
+            <a href={wa} target="_blank" rel="noopener" class="btn btn-gold w-full">
               <Icon name="whatsapp" size={18} /> {t('cta.whatsapp')}
             </a>
           )
         }
         {
           contact.phoneHref && (
-            <a href={contact.phoneHref} tabindex="-1" class="btn btn-line w-full">
+            <a href={contact.phoneHref} class="btn btn-line w-full">
               <Icon name="phone" size={16} /> {contact.phone}
             </a>
           )
         }
         {
           !wa && (
-            <a href={route('contact', lang)} tabindex="-1" class="btn btn-gold w-full">
+            <a href={route('contact', lang)} class="btn btn-gold w-full">
               {t('cta.project')}
             </a>
           )
@@ -112,6 +118,6 @@ const wa = whatsappLink(t('contact.form.intro'))
   #site-header[data-menu] { background: transparent !important; border-color: transparent !important; backdrop-filter: none !important; }
   #site-header[data-menu] .menu-bar:first-child { transform: translateY(4px) rotate(45deg); }
   #site-header[data-menu] .menu-bar:last-child { transform: translateY(-4px) rotate(-45deg); }
-  .menu-link { transform: translateY(100%); transition: transform 0.9s var(--ease-out-expo); }
-  #site-header[data-menu] .menu-link { transform: none; transition-delay: calc(0.08s + var(--i) * 0.06s); }
+  .menu-link { transform: translateY(12px); transition: transform 0.25s var(--ease-out); }
+  #site-header[data-menu] .menu-link { transform: none; }
 </style>

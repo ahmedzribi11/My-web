@@ -29,7 +29,7 @@ const studies = n((p) => p.status === 'etudes')
 
 <Base lang={lang} alt={route('projects', lang === 'fr' ? 'en' : 'fr')} title={t('projects.label')} description={t('projects.lead')}>
   <PageHeader label={t('projects.label')} title={t('projects.title')} accent={lang === 'fr' ? 'GCG.' : 'track record.'} lead={t('projects.lead')}>
-    <div class="flex flex-wrap items-center gap-x-8 gap-y-3 md:col-span-12" data-reveal style="--d:.3s">
+    <div class="flex flex-wrap items-center gap-x-8 gap-y-3 md:col-span-12" data-reveal>
       <p class="meta text-bone/70"><span class="text-gold">{projects.length}</span> {t('projects.count.many')}</p>
       <p class="meta text-bone/70"><span class="text-gold">{String(ongoing).padStart(2, '0')}</span> {STATUS_LABELS.execution[lang]}</p>
       <p class="meta text-bone/70"><span class="text-gold">{String(studies).padStart(2, '0')}</span> {STATUS_LABELS.etudes[lang]}</p>
@@ -37,7 +37,7 @@ const studies = n((p) => p.status === 'etudes')
     </div>
   </PageHeader>
 
-  <div id="filters" class="sticky top-0 z-30 border-y border-line bg-ink/85 backdrop-blur-xl transition-[top] duration-700" data-filters>
+  <div id="filters" class="sticky top-0 z-30 border-y border-line bg-ink/85 backdrop-blur-xl transition-[top] duration-300" data-filters>
     <div class="wrap flex items-center gap-3 py-3">
       <details class="filters-panel group relative flex-1 md:hidden">
         <summary class="chip w-full justify-between list-none">
@@ -49,8 +49,8 @@ const studies = n((p) => p.status === 'etudes')
       <button type="button" class="meta hidden text-mist hover:text-gold md:inline" data-reset>{t('projects.filter.reset')}</button>
       <p class="meta shrink-0 text-bone/70" aria-live="polite"><span data-results class="text-gold">{projects.length}</span> <span data-count-label>{t('projects.count.many')}</span></p>
       <div class="flex shrink-0 rounded-full border border-line p-1" role="group" aria-label={lang === 'fr' ? 'Affichage' : 'View'}>
-        <button type="button" class="flex h-8 items-center gap-1.5 rounded-full px-3 text-[12px] aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="true" data-view="grid"><Icon name="grid" size={14} /><span class="hidden sm:inline">{t('projects.view.grid')}</span></button>
-        <button type="button" class="flex h-8 items-center gap-1.5 rounded-full px-3 text-[12px] aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="false" data-view="map"><Icon name="map" size={14} /><span class="hidden sm:inline">{t('projects.view.map')}</span></button>
+        <button type="button" class="flex h-8 items-center gap-1.5 rounded-full px-3 text-label aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="true" data-view="grid" aria-label={t('projects.view.grid')}><Icon name="grid" size={14} /><span class="hidden sm:inline">{t('projects.view.grid')}</span></button>
+        <button type="button" class="flex h-8 items-center gap-1.5 rounded-full px-3 text-label aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="false" data-view="map" aria-label={t('projects.view.map')}><Icon name="map" size={14} /><span class="hidden sm:inline">{t('projects.view.map')}</span></button>
       </div>
     </div>
     <div class="wrap hidden pb-4" data-groups-mobile></div>
@@ -65,7 +65,7 @@ const studies = n((p) => p.status === 'etudes')
             {g.items
               .filter((it) => it.n > 0)
               .map((it) => (
-                <button type="button" class="chip !h-8 !px-3 !text-[12px]" aria-pressed="false" data-filter={g.key} data-value={it.v}>
+                <button type="button" class="chip !h-8 !px-3 !text-label" aria-pressed="false" data-filter={g.key} data-value={it.v}>
                   {it.label} <small>{it.n}</small>
                 </button>
               ))}
@@ -87,7 +87,7 @@ const studies = n((p) => p.status === 'etudes')
             {g.items
               .filter((it) => it.n > 0)
               .map((it) => (
-                <button type="button" class="dd-item flex items-center justify-between gap-6 rounded-xl px-3 py-2.5 text-left text-[13px] text-bone/80 hover:bg-ink-3 hover:text-bone aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="false" data-filter={g.key} data-value={it.v} data-label={it.label}>
+                <button type="button" class="dd-item flex items-center justify-between gap-6 rounded-xl px-3 py-2.5 text-left text-small text-bone/80 hover:bg-ink-3 hover:text-bone aria-pressed:bg-bone aria-pressed:text-ink" aria-pressed="false" data-filter={g.key} data-value={it.v} data-label={it.label}>
                   {it.label} <small class="meta opacity-60">{it.n}</small>
                 </button>
               ))}
@@ -98,11 +98,12 @@ const studies = n((p) => p.status === 'etudes')
   </template>
 
   <section class="wrap py-12 md:py-16" aria-label={t('projects.label')}>
+    <h2 class="sr-only">{lang === 'fr' ? 'Liste des projets' : 'Project list'}</h2>
     <div data-panel="grid" class="grid gap-x-6 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
-      {projects.map((p, i) => <ProjectCard project={p} lang={lang} index={i} />)}
+      {projects.map((p) => <ProjectCard project={p} lang={lang} />)}
     </div>
     <div data-empty hidden class="flex flex-col items-center gap-6 py-24 text-center">
-      <p class="text-2xl font-light text-bone/70">{t('projects.empty')}</p>
+      <p class="text-title font-light text-bone/70">{t('projects.empty')}</p>
       <button type="button" class="btn btn-line" data-reset>{t('projects.filter.reset')}</button>
     </div>
     <div data-panel="map" hidden class="mx-auto max-w-4xl py-8">
@@ -111,8 +112,6 @@ const studies = n((p) => p.status === 'etudes')
   </section>
 
   <FinalCta lang={lang} />
-</Base>
-
 <script>
   const KEYS = ['secteur', 'statut', 'ville', 'type'] as const
   type Key = (typeof KEYS)[number]
@@ -211,7 +210,7 @@ const studies = n((p) => p.status === 'etudes')
 
   apply(false)
 </script>
-
+</Base>
 <style>
   .dd[open] summary svg { transform: rotate(180deg); }
   .dd.is-active > summary { border-color: var(--color-gold); }

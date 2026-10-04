@@ -1,0 +1,17 @@
+---
+/** Logo GCG allégé (WebP, repli PNG) ; variantes : white (en-tête), gold (pied de page), green (impression). */
+interface Props {
+  tone: 'white' | 'gold' | 'green'
+  class?: string
+  lazy?: boolean
+}
+const { tone, class: cls, lazy = false } = Astro.props
+const webp = tone === 'white' ? '/brand/gcg-logo-white-240.webp' : `/brand/gcg-logo-${tone}-440.webp`
+const png = tone === 'white' ? '/brand/gcg-logo-white-240.png' : `/brand/gcg-logo-${tone}.png`
+const [w, h] = tone === 'white' ? [240, 73] : [440, 133]
+---
+
+<picture>
+  <source srcset={webp} type="image/webp" />
+  <img src={png} alt="GCG — General Constructor Group CI" width={w} height={h} class={cls} loading={lazy ? 'lazy' : 'eager'} decoding="async" />
+</picture>
