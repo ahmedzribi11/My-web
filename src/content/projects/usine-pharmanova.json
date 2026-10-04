@@ -1,0 +1,30 @@
+{
+  "number": 18,
+  "name": "Usine pharmaceutique Pharmanova",
+  "name_en": "Pharmanova pharmaceutical plant",
+  "sector": "industrie",
+  "city": "grand-bassam",
+  "location": "Zone franche VITIB",
+  "location_en": "VITIB free zone",
+  "period": "Févr. – déc. 2018",
+  "period_en": "Feb. – Dec. 2018",
+  "surface": "4 200 m²",
+  "composition": "Construction d’une usine pharmaceutique en structure métallique avec mezzanine.",
+  "composition_en": "Construction of a steel-frame pharmaceutical plant with a mezzanine.",
+  "missions": [
+    "Études techniques et réalisation"
+  ],
+  "missions_en": [
+    "Engineering studies and construction"
+  ],
+  "services": [
+    "ingenierie",
+    "construction"
+  ],
+  "types": [
+    "industrie"
+  ],
+  "images": [
+    "../../assets/projects/usine-pharmanova/01.jpg"
+  ]
+}

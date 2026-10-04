@@ -1,0 +1,37 @@
+{
+  "number": 8,
+  "name": "Salle polyvalente",
+  "name_en": "Multipurpose hall",
+  "sector": "equipements",
+  "city": "korhogo",
+  "location": "Korhogo",
+  "period": "2022",
+  "surface": "800 m²",
+  "composition": "Projet clé en main d’une salle polyvalente destinée aux cérémonies et événements.",
+  "composition_en": "Turnkey multipurpose hall for ceremonies and events.",
+  "missions": [
+    "Études",
+    "Construction",
+    "Aménagement"
+  ],
+  "missions_en": [
+    "Studies",
+    "Construction",
+    "Fit-out"
+  ],
+  "services": [
+    "etudes",
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "equipements",
+    "loisirs"
+  ],
+  "images": [
+    "../../assets/projects/salle-polyvalente-korhogo/01.jpg",
+    "../../assets/projects/salle-polyvalente-korhogo/02.jpg",
+    "../../assets/projects/salle-polyvalente-korhogo/03.jpg"
+  ]
+}

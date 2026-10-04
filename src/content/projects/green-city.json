@@ -1,0 +1,56 @@
+{
+  "number": 1,
+  "featured": true,
+  "featuredOrder": 1,
+  "name": "Green City",
+  "sector": "residentiel",
+  "city": "grand-bassam",
+  "location": "Grand-Bassam",
+  "period": "2025",
+  "status": "execution",
+  "surface": "2 500 m²",
+  "composition": "Projet de construction d’une cité de 45 villas haut standing.",
+  "composition_en": "A gated community of 45 high-end villas.",
+  "typologies": [
+    {
+      "name": "Villa Minan",
+      "surface": "204 m²"
+    },
+    {
+      "name": "Villa ASUE",
+      "surface": "220 m²"
+    },
+    {
+      "name": "Villa Boya",
+      "surface": "320 m²"
+    }
+  ],
+  "missions": [
+    "Études, conception et réalisation",
+    "Gros œuvre et second œuvre",
+    "Aménagements extérieurs et infrastructures"
+  ],
+  "missions_en": [
+    "Studies, design and construction",
+    "Structural and finishing works",
+    "Landscaping and infrastructure"
+  ],
+  "services": [
+    "etudes",
+    "architecture",
+    "construction",
+    "amenagement",
+    "infrastructures"
+  ],
+  "types": [
+    "villas",
+    "residences",
+    "infrastructures"
+  ],
+  "images": [
+    "../../assets/projects/green-city/01.jpg",
+    "../../assets/projects/green-city/02.jpg",
+    "../../assets/projects/green-city/03.jpg",
+    "../../assets/projects/green-city/04.jpg"
+  ]
+}

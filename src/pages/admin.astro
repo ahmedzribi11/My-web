@@ -1,0 +1,41 @@
+---
+/**
+ * Espace de gestion (Decap CMS) : modifie les fichiers du dépôt GitHub
+ * (src/content/projects, src/data/settings.json) ; chaque enregistrement redéploie le site.
+ * Configuration : public/admin/config.yml.
+ */
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Espace de gestion — GCG</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <script is:inline>
+      window.CMS_MANUAL_INIT = true
+    </script>
+  </head>
+  <body>
+    <script is:inline src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
+    <script is:inline>
+      // La connexion GitHub passe par les fonctions /api/auth et /api/callback du même domaine.
+      CMS.init({
+        config: {
+          backend: {
+            name: 'github',
+            repo: 'ahmedzribi11/My-web',
+            branch: 'main',
+            base_url: location.origin,
+            auth_endpoint: 'api/auth',
+          },
+          site_url: location.origin,
+          display_url: location.origin,
+        },
+      })
+    </script>
+  </body>
+</html>

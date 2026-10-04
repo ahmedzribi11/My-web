@@ -1,0 +1,237 @@
+---
+import Base from '../layouts/Base.astro'
+import Icon from '../components/Icon.astro'
+import { route, useT, type Lang, type UIKey } from '../i18n'
+import { getProjects } from '../lib/projects'
+import { contact, hasContact, socials, whatsappLink } from '../lib/settings'
+
+interface Props {
+  lang: Lang
+}
+const { lang } = Astro.props
+const t = useT(lang)
+const fr = lang === 'fr'
+const projects = await getProjects(lang)
+const profiles = ['particulier', 'diaspora', 'investisseur', 'hotelier', 'entreprise', 'autre'] as const
+const types = ['villa', 'residence', 'immeuble', 'hotel', 'commerce', 'industrie', 'equipement', 'vrd', 'renovation', 'etude', 'autre'] as const
+const wa = whatsappLink()
+const hours = fr ? contact.hours : contact.hours_en || contact.hours
+const field = 'mt-2 w-full rounded-none border-0 border-b border-line bg-transparent px-0 py-3 text-lg font-light text-bone placeholder:text-bone/30 focus:border-gold focus:outline-none focus:ring-0'
+---
+
+<Base lang={lang} alt={route('contact', fr ? 'en' : 'fr')} title={t('contact.label')} description={t('contact.lead')}>
+  <section class="relative overflow-hidden pb-24 pt-32 md:pb-36 md:pt-48">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="css-fog opacity-60"><span></span><span></span><span></span></div>
+    </div>
+    <div class="wrap relative grid gap-16 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <p class="label text-gold" data-reveal>{t('contact.label')}</p>
+        <h1 class="display mt-8 text-[clamp(2.8rem,7vw,7rem)]" data-split>
+          {fr ? 'Parlons de' : 'Let’s talk about'} <em class="serif text-gold">{fr ? 'votre projet.' : 'your project.'}</em>
+        </h1>
+        <p class="mt-8 max-w-md text-lg leading-relaxed text-bone/70" data-reveal>{t('contact.lead')}</p>
+
+        <div class="mt-12 space-y-3" data-reveal>
+          {
+            wa && (
+              <a href={whatsappLink(t('contact.form.intro'))} target="_blank" rel="noopener" class="group flex items-center justify-between gap-4 border-b border-line py-4">
+                <span class="flex items-center gap-4"><Icon name="whatsapp" size={20} class="text-gold" /><span><span class="meta block text-mist">{t('contact.whatsapp')}</span><span class="text-lg">{contact.whatsapp}</span></span></span>
+                <Icon name="arrow-up-right" class="opacity-50 group-hover:opacity-100" />
+              </a>
+            )
+          }
+          {
+            contact.phone && (
+              <a href={contact.phoneHref} class="group flex items-center justify-between gap-4 border-b border-line py-4">
+                <span class="flex items-center gap-4"><Icon name="phone" size={20} class="text-gold" /><span><span class="meta block text-mist">{t('contact.phone')}</span><span class="text-lg">{contact.phone}</span></span></span>
+                <Icon name="arrow-up-right" class="opacity-50 group-hover:opacity-100" />
+              </a>
+            )
+          }
+          {
+            contact.email && (
+              <a href={`mailto:${contact.email}`} class="group flex items-center justify-between gap-4 border-b border-line py-4">
+                <span class="flex items-center gap-4"><Icon name="mail" size={20} class="text-gold" /><span><span class="meta block text-mist">{t('contact.email')}</span><span class="break-all text-lg">{contact.email}</span></span></span>
+                <Icon name="arrow-up-right" class="opacity-50 group-hover:opacity-100" />
+              </a>
+            )
+          }
+          {
+            contact.address && (
+              <a href={contact.mapsUrl || undefined} target={contact.mapsUrl ? '_blank' : undefined} rel="noopener" class="group flex items-center justify-between gap-4 border-b border-line py-4">
+                <span class="flex items-center gap-4"><Icon name="pin" size={20} class="text-gold" /><span><span class="meta block text-mist">{t('contact.address')}</span><span class="text-lg">{contact.address}</span></span></span>
+                {contact.mapsUrl && <Icon name="arrow-up-right" class="opacity-50 group-hover:opacity-100" />}
+              </a>
+            )
+          }
+          {
+            hours && (
+              <p class="flex items-center gap-4 border-b border-line py-4"><Icon name="clock" size={20} class="text-gold" /><span><span class="meta block text-mist">{t('contact.hours')}</span><span class="text-lg">{hours}</span></span></p>
+            )
+          }
+          {!hasContact && <p class="max-w-md border-l border-gold/60 pl-4 text-[15px] leading-relaxed text-bone/60">{t('contact.form.pending')}</p>}
+        </div>
+
+        {
+          socials.length > 0 && (
+            <div class="mt-10" data-reveal>
+              <p class="meta text-mist">{t('contact.social')}</p>
+              <ul class="mt-4 flex gap-2">
+                {socials.map((s) => (
+                  <li><a href={s.url} target="_blank" rel="noopener" aria-label={s.name} class="flex h-12 w-12 items-center justify-center rounded-full border border-line hover:border-gold hover:text-gold"><Icon name={s.key} size={18} /></a></li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+
+        <a href={route('share', lang)} class="mt-12 flex max-w-sm items-center gap-5 rounded-2xl border border-line p-3 pr-6 transition-colors hover:border-gold/60" data-reveal>
+          <span class="block w-20 shrink-0 rounded-lg bg-white p-1" data-qr="/" aria-hidden="true"></span>
+          <span>
+            <span class="meta block text-gold">{t('contact.share')}</span>
+            <span class="mt-1 block text-[13px] text-bone/60" data-qr-text="/"></span>
+          </span>
+        </a>
+      </div>
+
+      <form id="brief" class="md:col-span-6 md:col-start-7" novalidate data-wa={contact.whatsappNumber} data-email={contact.email} data-reveal>
+        <div class="grid gap-x-8 gap-y-8 border border-line bg-ink/70 p-6 backdrop-blur-xl md:grid-cols-2 md:p-10">
+          <label class="block md:col-span-2">
+            <span class="meta text-mist">{t('contact.form.name')} *</span>
+            <input name="name" required autocomplete="name" class={field} />
+          </label>
+          <label class="block">
+            <span class="meta text-mist">{t('contact.form.phone')} *</span>
+            <input name="phone" type="tel" required autocomplete="tel" inputmode="tel" class={field} />
+          </label>
+          <label class="block">
+            <span class="meta text-mist">{t('contact.form.email')}</span>
+            <input name="email" type="email" autocomplete="email" class={field} />
+          </label>
+          <label class="block">
+            <span class="meta text-mist">{t('contact.form.profile')}</span>
+            <select name="profile" class={`${field} cursor-pointer`}>
+              {profiles.map((p) => <option value={p} class="bg-ink">{t(`profile.${p}` as UIKey)}</option>)}
+            </select>
+          </label>
+          <label class="block">
+            <span class="meta text-mist">{t('contact.form.type')}</span>
+            <select name="type" class={`${field} cursor-pointer`}>
+              {types.map((p) => <option value={p} class="bg-ink">{t(`ptype.${p}` as UIKey)}</option>)}
+            </select>
+          </label>
+          <label class="block md:col-span-2">
+            <span class="meta text-mist">{t('contact.form.location')}</span>
+            <input name="location" autocomplete="address-level2" placeholder={fr ? 'Abidjan, Grand-Bassam, Assinie…' : 'Abidjan, Grand-Bassam, Assinie…'} class={field} />
+          </label>
+          <label class="block md:col-span-2">
+            <span class="meta text-mist">{t('contact.form.message')}</span>
+            <textarea name="message" rows="4" class={`${field} resize-y`}></textarea>
+          </label>
+          <input type="hidden" name="ref" />
+          <p data-ref-chip hidden class="md:col-span-2 text-[14px] text-bone/70"></p>
+
+          <div class="flex flex-col gap-3 sm:flex-row md:col-span-2">
+            {
+              contact.whatsappNumber && (
+                <button type="submit" value="whatsapp" class="btn btn-gold flex-1">
+                  <Icon name="whatsapp" size={18} /> {t('contact.form.sendWhatsapp')}
+                </button>
+              )
+            }
+            {
+              contact.email && (
+                <button type="submit" value="email" class:list={['btn flex-1', contact.whatsappNumber ? 'btn-line' : 'btn-gold']}>
+                  <Icon name="mail" size={16} /> {t('contact.form.sendEmail')}
+                </button>
+              )
+            }
+            {
+              !contact.whatsappNumber && !contact.email && (
+                <button type="submit" value="none" class="btn btn-gold flex-1 opacity-60" aria-describedby="brief-pending">
+                  {t('cta.project')} <Icon name="arrow" />
+                </button>
+              )
+            }
+          </div>
+          <p id="brief-pending" data-pending hidden class="md:col-span-2 border-l border-gold/60 pl-4 text-[14px] text-bone/70">{t('contact.form.pending')}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script id="brief-data" type="application/json" set:html={JSON.stringify({
+    projects: Object.fromEntries(projects.map((p) => [p.slug, p.name])),
+    labels: {
+      intro: t('contact.form.intro'),
+      name: t('contact.form.name'),
+      phone: t('contact.form.phone'),
+      email: t('contact.form.email'),
+      profile: t('contact.form.profile'),
+      type: t('contact.form.type'),
+      location: t('contact.form.location'),
+      message: t('contact.form.message'),
+      ref: fr ? 'Projet de référence' : 'Reference project',
+      subject: fr ? 'Demande de projet — site GCG' : 'Project enquiry — GCG website',
+    },
+  })} />
+</Base>
+
+<script>
+  import '../scripts/qr'
+
+  const form = document.getElementById('brief') as HTMLFormElement
+  const data = JSON.parse(document.getElementById('brief-data')!.textContent!) as {
+    projects: Record<string, string>
+    labels: Record<string, string>
+  }
+  const L = data.labels
+  const params = new URLSearchParams(location.search)
+
+  // Préremplissage depuis un projet ou un public cible
+  const profileMap: Record<string, string> = { investisseurs: 'investisseur', hotellerie: 'hotelier', diaspora: 'diaspora', entreprises: 'entreprise' }
+  const profil = params.get('profil')
+  if (profil && profileMap[profil]) (form.elements.namedItem('profile') as HTMLSelectElement).value = profileMap[profil]
+  const ref = params.get('projet')
+  if (ref && data.projects[ref]) {
+    ;(form.elements.namedItem('ref') as HTMLInputElement).value = ref
+    const chip = form.querySelector<HTMLElement>('[data-ref-chip]')!
+    chip.hidden = false
+    chip.textContent = `${L.ref} : ${data.projects[ref]}`
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const via = (e.submitter as HTMLButtonElement | null)?.value
+    if (via === 'none') {
+      form.querySelector<HTMLElement>('[data-pending]')!.hidden = false
+      return
+    }
+    if (!form.reportValidity()) return
+    const f = new FormData(form)
+    const sel = (name: string) => {
+      const el = form.elements.namedItem(name) as HTMLSelectElement
+      return el.options[el.selectedIndex]?.text ?? ''
+    }
+    const refSlug = String(f.get('ref') || '')
+    const lines = [
+      L.intro,
+      '',
+      `${L.name} : ${f.get('name')}`,
+      `${L.phone} : ${f.get('phone')}`,
+      f.get('email') ? `${L.email} : ${f.get('email')}` : '',
+      `${L.profile} : ${sel('profile')}`,
+      `${L.type} : ${sel('type')}`,
+      f.get('location') ? `${L.location} : ${f.get('location')}` : '',
+      refSlug ? `${L.ref} : ${data.projects[refSlug]} (${location.origin}${location.pathname.replace(/\/contact$/, '')}${document.body.dataset.lang === 'en' ? '/projects/' : '/realisations/'}${refSlug})` : '',
+      f.get('message') ? `\n${L.message} :\n${f.get('message')}` : '',
+    ].filter(Boolean)
+    const text = lines.join('\n')
+    if (via === 'whatsapp' && form.dataset.wa) {
+      window.open(`https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(text)}`, '_blank', 'noopener')
+    } else if (form.dataset.email) {
+      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(L.subject)}&body=${encodeURIComponent(text)}`
+    }
+  })
+</script>

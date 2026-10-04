@@ -1,0 +1,32 @@
+{
+  "number": 21,
+  "name": "Usine de cajou",
+  "name_en": "Cashew plant",
+  "sector": "industrie",
+  "city": "attingue",
+  "location": "Attingué",
+  "period": "2025",
+  "surface": "55 000 m²",
+  "composition": "Usine de stockage de cajou.",
+  "composition_en": "Cashew storage plant.",
+  "missions": [
+    "Étude technique",
+    "Analyse et conception des installations"
+  ],
+  "missions_en": [
+    "Engineering study",
+    "Analysis and design of the installations"
+  ],
+  "services": [
+    "etudes",
+    "ingenierie"
+  ],
+  "types": [
+    "industrie"
+  ],
+  "images": [
+    "../../assets/projects/usine-de-cajou/01.jpg",
+    "../../assets/projects/usine-de-cajou/02.jpg",
+    "../../assets/projects/usine-de-cajou/03.jpg"
+  ]
+}

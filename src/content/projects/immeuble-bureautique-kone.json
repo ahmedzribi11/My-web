@@ -1,0 +1,35 @@
+{
+  "number": 34,
+  "name": "Immeuble bureautique Koné",
+  "name_en": "Koné office building",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Vallon",
+  "period": "Avril – déc. 2020",
+  "period_en": "Apr. – Dec. 2020",
+  "surface": "600 m²",
+  "composition": "Projet clé en main d’un immeuble R+2 haut standing.",
+  "composition_en": "Turnkey three-storey (R+2) high-end office building.",
+  "missions": [
+    "Travaux de gros œuvre et de second œuvre",
+    "Aménagements intérieurs et extérieurs"
+  ],
+  "missions_en": [
+    "Structural and finishing works",
+    "Interior and exterior fit-out"
+  ],
+  "services": [
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "immeubles"
+  ],
+  "images": [
+    "../../assets/projects/immeuble-bureautique-kone/01.jpg",
+    "../../assets/projects/immeuble-bureautique-kone/02.jpg",
+    "../../assets/projects/immeuble-bureautique-kone/03.jpg",
+    "../../assets/projects/immeuble-bureautique-kone/04.jpg"
+  ]
+}

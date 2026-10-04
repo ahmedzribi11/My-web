@@ -1,0 +1,31 @@
+{
+  "number": 29,
+  "name": "École Green City",
+  "name_en": "Green City school",
+  "sector": "equipements",
+  "city": "grand-bassam",
+  "location": "Bassam Modeste",
+  "period": "2026",
+  "status": "etudes",
+  "surface": "3 810 m²",
+  "composition": "École primaire en R+2 avec piscine et 3 terrains de padel.",
+  "composition_en": "Three-storey (R+2) primary school with a pool and 3 padel courts.",
+  "missions": [
+    "Études et conception architecturale"
+  ],
+  "missions_en": [
+    "Studies and architectural design"
+  ],
+  "services": [
+    "etudes",
+    "architecture"
+  ],
+  "types": [
+    "equipements"
+  ],
+  "images": [
+    "../../assets/projects/ecole-green-city/01.jpg",
+    "../../assets/projects/ecole-green-city/02.jpg",
+    "../../assets/projects/ecole-green-city/03.jpg"
+  ]
+}

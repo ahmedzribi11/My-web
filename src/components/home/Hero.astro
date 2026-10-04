@@ -1,0 +1,82 @@
+---
+import HeroIsland from '../hero/HeroIsland'
+import Icon from '../Icon.astro'
+import { route, useT, type Lang } from '../../i18n'
+import { whatsappLink } from '../../lib/settings'
+
+interface Props {
+  lang: Lang
+}
+const { lang } = Astro.props
+const t = useT(lang)
+const words =
+  lang === 'fr'
+    ? ['des villas', 'des résidences', 'des hôtels', 'des immeubles', 'des usines', 'des écoles', 'des restaurants', 'des routes']
+    : ['villas', 'residences', 'hotels', 'buildings', 'factories', 'schools', 'restaurants', 'roads']
+const wa = whatsappLink(t('contact.form.intro'))
+---
+
+<section id="hero" class="relative h-svh min-h-[640px] overflow-hidden bg-ink" aria-labelledby="hero-title">
+  <div class="absolute inset-0" aria-hidden="true">
+    <div class="css-fog opacity-80"><span></span><span></span><span></span></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_68%_38%,rgba(5,46,20,0.55),transparent_60%)]"></div>
+  </div>
+
+  <HeroIsland client:idle sectionId="hero" />
+
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_35%,rgba(7,12,9,0.85)_100%)]"></div>
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-ink via-ink/75 to-transparent md:h-1/2 md:via-ink/40"></div>
+
+  <div class="wrap relative flex h-full flex-col justify-end pb-24 pt-28 md:pb-16">
+    <p class="label absolute top-24 text-gold md:top-32" data-reveal style="--d:.2s">{t('hero.kicker')}</p>
+
+    <div class="grid items-end gap-10 md:grid-cols-12">
+      <h1 id="hero-title" class="display text-[clamp(2.9rem,10.5vw,5rem)] md:col-span-8 md:text-[clamp(4rem,7.6vw,9.4rem)]">
+        <span class="block" data-split style="--d:.25s">{t('hero.title1')} <em class="serif text-gold">{t('hero.title2')}</em></span>
+        <span class="block" data-split style="--d:.45s">{t('hero.title3')}</span>
+      </h1>
+
+      <div class="flex flex-col gap-7 md:col-span-4 md:pb-3">
+        <p class="max-w-md text-[15px] leading-relaxed text-bone/75 md:text-base" data-reveal style="--d:.7s">{t('hero.lead')}</p>
+        <div class="flex flex-wrap gap-3" data-reveal style="--d:.85s">
+          <a href={route('projects', lang)} class="btn btn-gold" data-magnetic>
+            {t('cta.projects')} <Icon name="arrow" />
+          </a>
+          <a href={wa || route('contact', lang)} target={wa ? '_blank' : undefined} rel={wa ? 'noopener' : undefined} class="btn btn-line" data-magnetic>
+            {wa && <Icon name="whatsapp" size={16} />}
+            {t('cta.project')}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 flex items-end justify-between gap-6 border-t border-line pt-5" data-reveal style="--d:1s">
+      <p class="flex items-baseline gap-3 text-[15px] text-bone/60">
+        <span class="meta text-mist">{t('hero.we')}</span>
+        <span class="word-rotator relative inline-block h-[1.4em] overflow-hidden align-bottom text-bone" aria-label={words.join(', ')}>
+          {words.map((w, i) => <span class="block h-[1.4em]" style={`--n:${i}`} aria-hidden="true">{w}</span>)}
+          <span class="block h-[1.4em]" aria-hidden="true">{words[0]}</span>
+        </span>
+      </p>
+      <a href="#intro" class="meta hidden items-center gap-3 text-mist hover:text-bone md:flex">
+        {t('hero.scroll')}
+        <span class="relative block h-8 w-px overflow-hidden bg-bone/20"><span class="absolute inset-x-0 top-0 h-1/2 animate-[cue_2.4s_var(--ease-cinema)_infinite] bg-gold"></span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .word-rotator > span:first-child { animation: rotate-words 16s var(--ease-cinema) infinite; }
+  @keyframes rotate-words {
+    0%, 9% { margin-top: 0; }
+    12.5%, 21.5% { margin-top: -1.4em; }
+    25%, 34% { margin-top: -2.8em; }
+    37.5%, 46.5% { margin-top: -4.2em; }
+    50%, 59% { margin-top: -5.6em; }
+    62.5%, 71.5% { margin-top: -7em; }
+    75%, 84% { margin-top: -8.4em; }
+    87.5%, 96.5% { margin-top: -9.8em; }
+    100% { margin-top: -11.2em; }
+  }
+</style>

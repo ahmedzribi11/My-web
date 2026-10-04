@@ -1,0 +1,36 @@
+{
+  "number": 6,
+  "featured": true,
+  "featuredOrder": 6,
+  "name": "Hôtel Akwabeach",
+  "sector": "hotellerie",
+  "city": "assouinde",
+  "location": "Assouindé",
+  "period": "2025",
+  "status": "execution",
+  "surface": "2 500 m²",
+  "composition": "Travaux de réaménagement d’un hôtel 4 étoiles.",
+  "composition_en": "Refurbishment of a four-star hotel.",
+  "missions": [
+    "Rénovation et modernisation des espaces intérieurs",
+    "Réhabilitation des infrastructures et équipements",
+    "Mise à niveau des prestations et des aménagements"
+  ],
+  "missions_en": [
+    "Renovation and modernisation of interiors",
+    "Rehabilitation of infrastructure and equipment",
+    "Upgrade of amenities and fittings"
+  ],
+  "services": [
+    "rehabilitation",
+    "amenagement"
+  ],
+  "types": [
+    "hotels"
+  ],
+  "images": [
+    "../../assets/projects/hotel-akwabeach/01.jpg",
+    "../../assets/projects/hotel-akwabeach/02.jpg",
+    "../../assets/projects/hotel-akwabeach/03.jpg"
+  ]
+}

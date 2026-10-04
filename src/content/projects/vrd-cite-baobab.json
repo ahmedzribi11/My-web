@@ -1,0 +1,33 @@
+{
+  "number": 19,
+  "name": "VRD cité Baobab",
+  "name_en": "Cité Baobab roads and utilities",
+  "sector": "industrie",
+  "city": "grand-bassam",
+  "location": "Grand-Bassam",
+  "period": "Juin – nov. 2023",
+  "period_en": "Jun. – Nov. 2023",
+  "surface": "5 hectares",
+  "composition": "Aménagement et voirie d’un quartier résidentiel : la cité BAOBAB de SIDI.",
+  "composition_en": "Roads and utilities for a residential estate: the SIDI Baobab estate.",
+  "missions": [
+    "Travaux de voirie et réseaux divers (VRD)",
+    "Voiries, assainissement et réseaux divers",
+    "Travaux d’infrastructures et d’équipements"
+  ],
+  "missions_en": [
+    "Roads and utility networks (VRD)",
+    "Roads, drainage and utility networks",
+    "Infrastructure and equipment works"
+  ],
+  "services": [
+    "infrastructures"
+  ],
+  "types": [
+    "infrastructures"
+  ],
+  "images": [
+    "../../assets/projects/vrd-cite-baobab/01.jpg",
+    "../../assets/projects/vrd-cite-baobab/02.jpg"
+  ]
+}

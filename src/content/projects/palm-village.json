@@ -1,0 +1,37 @@
+{
+  "number": 11,
+  "name": "Palm Village",
+  "sector": "hotellerie",
+  "city": "assinie",
+  "location": "Assinie",
+  "period": "2022",
+  "surface": "1 600 m²",
+  "composition": "Complexe résidentiel de 4 villas et 8 appartements.",
+  "composition_en": "Residential complex of 4 villas and 8 apartments.",
+  "missions": [
+    "Étude de structure",
+    "Études fluides et électricité",
+    "Travaux de gros œuvre et second œuvre",
+    "Ameublement et agencement"
+  ],
+  "missions_en": [
+    "Structural engineering",
+    "MEP engineering (plumbing and electrical)",
+    "Structural and finishing works",
+    "Furnishing and interior layout"
+  ],
+  "services": [
+    "ingenierie",
+    "construction",
+    "amenagement"
+  ],
+  "types": [
+    "villas",
+    "residences"
+  ],
+  "images": [
+    "../../assets/projects/palm-village/01.jpg",
+    "../../assets/projects/palm-village/02.jpg",
+    "../../assets/projects/palm-village/03.jpg"
+  ]
+}

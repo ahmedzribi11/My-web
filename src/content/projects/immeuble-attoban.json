@@ -1,0 +1,33 @@
+{
+  "number": 14,
+  "name": "Immeuble Attoban",
+  "name_en": "Attoban complex",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Attoban",
+  "period": "2021",
+  "surface": "7 800 m²",
+  "composition": "Complexe de 3 bâtiments à usage bureautique et résidentiel.",
+  "composition_en": "Complex of three mixed-use office and residential buildings.",
+  "missions": [
+    "Étude architecturale",
+    "Étude technique"
+  ],
+  "missions_en": [
+    "Architectural design",
+    "Engineering study"
+  ],
+  "services": [
+    "architecture",
+    "ingenierie"
+  ],
+  "types": [
+    "immeubles"
+  ],
+  "images": [
+    "../../assets/projects/immeuble-attoban/01.jpg",
+    "../../assets/projects/immeuble-attoban/02.jpg",
+    "../../assets/projects/immeuble-attoban/03.jpg",
+    "../../assets/projects/immeuble-attoban/04.jpg"
+  ]
+}

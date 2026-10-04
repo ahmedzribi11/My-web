@@ -1,0 +1,202 @@
+# Espace de gestion GCG (Decap CMS) — https://decapcms.org/docs/
+# Les listes de choix (secteurs, statuts, villes, expertises, typologies) doivent rester
+# identiques à celles de src/content.config.ts.
+
+backend:
+  name: github
+  repo: ahmedzribi11/My-web
+  branch: main
+  auth_endpoint: api/auth
+  commit_messages:
+    create: 'Projet ajouté : {{slug}}'
+    update: 'Mise à jour : {{slug}}'
+    delete: 'Suppression : {{slug}}'
+    uploadMedia: 'Image ajoutée : {{path}}'
+    deleteMedia: 'Image supprimée : {{path}}'
+
+# En local : « npm run cms » puis http://localhost:4321/admin/
+local_backend: true
+
+locale: fr
+logo_url: /brand/gcg-logo-green.png
+media_folder: public/uploads
+public_folder: /uploads
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: projects
+    label: Réalisations
+    label_singular: projet
+    description: >-
+      Les 34 projets du portfolio et les suivants. Ne renseigner que des informations confirmées par GCG :
+      un champ laissé vide n’est pas affiché sur le site. Chaque enregistrement met le site à jour en quelques minutes.
+    folder: src/content/projects
+    extension: json
+    format: json
+    create: true
+    delete: false
+    identifier_field: name
+    slug: '{{slug}}'
+    summary: 'N° {{number}} — {{name}} · {{location}}'
+    sortable_fields:
+      - { field: number, label: 'N°', default_sort: asc }
+      - { field: name, label: Nom }
+    preview_path: 'realisations/{{filename}}'
+    view_groups:
+      - { label: Secteur, field: sector }
+      - { label: Statut, field: status }
+    # Images enregistrées à côté des autres images du projet (optimisées automatiquement au déploiement)
+    media_folder: /src/assets/projects/{{slug}}
+    public_folder: ../../assets/projects/{{slug}}
+    editor:
+      preview: false
+    fields:
+      - { label: 'N° d’ordre', name: number, widget: number, value_type: int, min: 1, hint: 'Ordre d’affichage (01, 02…). Les nouveaux projets prennent le numéro suivant.' }
+      - { label: 'Nom du projet', name: name, widget: string }
+      - { label: 'Nom en anglais', name: name_en, widget: string, required: false, hint: 'Seulement si le nom change en anglais.' }
+      - label: Secteur
+        name: sector
+        widget: select
+        options:
+          - { label: 'Résidentiel & bureaux', value: residentiel }
+          - { label: 'Hôtellerie & tourisme', value: hotellerie }
+          - { label: 'Équipements & loisirs', value: equipements }
+          - { label: 'Industrie & infrastructures', value: industrie }
+      - label: Ville
+        name: city
+        widget: select
+        hint: 'Sert aux filtres et à la carte. Pour une ville absente de la liste, contacter le webmaster.'
+        options:
+          - { label: 'Abidjan', value: abidjan }
+          - { label: 'Grand-Bassam', value: grand-bassam }
+          - { label: 'Assinie', value: assinie }
+          - { label: 'Assouindé', value: assouinde }
+          - { label: 'Korhogo', value: korhogo }
+          - { label: 'Attingué', value: attingue }
+          - { label: 'Anyama', value: anyama }
+          - { label: 'Bingerville', value: bingerville }
+          - { label: 'Songon', value: songon }
+          - { label: 'Dabou', value: dabou }
+          - { label: 'Jacqueville', value: jacqueville }
+          - { label: 'Bonoua', value: bonoua }
+          - { label: 'Aboisso', value: aboisso }
+          - { label: 'Yamoussoukro', value: yamoussoukro }
+          - { label: 'Bouaké', value: bouake }
+          - { label: 'Daloa', value: daloa }
+          - { label: 'Man', value: man }
+          - { label: 'San-Pédro', value: san-pedro }
+          - { label: 'Abengourou', value: abengourou }
+      - { label: 'Lieu (texte affiché)', name: location, widget: string, hint: 'Ex. : Abidjan, Riviera Golf' }
+      - { label: 'Lieu en anglais', name: location_en, widget: string, required: false }
+      - { label: Période, name: period, widget: string, hint: 'Ex. : 2024 – 2025' }
+      - { label: 'Période en anglais', name: period_en, widget: string, required: false }
+      - label: Statut
+        name: status
+        widget: select
+        required: false
+        hint: 'Laisser vide si le statut n’est pas confirmé.'
+        options:
+          - { label: 'En cours d’exécution', value: execution }
+          - { label: 'En cours d’études', value: etudes }
+          - { label: 'Réceptionné', value: receptionne }
+      - { label: 'Surface', name: surface, widget: string, required: false, hint: 'Ex. : 2 500 m²' }
+      - { label: 'Terrain', name: terrain, widget: string, required: false }
+      - { label: 'Surface couverte', name: coveredSurface, widget: string, required: false }
+      - { label: 'Programme (français)', name: composition, widget: text }
+      - { label: 'Programme (anglais)', name: composition_en, widget: text }
+      - label: Typologies
+        label_singular: typologie
+        name: typologies
+        widget: list
+        required: false
+        summary: '{{fields.name}} — {{fields.surface}}'
+        fields:
+          - { label: Nom, name: name, widget: string }
+          - { label: Surface, name: surface, widget: string }
+      - { label: 'Typologie (texte libre)', name: typology, widget: string, required: false }
+      - { label: 'Typologie en anglais', name: typology_en, widget: string, required: false }
+      - { label: 'Missions GCG (français)', label_singular: mission, name: missions, widget: list, min: 1, field: { label: Mission, name: mission, widget: string } }
+      - { label: 'Missions GCG (anglais)', label_singular: 'mission (anglais)', name: missions_en, widget: list, min: 1, field: { label: Mission, name: mission, widget: string } }
+      - label: Expertises mobilisées
+        name: services
+        widget: select
+        multiple: true
+        required: false
+        hint: 'Le projet apparaît sur la page de chaque expertise cochée.'
+        options:
+          - { label: 'Études & faisabilité', value: etudes }
+          - { label: 'Architecture & conception', value: architecture }
+          - { label: 'Ingénierie', value: ingenierie }
+          - { label: 'Construction', value: construction }
+          - { label: 'Aménagement', value: amenagement }
+          - { label: 'Rénovation & mise à niveau', value: rehabilitation }
+          - { label: 'Infrastructures & VRD', value: infrastructures }
+          - { label: 'Clé en main', value: cle-en-main }
+      - label: Typologies de bâtiment
+        name: types
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: 'Villas', value: villas }
+          - { label: 'Résidences', value: residences }
+          - { label: 'Immeubles', value: immeubles }
+          - { label: 'Hôtels', value: hotels }
+          - { label: 'Loisirs', value: loisirs }
+          - { label: 'Usines', value: industrie }
+          - { label: 'Équipements', value: equipements }
+          - { label: 'Infrastructures', value: infrastructures }
+      - label: Photos
+        label_singular: photo
+        name: images
+        widget: list
+        min: 1
+        hint: 'La première photo sert de couverture. Glisser pour réordonner. Format JPG ou PNG, 2 000 px de large suffisent.'
+        field: { label: Photo, name: image, widget: image, choose_url: false }
+      - { label: 'Mettre en avant sur l’accueil', name: featured, widget: boolean, default: false, required: false }
+      - { label: 'Ordre sur l’accueil', name: featuredOrder, widget: number, value_type: int, required: false }
+
+  - name: settings
+    label: Paramètres
+    description: 'Coordonnées, réseaux sociaux et médias. Un champ vide est masqué sur le site.'
+    editor:
+      preview: false
+    delete: false
+    files:
+      - name: site
+        label: 'Coordonnées, réseaux et médias'
+        file: src/data/settings.json
+        format: json
+        fields:
+          - label: Coordonnées
+            name: contact
+            widget: object
+            collapsed: false
+            fields:
+              - { label: Téléphone, name: phone, widget: string, required: false, hint: 'Format international, ex. +225 07 00 00 00 00' }
+              - { label: WhatsApp, name: whatsapp, widget: string, required: false, hint: 'Numéro WhatsApp au format international. Active les boutons WhatsApp du site.' }
+              - { label: Email, name: email, widget: string, required: false }
+              - { label: Adresse, name: address, widget: string, required: false }
+              - { label: 'Lien Google Maps', name: mapsUrl, widget: string, required: false }
+              - { label: Horaires, name: hours, widget: string, required: false, hint: 'Ex. : Lun – Ven, 8 h – 17 h' }
+              - { label: 'Horaires en anglais', name: hours_en, widget: string, required: false }
+          - label: Réseaux sociaux
+            name: social
+            widget: object
+            collapsed: false
+            hint: 'Adresse complète de chaque page (https://…). Les QR codes de la page Partager sont générés automatiquement.'
+            fields:
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: Facebook, name: facebook, widget: string, required: false }
+              - { label: LinkedIn, name: linkedin, widget: string, required: false }
+              - { label: TikTok, name: tiktok, widget: string, required: false }
+              - { label: YouTube, name: youtube, widget: string, required: false }
+          - label: Médias
+            name: media
+            widget: object
+            collapsed: false
+            fields:
+              - { label: 'Vidéo de présentation', name: videoUrl, widget: string, required: false, hint: 'Lien YouTube ou Vimeo. Affichée sur la page À propos.' }
+              - { label: 'Portfolio PDF', name: portfolioPdf, widget: file, required: false, media_folder: /public/documents, public_folder: /documents, choose_url: false, hint: 'Proposé en téléchargement (pied de page et page Partager).' }

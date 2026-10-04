@@ -1,0 +1,36 @@
+{
+  "number": 23,
+  "name": "Villa de maître Beverly Hills",
+  "name_en": "Beverly Hills villa",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Riviera Golf",
+  "period": "2025",
+  "status": "execution",
+  "surface": "600 m²",
+  "composition": "Projet d’une villa haut standing avec piscine.",
+  "composition_en": "High-end villa with a swimming pool.",
+  "missions": [
+    "Étude technique",
+    "Travaux de finition",
+    "Aménagement extérieur"
+  ],
+  "missions_en": [
+    "Engineering study",
+    "Finishing works",
+    "Landscaping"
+  ],
+  "services": [
+    "ingenierie",
+    "construction",
+    "amenagement"
+  ],
+  "types": [
+    "villas"
+  ],
+  "images": [
+    "../../assets/projects/villa-de-maitre-beverly-hills/01.jpg",
+    "../../assets/projects/villa-de-maitre-beverly-hills/02.jpg",
+    "../../assets/projects/villa-de-maitre-beverly-hills/03.jpg"
+  ]
+}

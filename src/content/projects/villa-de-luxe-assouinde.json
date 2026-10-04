@@ -1,0 +1,39 @@
+{
+  "number": 16,
+  "name": "Villa de luxe Assouindé",
+  "name_en": "Assouindé luxury villa",
+  "sector": "residentiel",
+  "city": "assouinde",
+  "location": "Assouindé",
+  "period": "Décembre 2025",
+  "period_en": "December 2025",
+  "surface": "260 m²",
+  "composition": "Projet clé en main d’une villa haut standing.",
+  "composition_en": "Turnkey high-end villa.",
+  "missions": [
+    "Études",
+    "Construction",
+    "Aménagement",
+    "Réalisation de la piscine"
+  ],
+  "missions_en": [
+    "Studies",
+    "Construction",
+    "Fit-out",
+    "Swimming pool"
+  ],
+  "services": [
+    "etudes",
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "villas"
+  ],
+  "images": [
+    "../../assets/projects/villa-de-luxe-assouinde/01.jpg",
+    "../../assets/projects/villa-de-luxe-assouinde/02.jpg",
+    "../../assets/projects/villa-de-luxe-assouinde/03.jpg"
+  ]
+}

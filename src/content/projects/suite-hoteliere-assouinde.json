@@ -1,0 +1,32 @@
+{
+  "number": 15,
+  "name": "Suite hôtelière Assouindé",
+  "name_en": "Assouindé hotel suites",
+  "sector": "hotellerie",
+  "city": "assouinde",
+  "location": "Assouindé",
+  "period": "Sept. 2024 – févr. 2025",
+  "period_en": "Sept. 2024 – Feb. 2025",
+  "surface": "400 m²",
+  "composition": "Projet clé en main de 3 suites et 5 chambres.",
+  "composition_en": "Turnkey project of 3 suites and 5 rooms.",
+  "missions": [
+    "Études, réalisation et aménagement"
+  ],
+  "missions_en": [
+    "Studies, construction and fit-out"
+  ],
+  "services": [
+    "etudes",
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "hotels"
+  ],
+  "images": [
+    "../../assets/projects/suite-hoteliere-assouinde/01.jpg",
+    "../../assets/projects/suite-hoteliere-assouinde/02.jpg"
+  ]
+}

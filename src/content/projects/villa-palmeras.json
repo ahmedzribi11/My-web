@@ -1,0 +1,39 @@
+{
+  "number": 2,
+  "featured": true,
+  "featuredOrder": 2,
+  "name": "Villa Palmeras",
+  "sector": "residentiel",
+  "city": "grand-bassam",
+  "location": "Grand-Bassam",
+  "period": "2023",
+  "status": "execution",
+  "surface": "33 000 m²",
+  "terrain": "6 hectares",
+  "composition": "Travaux de construction de 116 villas R+1 haut standing.",
+  "composition_en": "Construction of 116 two-storey (R+1) high-end villas.",
+  "missions": [
+    "Études et réalisation du projet",
+    "Gros œuvre et second œuvre",
+    "Aménagements intérieurs et extérieurs"
+  ],
+  "missions_en": [
+    "Studies and construction",
+    "Structural and finishing works",
+    "Interior and exterior fit-out"
+  ],
+  "services": [
+    "etudes",
+    "construction",
+    "amenagement"
+  ],
+  "types": [
+    "villas",
+    "residences"
+  ],
+  "images": [
+    "../../assets/projects/villa-palmeras/01.jpg",
+    "../../assets/projects/villa-palmeras/02.jpg",
+    "../../assets/projects/villa-palmeras/03.jpg"
+  ]
+}

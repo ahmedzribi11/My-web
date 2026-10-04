@@ -1,0 +1,32 @@
+{
+  "number": 12,
+  "name": "Immeuble Marikati",
+  "name_en": "Marikati building",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Vallon",
+  "period": "2020",
+  "surface": "6 800 m²",
+  "composition": "Bâtiment à usage bureautique et résidentiel.",
+  "composition_en": "Mixed-use office and residential building.",
+  "missions": [
+    "Étude architecturale",
+    "Études techniques"
+  ],
+  "missions_en": [
+    "Architectural design",
+    "Engineering studies"
+  ],
+  "services": [
+    "architecture",
+    "ingenierie"
+  ],
+  "types": [
+    "immeubles"
+  ],
+  "images": [
+    "../../assets/projects/immeuble-marikati/01.jpg",
+    "../../assets/projects/immeuble-marikati/02.jpg",
+    "../../assets/projects/immeuble-marikati/03.jpg"
+  ]
+}

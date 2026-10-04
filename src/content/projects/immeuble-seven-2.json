@@ -1,0 +1,34 @@
+{
+  "number": 33,
+  "name": "Immeuble Seven 2",
+  "name_en": "Seven 2 building",
+  "sector": "residentiel",
+  "city": "abidjan",
+  "location": "Angré 8e tranche",
+  "location_en": "Angré, 8th phase",
+  "period": "2019 – 2021",
+  "surface": "4 000 m²",
+  "composition": "Projet clé en main d’un immeuble R+5 avec mezzanine — 17 appartements haut standing.",
+  "composition_en": "Turnkey six-storey (R+5) building with mezzanine — 17 high-end apartments.",
+  "missions": [
+    "Travaux de gros œuvre et de second œuvre",
+    "Aménagements intérieurs et extérieurs"
+  ],
+  "missions_en": [
+    "Structural and finishing works",
+    "Interior and exterior fit-out"
+  ],
+  "services": [
+    "construction",
+    "amenagement",
+    "cle-en-main"
+  ],
+  "types": [
+    "immeubles"
+  ],
+  "images": [
+    "../../assets/projects/immeuble-seven-2/01.jpg",
+    "../../assets/projects/immeuble-seven-2/02.jpg",
+    "../../assets/projects/immeuble-seven-2/03.jpg"
+  ]
+}

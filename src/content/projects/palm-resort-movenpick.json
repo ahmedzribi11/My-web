@@ -1,0 +1,35 @@
+{
+  "number": 25,
+  "featured": true,
+  "featuredOrder": 9,
+  "name": "Palm Resort phase 2 : Mövenpick",
+  "name_en": "Palm Resort phase 2: Mövenpick",
+  "sector": "hotellerie",
+  "city": "assouinde",
+  "location": "Assouindé",
+  "period": "2025",
+  "status": "etudes",
+  "surface": "5 hectares",
+  "composition": "64 bungalows, 30 villas haut standing, 1 salle de conférence et 1 bâtiment principal.",
+  "composition_en": "64 bungalows, 30 high-end villas, a conference hall and a main building.",
+  "missions": [
+    "Permis de bâtir"
+  ],
+  "missions_en": [
+    "Building permit application"
+  ],
+  "services": [
+    "etudes",
+    "architecture"
+  ],
+  "types": [
+    "hotels",
+    "villas"
+  ],
+  "images": [
+    "../../assets/projects/palm-resort-movenpick/01.jpg",
+    "../../assets/projects/palm-resort-movenpick/02.jpg",
+    "../../assets/projects/palm-resort-movenpick/03.jpg",
+    "../../assets/projects/palm-resort-movenpick/04.jpg"
+  ]
+}

@@ -1,0 +1,144 @@
+---
+import { geoMercator, geoPath } from 'd3-geo'
+import { feature } from 'topojson-client'
+import type { Feature, FeatureCollection, Geometry } from 'geojson'
+import type { Topology, GeometryCollection } from 'topojson-specification'
+import world from 'world-atlas/countries-50m.json'
+import { cities, type CityId } from '../data/geo'
+import { route, useT, type Lang } from '../i18n'
+import type { Project } from '../lib/projects'
+
+interface Props {
+  lang: Lang
+  projects: Project[]
+  tone?: 'dark' | 'paper'
+  inset?: boolean
+  /** Lien des épingles vers la liste filtrée (sinon filtre en place). */
+  link?: boolean
+}
+const { lang, projects, tone = 'dark', inset = true, link = true } = Astro.props
+const t = useT(lang)
+
+const topo = world as unknown as Topology<{ countries: GeometryCollection }>
+const all = (feature(topo, topo.objects.countries) as FeatureCollection<Geometry>).features
+const byId = (id: string) => all.find((f) => String(f.id) === id)!
+const ci = byId('384')
+const WEST_AFRICA = ['384', '430', '324', '466', '854', '288', '694', '624', '686', '270', '478', '768', '204', '562', '566']
+const neighbours = ['430', '324', '466', '854', '288'].map(byId)
+
+// Comptage des projets par localité (seules les localités avec projets sont affichées)
+const counts = projects.reduce<Record<string, number>>((a, p) => ((a[p.city] = (a[p.city] ?? 0) + 1), a), {})
+const present = Object.keys(counts) as CityId[]
+const solo = present.filter((c) => cities[c].zone === 'solo')
+const cluster = present.filter((c) => cities[c].zone === 'cluster').sort((a, b) => cities[a].lon - cities[b].lon)
+
+// Étiquettes du littoral : réparties sous la carte, sur deux rangs au-delà de cinq localités
+const twoRows = cluster.length > 5
+const step = cluster.length > 1 ? Math.min(135, (twoRows ? 600 : 540) / (cluster.length - 1)) : 0
+const x0 = 420 - (step * (cluster.length - 1)) / 2
+const labelAt = (i: number) => ({ lx: x0 + i * step, ly: twoRows && i % 2 ? 816 : 760 })
+
+const W = 800
+const H = twoRows ? 900 : 860
+const proj = geoMercator().fitExtent([[60, 40], [W - 60, 640]], ci)
+const path = geoPath(proj)
+const pt = (lon: number, lat: number) => proj([lon, lat]) as [number, number]
+
+
+// Encart Afrique de l’Ouest
+const waFeatures = WEST_AFRICA.map(byId)
+const waColl: FeatureCollection<Geometry> = { type: 'FeatureCollection', features: waFeatures }
+const IW = 260
+const IH = 170
+const insetProj = geoMercator().fitExtent([[6, 6], [IW - 6, IH - 6]], waColl)
+const insetPath = geoPath(insetProj)
+
+const stroke = tone === 'paper' ? 'rgba(5,46,20,.55)' : 'rgba(232,222,159,.55)'
+const fillCi = tone === 'paper' ? 'rgba(5,46,20,.08)' : 'rgba(5,46,20,.55)'
+const fillN = tone === 'paper' ? 'rgba(5,46,20,.03)' : 'rgba(242,239,230,.025)'
+const strokeN = tone === 'paper' ? 'rgba(5,46,20,.15)' : 'rgba(242,239,230,.12)'
+const ink = tone === 'paper' ? '#052e14' : '#f2efe6'
+const gold = tone === 'paper' ? '#8a7a2e' : '#e8de9f'
+const href = (c: string) => `${route('projects', lang)}?ville=${c}`
+const pathStr = (f: Feature<Geometry>) => path(f) ?? ''
+---
+
+<figure class="presence-map relative" data-tone={tone} data-reveal="fade">
+  <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full" role="img" aria-labelledby="map-title map-desc">
+    <title id="map-title">{t('presence.title')}</title>
+    <desc id="map-desc">{(Object.keys(counts) as CityId[]).map((c) => `${cities[c].name} : ${counts[c]}`).join(', ')}</desc>
+    <defs>
+      <clipPath id="map-clip"><rect x="0" y="0" width={W} height={H} /></clipPath>
+      <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0H0V40" fill="none" stroke={strokeN} stroke-width="0.5" />
+      </pattern>
+    </defs>
+    <rect width={W} height={H} fill="url(#map-grid)" opacity="0.6" />
+    <g clip-path="url(#map-clip)">
+      {neighbours.map((f) => <path d={pathStr(f)} fill={fillN} stroke={strokeN} stroke-width="1" />)}
+      <path d={pathStr(ci)} fill={fillCi} stroke={stroke} stroke-width="1.4" class="map-ci" />
+    </g>
+
+    {/* Villes de l’intérieur : étiquette directe */}
+    {
+      solo.map((c) => {
+        const [x, y] = pt(cities[c].lon, cities[c].lat)
+        const n = counts[c] ?? 0
+        const left = cities[c].side === 'left'
+        const tx = left ? x - 18 : x + 18
+        const anchor = left ? 'end' : 'start'
+        return (
+          <a href={link ? href(c) : undefined} data-city-pin={c} class="map-pin">
+            <circle cx={x} cy={y} r={10 + n * 2.5} fill={gold} opacity="0.16" class="map-halo" />
+            <circle cx={x} cy={y} r="5" fill={gold} />
+            <text x={tx} y={y - 4} fill={ink} font-size="22" font-weight="300" text-anchor={anchor}>{cities[c].name}</text>
+            <text x={tx} y={y + 20} fill={gold} font-size="13" text-anchor={anchor} font-family="Geist Mono Variable, monospace" letter-spacing="2">{n} {n > 1 ? t('projects.count.many').toUpperCase() : t('projects.count.one').toUpperCase()}</text>
+          </a>
+        )
+      })
+    }
+
+    {/* Littoral : annotations avec lignes de rappel */}
+    {
+      cluster.map((c, i) => {
+        const [x, y] = pt(cities[c].lon, cities[c].lat)
+        const n = counts[c] ?? 0
+        const { lx, ly } = labelAt(i)
+        return (
+          <a href={link ? href(c) : undefined} data-city-pin={c} class="map-pin">
+            <polyline points={`${x},${y} ${x},${y + 26} ${lx},${ly - 58} ${lx},${ly - 40}`} fill="none" stroke={stroke} stroke-width="0.8" stroke-dasharray="2 4" />
+            <circle cx={x} cy={y} r={7 + n * 1.6} fill={gold} opacity="0.16" class="map-halo" />
+            <circle cx={x} cy={y} r="4" fill={gold} />
+            <text x={lx} y={ly} fill={ink} font-size="20" font-weight="300" text-anchor="middle">{cities[c].name}</text>
+            <text x={lx} y={ly + 26} fill={gold} font-size="13" text-anchor="middle" font-family="Geist Mono Variable, monospace" letter-spacing="2">{String(n).padStart(2, '0')}</text>
+          </a>
+        )
+      })
+    }
+    <text x={W - 60} y={H - 22} fill={ink} opacity="0.35" font-size="11" text-anchor="end" font-family="Geist Mono Variable, monospace" letter-spacing="3">CÔTE D’IVOIRE · OCÉAN ATLANTIQUE</text>
+  </svg>
+
+  {
+    inset && (
+      <figcaption class="ml-auto mt-2 flex w-full items-end justify-end gap-4"><span class="w-36 md:w-44">
+        <svg viewBox={`0 0 ${IW} ${IH}`} class="h-auto w-full" aria-hidden="true">
+          {waFeatures.map((f) => (
+            <path d={insetPath(f) ?? ''} fill={String(f.id) === '384' ? gold : fillN} fill-opacity={String(f.id) === '384' ? 0.85 : 1} stroke={strokeN} stroke-width="0.6" />
+          ))}
+        </svg>
+        </span>
+        <p class:list={['meta pb-2 text-right', tone === 'paper' ? 'text-brand/55' : 'text-mist']}>{lang === 'fr' ? 'Afrique de l’Ouest' : 'West Africa'}</p>
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .map-pin { cursor: pointer; }
+  .map-pin text { transition: fill 0.4s; }
+  .map-halo { transform-box: fill-box; transform-origin: center; animation: halo 3.2s var(--ease-cinema) infinite; }
+  .map-pin:hover .map-halo, .map-pin[data-active] .map-halo { opacity: 0.4; }
+  @keyframes halo { 0%, 100% { transform: scale(0.85); } 50% { transform: scale(1.15); } }
+  .js .presence-map .map-ci { stroke-dasharray: 4000; stroke-dashoffset: 4000; transition: stroke-dashoffset 3s var(--ease-cinema); }
+  .js .presence-map.is-in .map-ci { stroke-dashoffset: 0; }
+</style>

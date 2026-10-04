@@ -1,0 +1,99 @@
+---
+import { getImage } from 'astro:assets'
+import Base from '../layouts/Base.astro'
+import ProjectImage from '../components/ProjectImage.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import FinalCta from '../components/FinalCta.astro'
+import Icon from '../components/Icon.astro'
+import { services, type Service } from '../data/services'
+import { route, servicePath, useT, type Lang } from '../i18n'
+import { coverImage, getProjects } from '../lib/projects'
+
+interface Props {
+  lang: Lang
+  service: Service
+}
+const { lang, service: s } = Astro.props
+const t = useT(lang)
+const other = lang === 'fr' ? 'en' : 'fr'
+const projects = await getProjects(lang)
+const related = projects.filter((p) => p.services.includes(s.id))
+const cover = coverImage(projects, s.cover)
+const og = await getImage({ src: cover, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 80 })
+const others = services.filter((x) => x.id !== s.id)
+---
+
+<Base lang={lang} alt={servicePath(s.slug[other], other)} title={s.title[lang]} description={s.intro[lang]} image={og.src} header="overlay">
+  <header class="relative flex min-h-[78svh] items-end overflow-hidden bg-ink-3">
+    <ProjectImage src={cover} alt="" sizes="100vw" priority class="absolute inset-0 block h-full w-full" />
+    <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/30"></div>
+    <div class="wrap relative pb-12 pt-32 md:pb-16">
+      <nav class="meta flex items-center gap-2 text-bone/70" aria-label={lang === 'fr' ? 'Fil d’Ariane' : 'Breadcrumb'} data-reveal>
+        <a href={route('services', lang)} class="hover:text-gold">{t('services.label')}</a>
+        <span aria-hidden="true">/</span>
+        <span class="text-gold">{s.title[lang]}</span>
+      </nav>
+      <h1 class="display mt-6 text-[clamp(3rem,9vw,9.5rem)]" data-split>
+        {s.id === 'cle-en-main' ? <em class="serif text-gold">{s.title[lang]}</em> : s.title[lang]}
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-bone/80" data-reveal style="--d:.2s">{s.short[lang]}</p>
+    </div>
+  </header>
+
+  <section class="wrap grid gap-14 py-20 md:grid-cols-12 md:py-32">
+    <div class="md:col-span-7">
+      <p class="text-[clamp(1.5rem,2.6vw,2.4rem)] font-light leading-[1.3] tracking-[-0.02em]" data-reveal>{s.intro[lang]}</p>
+    </div>
+    <div class="md:col-span-4 md:col-start-9">
+      <h2 class="label text-gold" data-reveal>{t('services.includes')}</h2>
+      <ol class="mt-6 border-t border-line">
+        {
+          s.includes[lang].map((it, i) => (
+            <li class="flex gap-5 border-b border-line py-4 text-lg font-light" data-reveal style={`--d:${i * 0.05}s`}>
+              <span class="meta pt-1.5 text-mist">{String(i + 1).padStart(2, '0')}</span>
+              {it}
+            </li>
+          ))
+        }
+      </ol>
+      <a href={route('contact', lang)} class="btn btn-gold mt-10" data-magnetic>{t('cta.project')} <Icon name="arrow" /></a>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="border-t border-line py-20 md:py-28" aria-labelledby="related-title">
+        <div class="wrap">
+          <div class="flex items-end justify-between gap-6">
+            <h2 id="related-title" class="display text-[clamp(2rem,4vw,4rem)]" data-split>
+              {t('services.related')} <span class="text-gold">{related.length}</span>
+            </h2>
+          </div>
+          <div class="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
+            {related.map((p, i) => <ProjectCard project={p} lang={lang} index={i} />)}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="theme-paper py-20 md:py-28" aria-labelledby="others-title">
+    <div class="wrap">
+      <h2 id="others-title" class="label text-brand/60">{t('services.others')}</h2>
+      <ul class="mt-8 grid border-t border-brand/15 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          others.map((o) => (
+            <li class="border-b border-brand/15 sm:odd:border-r lg:border-r lg:[&:nth-child(4n)]:border-r-0">
+              <a href={servicePath(o.slug[lang], lang)} class="group flex h-full items-center justify-between gap-4 px-1 py-6 sm:px-5">
+                <span class="text-xl font-light tracking-[-0.02em] transition-transform duration-500 group-hover:translate-x-1">{o.title[lang]}</span>
+                <Icon name="arrow-up-right" class="shrink-0 opacity-50 transition-opacity group-hover:opacity-100" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <FinalCta lang={lang} />
+</Base>

@@ -1,52 +1,33 @@
 /**
- * Organisation et moyens matériels — source : « Portfolio GCG_CI.pdf », pages 4 et 5.
- * Seuls des chiffres présents dans le portfolio sont utilisés.
+ * Organisation et moyens matériels — « Portfolio GCG_CI.pdf », pages 4 et 5.
  * Les noms et photos des collaborateurs ne sont volontairement pas publiés.
  */
+type L<T> = { fr: T; en: T }
 
-export const organisationTagline = 'Une organisation structurée au service de l’excellence et de la performance.'
-
-export interface KeyFigure {
-  value: number
-  suffix?: string
-  label: string
-}
-
-export const keyFigures: KeyFigure[] = [
-  { value: 20, suffix: '+', label: 'Collaborateurs' },
-  { value: 4, label: 'Pôles opérationnels' },
-  { value: 6, label: 'Techniciens terrain' },
-  { value: 1, label: 'Pilotage centralisé' },
+export const keyFigures: { value: number; suffix?: string; label: L<string> }[] = [
+  { value: 20, suffix: '+', label: { fr: 'Collaborateurs', en: 'Staff' } },
+  { value: 4, label: { fr: 'Pôles opérationnels', en: 'Operating divisions' } },
+  { value: 6, label: { fr: 'Techniciens terrain', en: 'Field technicians' } },
+  { value: 1, label: { fr: 'Pilotage centralisé', en: 'Central management' } },
 ]
 
-export const poles = [
-  { name: 'Construction', team: '12+' },
-  { name: 'Études & QC', team: '6+' },
-  { name: 'Finances', team: '4+' },
-  { name: 'Logistique', team: '4+' },
+export const poles: { name: L<string>; team: string; role: L<string> }[] = [
+  { name: { fr: 'Construction', en: 'Construction' }, team: '12+', role: { fr: 'Direction technique, chefs de projet, équipes chantier', en: 'Technical management, project managers, site teams' } },
+  { name: { fr: 'Études & contrôle qualité', en: 'Studies & quality control' }, team: '6+', role: { fr: 'Ingénierie, structure, contrôle qualité', en: 'Engineering, structure, quality control' } },
+  { name: { fr: 'Finances', en: 'Finance' }, team: '4+', role: { fr: 'Direction financière et comptabilité', en: 'Financial management and accounting' } },
+  { name: { fr: 'Logistique', en: 'Logistics' }, team: '4+', role: { fr: 'Matériel, approvisionnement, coordination', en: 'Equipment, supply, coordination' } },
 ]
 
-export const competences = [
-  { name: 'Construction', items: ['Gros œuvre', 'Second œuvre', 'Finitions'] },
-  { name: 'Études', items: ['Architecture', 'Structure', 'BIM'] },
-  { name: 'Contrôle qualité', items: ['QA/QC', 'Suivi chantier', 'Réception'] },
-  { name: 'Gestion', items: ['Planning', 'Reporting', 'Coordination'] },
+export const competences: { name: L<string>; items: L<string[]> }[] = [
+  { name: { fr: 'Construction', en: 'Construction' }, items: { fr: ['Gros œuvre', 'Second œuvre', 'Finitions'], en: ['Structural works', 'Secondary works', 'Finishing'] } },
+  { name: { fr: 'Études', en: 'Studies' }, items: { fr: ['Architecture', 'Structure', 'BIM'], en: ['Architecture', 'Structure', 'BIM'] } },
+  { name: { fr: 'Contrôle qualité', en: 'Quality control' }, items: { fr: ['QA/QC', 'Suivi chantier', 'Réception'], en: ['QA/QC', 'Site supervision', 'Handover'] } },
+  { name: { fr: 'Gestion', en: 'Management' }, items: { fr: ['Planning', 'Reporting', 'Coordination'], en: ['Planning', 'Reporting', 'Coordination'] } },
 ]
 
-export interface EquipmentItem {
-  name: string
-  qty: number
-}
-
-export interface EquipmentGroup {
-  name: string
-  items: EquipmentItem[]
-}
-
-/** Engins et équipements de chantier, détaillés comme dans le portfolio. */
-export const equipment: EquipmentGroup[] = [
+export const equipment: { name: L<string>; items: { name: string; qty: number }[] }[] = [
   {
-    name: 'Engins',
+    name: { fr: 'Engins', en: 'Heavy machinery' },
     items: [
       { name: 'Caterpillar 325 CL', qty: 1 },
       { name: 'Caterpillar 325 BL', qty: 1 },
@@ -56,7 +37,7 @@ export const equipment: EquipmentGroup[] = [
     ],
   },
   {
-    name: 'Équipements de chantier',
+    name: { fr: 'Équipements de chantier', en: 'Site equipment' },
     items: [
       { name: 'Ingeco 750 L', qty: 4 },
       { name: 'Sogi-Bem 200', qty: 2 },
@@ -67,10 +48,10 @@ export const equipment: EquipmentGroup[] = [
   },
 ]
 
-/** Parc de véhicules : publié en totaux (6 voitures de service, 3 pick-up et utilitaires). */
-export const vehicles = [
-  { name: 'Voitures de service', qty: 6 },
-  { name: 'Pick-up & utilitaires', qty: 3 },
+/** Véhicules publiés en totaux (le détail du parc n’a pas d’intérêt commercial). */
+export const vehicles: { name: L<string>; qty: number }[] = [
+  { name: { fr: 'Voitures de service', en: 'Service vehicles' }, qty: 6 },
+  { name: { fr: 'Pick-up & utilitaires', en: 'Pick-ups & utility vehicles' }, qty: 3 },
 ]
 
 export const totalQty = (items: { qty: number }[]) => items.reduce((n, i) => n + i.qty, 0)
