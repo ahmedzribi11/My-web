@@ -20,7 +20,7 @@ const title2 = split(t('hero.title2'), title1.length)
 const title3 = split(t('hero.title3'))
 ---
 
-<section id="hero" class="relative h-svh min-h-[640px] overflow-hidden bg-ink" aria-labelledby="hero-title">
+<section id="hero" class="relative flex min-h-[max(100svh,640px)] flex-col overflow-hidden bg-ink" aria-labelledby="hero-title">
   <div class="absolute inset-0" aria-hidden="true">
     <div class="css-fog opacity-80"><span></span><span></span><span></span></div>
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_68%_38%,rgba(5,46,20,0.55),transparent_60%)]"></div>
@@ -31,11 +31,12 @@ const title3 = split(t('hero.title3'))
   <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_35%,rgba(7,12,9,0.85)_100%)]"></div>
   <div class="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-ink via-ink/75 to-transparent md:h-1/2 md:via-ink/40"></div>
 
-  <div class="wrap relative flex h-full flex-col justify-end pb-24 pt-28 md:pb-16">
-    <p class="label absolute top-24 text-gold md:top-32" data-intro style="--d:.2s">{t('hero.kicker')}</p>
+  <div class="wrap relative flex flex-1 flex-col pb-24 pt-24 md:pb-16 md:pt-32">
+    <!-- Accroche dans le flux : le titre ne peut plus passer dessous ; si le contenu dépasse l’écran, le hero s’allonge -->
+    <p class="label text-gold" data-intro style="--d:.2s">{t('hero.kicker')}</p>
 
-    <div class="grid items-end gap-10 md:grid-cols-12">
-      <h1 id="hero-title" class="display text-[clamp(2.9rem,10.5vw,5rem)] md:col-span-8 md:text-[clamp(4rem,7.6vw,9.4rem)]">
+    <div class="mt-auto grid items-end gap-10 pt-10 md:grid-cols-12">
+      <h1 id="hero-title" class="display text-[clamp(2.9rem,10.5vw,5rem)] md:col-span-8 md:text-[clamp(4rem,min(7.6vw,14svh),9.4rem)]">
         <span class="block" data-intro-split style="--d:.25s">
           {
             title1.map(({ w, i }) => (
@@ -79,8 +80,10 @@ const title3 = split(t('hero.title3'))
         <span class="meta text-mist">{t('hero.we')}</span>
         <span class="sr-only">{words.join(', ')}</span>
         <span class="word-rotator relative inline-block h-[1.4em] overflow-hidden align-bottom text-bone" aria-hidden="true">
-          {words.map((w, i) => <span class="block h-[1.4em]" style={`--n:${i}`} aria-hidden="true">{w}</span>)}
-          <span class="block h-[1.4em]" aria-hidden="true">{words[0]}</span>
+          <span class="block">
+            {words.map((w) => <span class="block h-[1.4em]">{w}</span>)}
+            <span class="block h-[1.4em]">{words[0]}</span>
+          </span>
         </span>
       </p>
       <a href="#intro" class="meta hidden items-center gap-3 text-mist hover:text-bone md:flex">
@@ -131,16 +134,17 @@ const title3 = split(t('hero.title3'))
     [data-intro], [data-intro-split] .w > span { animation: none; }
   }
 
-  .word-rotator > span:first-child { animation: rotate-words 16s var(--ease-cinema) infinite; }
+  /* translateY (et non margin-top) : la ligne de base du mot ne bouge pas, il reste aligné sur « nous construisons » */
+  .word-rotator > span { animation: rotate-words 16s var(--ease-cinema) infinite; }
   @keyframes rotate-words {
-    0%, 9% { margin-top: 0; }
-    12.5%, 21.5% { margin-top: -1.4em; }
-    25%, 34% { margin-top: -2.8em; }
-    37.5%, 46.5% { margin-top: -4.2em; }
-    50%, 59% { margin-top: -5.6em; }
-    62.5%, 71.5% { margin-top: -7em; }
-    75%, 84% { margin-top: -8.4em; }
-    87.5%, 96.5% { margin-top: -9.8em; }
-    100% { margin-top: -11.2em; }
+    0%, 9% { transform: none; }
+    12.5%, 21.5% { transform: translateY(-1.4em); }
+    25%, 34% { transform: translateY(-2.8em); }
+    37.5%, 46.5% { transform: translateY(-4.2em); }
+    50%, 59% { transform: translateY(-5.6em); }
+    62.5%, 71.5% { transform: translateY(-7em); }
+    75%, 84% { transform: translateY(-8.4em); }
+    87.5%, 96.5% { transform: translateY(-9.8em); }
+    100% { transform: translateY(-11.2em); }
   }
 </style>
