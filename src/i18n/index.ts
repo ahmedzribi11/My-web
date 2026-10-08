@@ -137,6 +137,7 @@ const UI = {
 
     'featured.label': 'Réalisations phares',
     'featured.title': 'Des projets qui parlent pour nous.',
+    'featured.skip': 'Passer les projets',
 
     'scale.label': 'À toutes les échelles',
     'scale.title': 'De la villa de 260 m² au programme de 600 000 m².',
@@ -412,6 +413,7 @@ const UI = {
 
     'featured.label': 'Flagship projects',
     'featured.title': 'Projects that speak for us.',
+    'featured.skip': 'Skip projects',
 
     'scale.label': 'At every scale',
     'scale.title': 'From a 260 m² villa to a 600,000 m² development.',
