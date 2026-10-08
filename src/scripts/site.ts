@@ -52,7 +52,7 @@ const onScroll = () => {
     header.toggleAttribute('data-hidden', !menuOpen && y > 400 && y > lastY + 2)
     if (y < lastY - 2) header.removeAttribute('data-hidden')
   }
-  bar?.setAttribute('data-visible', '') // barre mobile toujours visible
+  bar?.toggleAttribute('data-visible', y > innerHeight * 0.6)
   lastY = y
 }
 addEventListener('scroll', onScroll, { passive: true })
@@ -85,9 +85,6 @@ if (header && toggle && menu) {
     if ((e.target as Element).closest('a')) setOpen(false)
   })
 }
-
-/* ─── Impression (pas de onclick en ligne : bloqué par la CSP) ────────── */
-document.querySelectorAll('[data-print]').forEach((b) => b.addEventListener('click', () => print()))
 
 /* ─── Découpage des titres en mots ────────────────────────────────────── */
 function splitWords(root: HTMLElement) {
@@ -220,25 +217,3 @@ document.fonts?.ready.then(() => ScrollTrigger.refresh())
 addEventListener('load', () => ScrollTrigger.refresh())
 
 export { gsap, ScrollTrigger }
-
-/* ─── Mode clair / sombre ─────────────────────────────────────────────── */
-const themeBtn = document.getElementById('theme-toggle')
-const applyThemeUi = () => {
-  const light = document.documentElement.dataset.theme === 'light'
-  const fr = document.documentElement.lang === 'fr'
-  themeBtn?.setAttribute('aria-pressed', String(light))
-  themeBtn?.setAttribute('aria-label', light ? (fr ? 'Mode sombre' : 'Dark mode') : fr ? 'Mode clair' : 'Light mode')
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', light ? '#f4f0e6' : '#070c09')
-}
-themeBtn?.addEventListener('click', () => {
-  const light = document.documentElement.dataset.theme !== 'light'
-  if (light) document.documentElement.dataset.theme = 'light'
-  else delete document.documentElement.dataset.theme
-  try {
-    localStorage.setItem('gcg-theme', light ? 'light' : 'dark')
-  } catch {
-    /* stockage indisponible : le choix vaut pour cette page */
-  }
-  applyThemeUi()
-})
-applyThemeUi()

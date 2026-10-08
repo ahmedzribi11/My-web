@@ -2,23 +2,28 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { heroState } from '../../scenes/state'
-import { isTouch, type Tier } from '../../scenes/device'
+import { detectTier, isTouch, prefersReducedMotion, type Tier } from '../../scenes/device'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const HeroScene = lazy(() => import('../../scenes/HeroScene'))
 
 /**
- * Scène 3D du hero : particules → plan → structure. Montée par le script du hero
- * (mount.tsx) une fois la page utilisable ; la page reste complète sans elle (repli CSS).
+ * Scène 3D du hero : particules → plan → structure. Chargée après l’affichage
+ * de la page ; la page reste complète sans elle (repli CSS en arrière-plan).
  */
-export default function HeroIsland({ sectionId, tier: detected }: { sectionId: string; tier: Exclude<Tier, 'none'> }) {
-  const [tier, setTier] = useState<Tier>(detected)
+export default function HeroIsland({ sectionId }: { sectionId: string }) {
+  const [tier, setTier] = useState<Tier | null>(null)
   const [active, setActive] = useState(true)
   const [shown, setShown] = useState(false)
   const timeline = useRef<gsap.core.Timeline | null>(null)
 
   useEffect(() => {
+    const reduced = prefersReducedMotion()
+    const t = detectTier()
+    if (reduced || t === 'none') return
+    setTier(t)
+
     const section = document.getElementById(sectionId)
     const s = heroState
     Object.assign(s, { ambient: 0, particles: 0, fog: 0, form: 0, solid: 0, dolly: 0, scroll: 0 })
@@ -43,7 +48,9 @@ export default function HeroIsland({ sectionId, tier: detected }: { sectionId: s
         })
       : null
 
-    const io = section ? new IntersectionObserver(([e]) => setActive(e.isIntersecting), { rootMargin: '100px' }) : null
+    const io = section
+      ? new IntersectionObserver(([e]) => setActive(e.isIntersecting), { rootMargin: '100px' })
+      : null
     if (section) io!.observe(section)
 
     const onPointer = (e: PointerEvent) => {
@@ -66,7 +73,7 @@ export default function HeroIsland({ sectionId, tier: detected }: { sectionId: s
     }
   }, [sectionId])
 
-  if (tier === 'none') return null
+  if (!tier || tier === 'none') return null
 
   return (
     <div
